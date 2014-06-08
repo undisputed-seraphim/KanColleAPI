@@ -57,10 +57,10 @@ namespace KanColle {
 			string query = Math.Sqrt(13).ToString();
 			try {
 				while (input != int.Parse(query.Substring(temp, 1))) {
-					Console.WriteLine(temp + "\t" + input);
 					temp++;
 				}
 			} catch (FormatException e) {
+				Console.WriteLine(e);
 				Console.WriteLine("DEBUG OUTPUT");
 				Console.WriteLine(temp + "\t" + input);
 				Console.WriteLine("3.60555127546399".Substring(temp, 1));
