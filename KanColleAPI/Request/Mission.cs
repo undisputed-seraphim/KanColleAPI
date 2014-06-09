@@ -1,24 +1,10 @@
 ﻿using System;
 using System.Text;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Mission {
 	public class Mission {
 		public static string START = "api_req_mission/start/";
 		public static string RESULT = "api_req_mission/result/";
-
-		public static string Start (int fleet_id, int mission_id) {
-			return KanColle.Request.MissionStart.Start(fleet_id, mission_id);
-		}
-
-		public static string Result (int fleet_id) {
-			return KanColle.Request.MissionResult.Result(fleet_id);
-		}
-
-	}
-
-	public class MissionStart {
-		public long api_complatetime { get; set; }
-		public string api_complatetime_str { get; set; }
 
 		public static string Start (int fleet_id, int mission_id) {
 			StringBuilder str = new StringBuilder();
@@ -28,6 +14,20 @@ namespace KanColle.Request {
 			str.AppendFormat("api_deck_id={0}", fleet_id);
 			return str.ToString();
 		}
+
+		public static string Result (int fleet_id) {
+			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_verno={0}&", 1);
+			str.Append("api_token={0}&");
+			str.AppendFormat("api_deck_id={0}", fleet_id);
+			return str.ToString();
+		}
+
+	}
+
+	public class MissionStart {
+		public long api_complatetime { get; set; }
+		public string api_complatetime_str { get; set; }
 
 		public void PrintConsole () {
 			string output = string.Format("This expedition will end at {0} GMT +9.", this.api_complatetime_str);
@@ -56,14 +56,6 @@ namespace KanColle.Request {
 			public int api_useitem_id { get; set; }
 			public String api_useitem_name { get; set; }
 			public int api_useitem_count { get; set; }
-		}
-
-		public static string Result (int fleet_id) {
-			StringBuilder str = new StringBuilder();
-			str.AppendFormat("api_verno={0}&", 1);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_deck_id={0}", fleet_id);
-			return str.ToString();
 		}
 
 		public string GetResult () {

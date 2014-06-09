@@ -63,7 +63,7 @@
     <Compile Include="Request\Sortie.cs" />
     <Compile Include="Request\Hokyu.cs" />
     <Compile Include="Request\Kaisou.cs" />
-    <Compile Include="Request\Kosyou.cs" />
+    <Compile Include="Request\Kousyou.cs" />
     <Compile Include="Request\Map.cs" />
     <Compile Include="Request\Mission.cs" />
     <Compile Include="Request\Nyukyo.cs" />

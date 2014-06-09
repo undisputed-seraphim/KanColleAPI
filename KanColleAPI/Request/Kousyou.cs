@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Kousyou {
 
 	public class Kousyou {
 		public static string GETSHIP = "api_req_kousyou/getship/";

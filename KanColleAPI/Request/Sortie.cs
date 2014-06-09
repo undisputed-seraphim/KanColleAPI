@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Sortie {
 
 	public class Sortie {
 		public static string BATTLE = "api_req_sortie/battle";

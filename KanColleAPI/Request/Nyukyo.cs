@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Nyukyo {
 
-	public class NyuKyo {
+	public class Nyukyo {
 		public static string START = "api_req_nyukyo/start/";
 
 		public static string Start (int ship_id, int ndock_id, int highspeed = 0) {

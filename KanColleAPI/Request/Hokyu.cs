@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Hokyu {
 
 	public enum ChargeKind {
 		FUEL = 1,
