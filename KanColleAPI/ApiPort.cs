@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace KanColle {
@@ -34,39 +33,41 @@ namespace KanColle {
 		private static string api_port (string args) {
 			int member_id = int.Parse(args);
 			string api_port = __((long) member_id);
-			Console.WriteLine("DEBUG API_PORT OUTPUT: " + api_port);
+			//Console.WriteLine("DEBUG API_PORT OUTPUT: " + api_port);
 			return api_port;
 		}
 
 		private static string __ (long member_id) {
 
 			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
-			string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id)) * array[2]).ToString();
+			string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id)) * array[func(member_id % 10)]).ToString();
 			string part_3 = (random_floor(9000) + 1000).ToString();
 
 			// Debug
+			/*
 			Console.WriteLine(part_1);
 			Console.WriteLine(part_2);
 			Console.WriteLine(part_3);
+			 * */
 
 			return string.Join("", part_1, part_2, part_3);
 		}
 
-		private static int func (int input) {
-			int temp = 0;
-			string query = Math.Sqrt(13).ToString();
-			try {
-				while (input != int.Parse(query.Substring(temp, 1))) {
-					temp++;
-				}
-			} catch (FormatException e) {
-				Console.WriteLine(e);
-				Console.WriteLine("DEBUG OUTPUT");
-				Console.WriteLine(temp + "\t" + input);
-				Console.WriteLine("3.60555127546399".Substring(temp, 1));
-				Console.WriteLine("END DEBUG");
-			}
-			return temp;
+		private static int func (long input) {
+			string sqrt13 = Math.Sqrt(array[array[13]]).ToString(); // 3.605551275463989
+
+			//Original function pseudocode:
+			// int counter = 0;
+			// While (input != (convert to integer from string) -> sqrt13.substring(counter, 1)) {
+			//		counter++;
+			// }
+			// return counter;
+			//
+			// Because C# runs into errors if you try to parse a period (.) to an integer,
+			// I have written this simulation instead. Far easier.
+
+			int[] arr = { 1, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
+			return arr[input];
 		}
 
 		private static int random_floor (int a) {
