@@ -26,7 +26,7 @@ namespace KanColle.Request {
 		}
 	}
 
-	public class Ship {
+	internal class Ship {
 		public int api_id { get; set; }
 		public int api_fuel { get; set; }
 		public int api_bull { get; set; }

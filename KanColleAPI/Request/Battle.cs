@@ -17,7 +17,7 @@ namespace KanColle.Request {
 		public List<int> api_search { get; set; }
 		public List<int> api_formation { get; set; }
 		public List<int> api_stage_flag { get; set; }
-		public ApiKouku api_kouku { get; set; }
+		public Kouku api_kouku { get; set; }
 		public int api_support_flag { get; set; }
 		public object api_support_info { get; set; }
 		public int api_opening_flag { get; set; }
@@ -40,7 +40,7 @@ namespace KanColle.Request {
 		}
 	}
 
-	public class ApiStage1 {
+	public class Stage1 {
 		public int api_f_count { get; set; }
 		public int api_f_lostcount { get; set; }
 		public int api_e_count { get; set; }
@@ -49,14 +49,14 @@ namespace KanColle.Request {
 		public List<int> api_touch_plane { get; set; }
 	}
 
-	public class ApiStage2 {
+	public class Stage2 {
 		public int api_f_count { get; set; }
 		public int api_f_lostcount { get; set; }
 		public int api_e_count { get; set; }
 		public int api_e_lostcount { get; set; }
 	}
 
-	public class ApiStage3 {
+	public class Stage3 {
 		public List<int> api_frai_flag { get; set; }
 		public List<int> api_erai_flag { get; set; }
 		public List<int> api_fbak_flag { get; set; }
@@ -67,11 +67,11 @@ namespace KanColle.Request {
 		public List<int> api_edam { get; set; }
 	}
 
-	public class ApiKouku {
+	public class Kouku {
 		public List<List<int>> api_plane_from { get; set; }
-		public ApiStage1 api_stage1 { get; set; }
-		public ApiStage2 api_stage2 { get; set; }
-		public ApiStage3 api_stage3 { get; set; }
+		public Stage1 api_stage1 { get; set; }
+		public Stage2 api_stage2 { get; set; }
+		public Stage3 api_stage3 { get; set; }
 	}
 
 	public class BattleResult {
@@ -89,7 +89,7 @@ namespace KanColle.Request {
 		public List<int> api_lost_flag { get; set; }
 		public string api_quest_name { get; set; }
 		public int api_quest_level { get; set; }
-		public ApiEnemyInfo api_enemy_info { get; set; }
+		public EnemyInfo api_enemy_info { get; set; }
 		public int api_first_clear { get; set; }
 		public List<int> api_get_flag { get; set; }
 		public ApiGetShip api_get_ship { get; set; }
@@ -100,7 +100,7 @@ namespace KanColle.Request {
 		public static string BATTLERESULT = "api_req_sortie/battleresult";
 	}
 
-	public class ApiEnemyInfo {
+	public class EnemyInfo {
 		public string api_level { get; set; }
 		public string api_rank { get; set; }
 		public string api_deck_name { get; set; }

@@ -62,8 +62,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\Battle.cs" />
     <Compile Include="Request\Hokyu.cs" />
+    <Compile Include="Request\Kosyou.cs" />
     <Compile Include="Request\Map.cs" />
     <Compile Include="Request\Mission.cs" />
+    <Compile Include="Request\Nyukyo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
