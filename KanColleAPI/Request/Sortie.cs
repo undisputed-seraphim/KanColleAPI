@@ -3,6 +3,20 @@ using System.Text;
 
 namespace KanColle.Request {
 
+	public class Sortie {
+		public static string BATTLE = "api_req_sortie/battle";
+		public static string BATTLERESULT = "api_req_sortie/battleresult";
+
+		public static string Battle (int formation, int recovery_type) {
+			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_formation={0}&", formation);
+			str.Append("api_token={0}&");
+			str.AppendFormat("api_recovery_type={0}&", recovery_type);
+			str.AppendFormat("api_verno={0}", 1);
+			return str.ToString();
+		}
+	}
+
 	public class Battle {
 		public int api_dock_id { get; set; }
 		public List<int> api_ship_ke { get; set; }
@@ -27,17 +41,6 @@ namespace KanColle.Request {
 		public object api_hougeki2 { get; set; }
 		public object api_hougeki3 { get; set; }
 		public object api_raigeki { get; set; }
-
-		public static string BATTLE = "api_req_sortie/battle";
-
-		public static string Get (int formation, int recovery_type) {
-			StringBuilder str = new StringBuilder();
-			str.AppendFormat("api_formation={0}&", formation);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_recovery_type={0}&", recovery_type);
-			str.AppendFormat("api_verno={0}", 1);
-			return str.ToString();
-		}
 	}
 
 	public class Stage1 {
@@ -92,12 +95,10 @@ namespace KanColle.Request {
 		public EnemyInfo api_enemy_info { get; set; }
 		public int api_first_clear { get; set; }
 		public List<int> api_get_flag { get; set; }
-		public ApiGetShip api_get_ship { get; set; }
+		public GetShip api_get_ship { get; set; }
 		public int api_get_eventflag { get; set; }
 		public int api_get_exmap_rate { get; set; }
 		public int api_get_exmap_useitem_id { get; set; }
-
-		public static string BATTLERESULT = "api_req_sortie/battleresult";
 	}
 
 	public class EnemyInfo {
@@ -106,7 +107,7 @@ namespace KanColle.Request {
 		public string api_deck_name { get; set; }
 	}
 
-	public class ApiGetShip {
+	public class GetShip {
 		public int api_ship_id { get; set; }
 		public string api_ship_type { get; set; }
 		public string api_ship_name { get; set; }
