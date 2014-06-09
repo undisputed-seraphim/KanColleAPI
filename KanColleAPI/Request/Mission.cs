@@ -2,6 +2,28 @@
 using System.Text;
 
 namespace KanColle.Request.Mission {
+
+	// TYPESAFE ENUM PATTERN! WOO!
+	// http://stackoverflow.com/questions/424366/c-sharp-string-enums
+	public sealed class ExpeditionResult {
+		private readonly string result;
+		private readonly int value;
+
+		public static readonly ExpeditionResult FAIL = new ExpeditionResult("失敗!", 0);
+		public static readonly ExpeditionResult SUCCESS = new ExpeditionResult("成功!", 1);
+		public static readonly ExpeditionResult GREAT_SUCCESS = new ExpeditionResult("大成功!", 2);
+
+		private ExpeditionResult (string result, int value) {
+			this.result = result;
+			this.value = value;
+		}
+
+		public override string ToString () {
+			return this.result;
+		}
+	}
+
+
 	public class Mission {
 		public static string START = "api_req_mission/start/";
 		public static string RESULT = "api_req_mission/result/";
@@ -22,7 +44,6 @@ namespace KanColle.Request.Mission {
 			str.AppendFormat("api_deck_id={0}", fleet_id);
 			return str.ToString();
 		}
-
 	}
 
 	public class MissionStart {
