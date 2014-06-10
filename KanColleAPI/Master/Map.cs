@@ -46,6 +46,10 @@ namespace KanColle.Master {
 		public int api_id { get; set; }
 		public string api_name { get; set; }
 		public int api_type { get; set; }
+
+		public override string ToString () {
+			return string.Format("{0}\t{1}\t{2}", api_id, api_type, api_name);
+		}
 	}
 
 	public class MapInfo : Iidentifiable {
@@ -59,6 +63,10 @@ namespace KanColle.Master {
 		public int[] api_item { get; set; }
 		public int api_max_maphp { get; set; }
 		public int api_required_defeat_count { get; set; }
+
+		public override string ToString () {
+			return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", api_id, api_maparea_id, api_no, api_name, api_max_maphp, api_required_defeat_count);
+		}
 	}
 
 	public class MapBgm : Iidentifiable {
@@ -77,4 +85,31 @@ namespace KanColle.Master {
 		public int api_no { get; set; }
 		public int api_color_no { get; set; }
 	}
+
+	/*
+	public enum EventMaps {
+		前哨戦,
+		警戒線突破,
+		警戒線突破,
+		湾内突入,
+		敵泊地強襲,
+		限定第1海域,
+		限定第2海域,
+		限定第3海域,
+		限定第4海域,
+		サーモン諸島海域,
+		ルンバ沖海域,
+		サンタクロース諸島海域,
+		アイアンボトムサウンド,
+		サーモン海域最深部,
+		観音崎沖,
+		硫黄島周辺海域,
+		中部太平洋海域,
+		南西海域サメワニ沖,
+		南西海域ズンダ海峡,
+		ポートワイン沖海域,
+		中部太平洋海域,
+		北太平洋海域
+	}*/
+
 }
