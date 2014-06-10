@@ -1,6 +1,47 @@
 ﻿
 namespace KanColle.Master {
 
+	// An enum of all maps in kancolle.
+	public sealed class Map {
+		private readonly int stage;
+		private readonly int map;
+		private readonly string name_jpn;
+
+		public static readonly Map _1_1 = new Map(1, 1, "鎮守府正面海域");
+		public static readonly Map _1_2 = new Map(1, 2, "南西諸島沖");
+		public static readonly Map _1_3 = new Map(1, 3, "製油所地帯沿岸");
+		public static readonly Map _1_4 = new Map(1, 4, "南西諸島防衛線");
+		public static readonly Map _1_5 = new Map(1, 5, "鎮守府近海");
+		public static readonly Map _2_1 = new Map(2, 1, "カムラン半島");
+		public static readonly Map _2_2 = new Map(2, 2, "バシー島沖");
+		public static readonly Map _2_3 = new Map(2, 3, "東部オリョール海");
+		public static readonly Map _2_4 = new Map(2, 4, "沖ノ島海域");
+		public static readonly Map _2_5 = new Map(2, 5, "沖ノ島沖");
+		public static readonly Map _3_1 = new Map(3, 1, "モーレイ海");
+		public static readonly Map _3_2 = new Map(3, 2, "キス島沖");
+		public static readonly Map _3_3 = new Map(3, 3, "アルフォンシーノ方面");
+		public static readonly Map _3_4 = new Map(3, 4, "北方海域全域");
+		public static readonly Map _4_1 = new Map(4, 1, "ジャム島攻略作戦");
+		public static readonly Map _4_2 = new Map(4, 2, "カレー洋制圧戦");
+		public static readonly Map _4_3 = new Map(4, 3, "リランカ島空襲");
+		public static readonly Map _4_4 = new Map(4, 4, "カスガダマ沖海戦");
+		public static readonly Map _5_1 = new Map(5, 1, "南方海域前面");
+		public static readonly Map _5_2 = new Map(5, 2, "珊瑚諸島沖");
+		public static readonly Map _5_3 = new Map(5, 3, "サブ島沖海域");
+		public static readonly Map _5_4 = new Map(5, 4, "サーモン海域");
+		public static readonly Map _5_5 = new Map(5, 5, "サーモン海域北方");
+
+		private Map (int stage, int map, string name_jpn) {
+			this.stage = stage;
+			this.map = map;
+			this.name_jpn = name_jpn;
+		}
+
+		public override string ToString () {
+			return this.name_jpn;
+		}
+	}
+
 	public class MapArea : Iidentifiable {
 		public int api_id { get; set; }
 		public string api_name { get; set; }

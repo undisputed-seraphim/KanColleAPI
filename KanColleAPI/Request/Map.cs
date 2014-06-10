@@ -1,6 +1,7 @@
 ﻿using System.Text;
 
 namespace KanColle.Request.Map {
+
 	public class Map {
 		public static string START = "api_req_map/start/";
 		public static string NEXT = "api_req_map/next/";

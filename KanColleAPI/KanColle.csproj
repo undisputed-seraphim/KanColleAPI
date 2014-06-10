@@ -54,6 +54,7 @@
     <Compile Include="Master\SlotItem.cs" />
     <Compile Include="Master\Start2.cs" />
     <Compile Include="Master\UseItem.cs" />
+    <Compile Include="Member\MapInfo.cs" />
     <Compile Include="Member\Port.cs" />
     <Compile Include="Member\Ship3.cs" />
     <Compile Include="Member\SlotItem.cs" />

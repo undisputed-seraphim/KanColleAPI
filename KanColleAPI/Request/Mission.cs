@@ -9,9 +9,9 @@ namespace KanColle.Request.Mission {
 		private readonly string result;
 		private readonly int value;
 
-		public static readonly ExpeditionResult FAIL = new ExpeditionResult("失敗!", 0);
-		public static readonly ExpeditionResult SUCCESS = new ExpeditionResult("成功!", 1);
-		public static readonly ExpeditionResult GREAT_SUCCESS = new ExpeditionResult("大成功!", 2);
+		public static readonly ExpeditionResult FAIL = new ExpeditionResult("失敗！", 0);
+		public static readonly ExpeditionResult SUCCESS = new ExpeditionResult("成功！", 1);
+		public static readonly ExpeditionResult GREAT_SUCCESS = new ExpeditionResult("大成功！", 2);
 
 		private ExpeditionResult (string result, int value) {
 			this.result = result;
@@ -79,38 +79,18 @@ namespace KanColle.Request.Mission {
 			public int api_useitem_count { get; set; }
 		}
 
-		public string GetResult () {
-			string ret;
-			switch (this.api_clear_result) {
-				default:
-				case 0: {
-						ret = "失敗！";
-						break;
-					}
-				case 1: {
-						ret = "成功！";
-						break;
-					}
-				case 2: {
-						ret = "大成功！";
-						break;
-					}
-			}
-			return ret;
-		}
-
 		public void PrintConsole () {
-			string clear_result = "";
+			string clear_result = "MISSION RESULT: {0} {1}";
 			switch (this.api_clear_result) {
 				default:
 				case 0:
-					clear_result = "MISSION RESULT: 失敗！ :(";
+					clear_result = string.Format(clear_result, ExpeditionResult.FAIL, ":(");
 					break;
 				case 1:
-					clear_result = "MISSION RESULT: 成功！ :)";
+					clear_result = string.Format(clear_result, ExpeditionResult.SUCCESS, ":)");
 					break;
 				case 2:
-					clear_result = "MISSION RESULT: 大成功！ :D";
+					clear_result = string.Format(clear_result, ExpeditionResult.GREAT_SUCCESS, ":D");
 					break;
 			}
 			string get_material = string.Format("{0} fuel, {1} ammo, {2} steel, {3} bauxite",
