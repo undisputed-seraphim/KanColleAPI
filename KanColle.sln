@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColle", "KanColleAPI\KanColle.csproj", "{AA6C512F-2127-4FCD-AC9A-51D085E14FC0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KanColleConsole", "KanColleConsole\KanColleConsole.csproj", "{4FE21194-7BB6-4FEF-8C87-2E0AE70FAF19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{AA6C512F-2127-4FCD-AC9A-51D085E14FC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA6C512F-2127-4FCD-AC9A-51D085E14FC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA6C512F-2127-4FCD-AC9A-51D085E14FC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FE21194-7BB6-4FEF-8C87-2E0AE70FAF19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FE21194-7BB6-4FEF-8C87-2E0AE70FAF19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FE21194-7BB6-4FEF-8C87-2E0AE70FAF19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FE21194-7BB6-4FEF-8C87-2E0AE70FAF19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
