@@ -61,8 +61,8 @@ namespace KanColle.Master {
 		public string api_opetext { get; set; }
 		public string api_infotext { get; set; }
 		public int[] api_item { get; set; }
-		public int api_max_maphp { get; set; }
-		public int api_required_defeat_count { get; set; }
+		public int? api_max_maphp { get; set; }
+		public int? api_required_defeat_count { get; set; }
 
 		public override string ToString () {
 			return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", api_id, api_maparea_id, api_no, api_name, api_max_maphp, api_required_defeat_count);
