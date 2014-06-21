@@ -62,7 +62,6 @@ namespace KanColle {
 			if (debug) {
 				Console.WriteLine("REFERER: " + request.Referer);
 				Console.WriteLine("CONTENT LENGTH: " + request.ContentLength);
-				Console.WriteLine("AUTO DECOMPRESSION: " + request.AutomaticDecompression);
 			}
 
 			// Get stream, write, flush and close.
