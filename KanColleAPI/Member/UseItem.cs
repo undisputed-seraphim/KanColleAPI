@@ -12,6 +12,6 @@ namespace KanColle.Member {
 		public int api_price { get; set; }
 		public int api_count { get; set; }
 
-		public static string GET = "api_get_member/useitem/";
+		public static string USEITEM = "api_get_member/useitem/";
 	}
 }

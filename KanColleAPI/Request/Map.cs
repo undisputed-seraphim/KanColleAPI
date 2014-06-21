@@ -17,7 +17,7 @@ namespace KanColle.Request.Map {
 			return str.ToString();
 		}
 
-		public static string Next (int recovery_type) {
+		public static string Next (int recovery_type = 0) {
 			StringBuilder str = new StringBuilder();
 			str.Append("api_token={0}&");
 			str.AppendFormat("api_recovery_type={0}&", recovery_type);

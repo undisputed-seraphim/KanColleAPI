@@ -38,7 +38,7 @@ namespace KanColle.Member {
 		public List<int> api_slottype30 { get; set; }
 		public List<int> api_slottype31 { get; set; }
 
-		public static string GET = "api_get_member/unsetslot/";
+		public static string UNSETSLOT = "api_get_member/unsetslot/";
 
 		public static UnsetSlot ParseUnsetSlot (string input) {
 			return JsonConvert.DeserializeObject<UnsetSlot>(input, new UnsetSlotConverter());

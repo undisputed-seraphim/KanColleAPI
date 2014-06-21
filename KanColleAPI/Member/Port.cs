@@ -9,7 +9,7 @@ namespace KanColle.Member {
 		public Basic api_basic { get; set; }
 		public ActionLog[] api_log { get; set; }
 
-		public static string GET = "api_port/port/";
+		public static string PORT = "api_port/port/";
 
 		public string GetFleetList (int fleet_num) {
 			return this.api_deck_port[fleet_num - 1].GetShipList(true);
