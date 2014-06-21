@@ -4,7 +4,9 @@ using System.Net;
 using System.Text;
 
 namespace KanColle {
-	public class KanColleProxy {
+
+	public sealed class KanColleProxy {
+
 		private static string HEADER_REFERER =		"{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";
 		private static string HEADER_USER_AGENT =	"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0";
 		private static string HEADER_ACCEPT =		"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
@@ -74,12 +76,12 @@ namespace KanColle {
 			HttpStatusCode status = response.StatusCode;
 
 			if (debug) {
-				Console.WriteLine("HTTP STATUS CODE: " + status.ToString());
+				Console.WriteLine("HTTP STATUS CODE: " + status);
 			}
 
 			if (status != HttpStatusCode.OK) {
 				Console.WriteLine(status);
-				// To implement: Throw an exception here
+				// ToDo: Throw an exception here
 			}
 			Stream responseStream = response.GetResponseStream();
 			StreamReader reader = new StreamReader(responseStream, Encoding.UTF8, true);
@@ -103,5 +105,9 @@ namespace KanColle {
 
 			return output;
 		}
+	}
+
+	public enum UserAgent {
+		FIREFOX, CHROME, FLASH_13
 	}
 }
