@@ -20,6 +20,7 @@ namespace Sparkler {
 		private KanColleProxy kcp;
 		private int fleet_id, run_times;
 		private string member_id, ship_list;
+		private bool no_wait { get; set; }
 
 		static void Main (string[] args) {
 			Console.OutputEncoding = Encoding.Unicode;
@@ -66,6 +67,7 @@ namespace Sparkler {
 		}
 
 		public void run () {
+			Console.WriteLine(this.ship_list);
 			
 			int run_count = 0;
 			while (this.run_times != run_count) {
@@ -76,8 +78,8 @@ namespace Sparkler {
 
 				this.kcp.proxy(Map.START, Map.Start(1, this.fleet_id, 1, 1));
 				Console.WriteLine("STARTED.");
-				Thread.Sleep(ONE_SECOND);
 
+				Thread.Sleep(ONE_SECOND);
 				this.kcp.proxy(Sortie.BATTLE, Sortie.Battle(1, 0));
 				Console.WriteLine("First battle done.");
 				Thread.Sleep(TEN_SECONDS);
@@ -115,7 +117,7 @@ namespace Sparkler {
 			try {
 				return api_data.GetData().GetFleetList(fleetNum);
 			} catch (Exception e) {
-				Console.WriteLine(result);
+				Console.WriteLine(result.Substring(0, 200));
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
@@ -127,7 +129,7 @@ namespace Sparkler {
 			try {
 				return api_data.GetData().api_member_id;
 			} catch (Exception e) {
-				Console.WriteLine(result);
+				Console.WriteLine(result.Substring(0, 200));
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
