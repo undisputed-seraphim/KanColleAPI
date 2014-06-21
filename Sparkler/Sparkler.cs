@@ -1,11 +1,10 @@
-﻿using System;
+﻿using KanColle;
+using KanColle.Master;
+using KanColle.Member;
+using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Text;
-
-using KanColle;
-using KanColle.Member;
-using KanColle.Master;
-using Newtonsoft.Json;
 
 namespace Sparkler {
 

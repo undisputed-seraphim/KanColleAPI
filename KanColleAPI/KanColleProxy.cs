@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Text;
-
-using System.Net;
 using System.IO;
+using System.Net;
+using System.Text;
 
 namespace KanColle {
 	public class KanColleProxy {
