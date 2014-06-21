@@ -7,7 +7,10 @@ namespace KanColle {
 		private static int RADIX = 31;
 		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
 		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };
-		private static long[] array = { 1623, 5727, 9278, 3527, 4976, 7180734, 6632, 3708, 4796, 9675, 13, 6631, 2987, 10, 1901, 9881, 1000, 3527 };
+		private static long[] old_array = { 1623, 5727, 9278, 3527, 4976, 7180734, 6632, 3708, 4796, 9675, 13, 6631, 2987, 10, 1901, 9881, 1000, 3527 };
+
+		private static long[] array = { 7536, 1882, 2237, 7280, 5686, 7180734, 6632, 1671, 4819, 1353, 13, 8422, 2987, 10, 1601, 6266, 1000, 3640 };
+
 		public static string PORT = "api_port/port/";
 
 		public static string port (string memberId) {
@@ -40,7 +43,7 @@ namespace KanColle {
 		private static string __ (long member_id) {
 
 			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
-			string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id)) * array[func(member_id % 10)]).ToString();
+			string part_2 = (((7180734 * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id)) * array[func(member_id % 10)]).ToString();
 			string part_3 = (random_floor(9000) + 1000).ToString();
 
 			// Debug
@@ -67,7 +70,9 @@ namespace KanColle {
 			// I have written this simulation instead. Far easier.
 
 			int[] arr = { 1, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
-			return arr[input];
+
+			int[] SHINGATA_ARR = { 3, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
+			return SHINGATA_ARR[input];
 		}
 
 		private static int random_floor (int a) {

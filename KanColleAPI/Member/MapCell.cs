@@ -7,7 +7,7 @@ namespace KanColle.Member {
 
 		public static string MAPCELL = "api_get_member/mapcell/";
 
-		public static string MapCell (int map_area_id, int map_info_no) {
+		public static string Get (int map_area_id, int map_info_no) {
 			StringBuilder str = new StringBuilder();
 			str.AppendFormat("api_maparea_id={0}&", map_area_id);
 			str.Append("api_token={0}&");

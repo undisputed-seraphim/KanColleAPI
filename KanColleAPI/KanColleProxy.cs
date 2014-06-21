@@ -16,30 +16,38 @@ namespace KanColle {
 		private readonly string USER_API_TOKEN;
 		private readonly string USER_SERVER;
 
-		public KanColleProxy (string api_token, string server) {
+		public bool debug { get; set; }
+
+		public KanColleProxy (string api_token, string server, bool debug = false) {
 			this.USER_API_TOKEN = api_token;
 			this.USER_SERVER = server;
+			this.debug = debug;
 		}
 
-		public KanColleProxy (string input) {
+		public KanColleProxy (string input, bool debug = false) {
 			string[] tokens = input.Split(new string[] { "kcs/mainD2.swf?api_token=" }, StringSplitOptions.None);
 			this.USER_SERVER = tokens[0];
 			this.USER_API_TOKEN = tokens[1];
+			this.debug = debug;
 		}
 
 		public string proxy (string context, string parameter = DEFAULT_GET) {
+			if (debug) {
+				Console.WriteLine("API TOKEN: " + this.USER_API_TOKEN);
+				Console.WriteLine("SERVER: " + this.USER_SERVER);
+			}
+
 			Uri uri = new Uri(this.USER_SERVER + "kcsapi/" + context);
 			string referer = string.Format(HEADER_REFERER, this.USER_SERVER, this.USER_API_TOKEN);
 			HttpWebRequest request = (HttpWebRequest) WebRequest.Create(uri);
 			parameter = String.Format(parameter, this.USER_API_TOKEN);
 			byte[] bytearray = Encoding.ASCII.GetBytes(parameter);
 
-			// For debug.
-			/*
-			Console.WriteLine(context);
-			Console.WriteLine(uri);
-			Console.WriteLine(parameter);
-			*/
+			if (debug) {
+				Console.WriteLine("CONTEXT: " + context);
+				Console.WriteLine("URI: " + uri);
+				Console.WriteLine("PARAMETER: " + parameter);
+			}
 
 			// Set headers and method.
 			request.Method = "POST";
@@ -51,6 +59,12 @@ namespace KanColle {
 			request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 			request.KeepAlive = true;
 
+			if (debug) {
+				Console.WriteLine("REFERER: " + request.Referer);
+				Console.WriteLine("CONTENT LENGTH: " + request.ContentLength);
+				Console.WriteLine("AUTO DECOMPRESSION: " + request.AutomaticDecompression);
+			}
+
 			// Get stream, write, flush and close.
 			Stream requestStream = request.GetRequestStream();
 			requestStream.Write(bytearray, 0, bytearray.Length);
@@ -60,6 +74,11 @@ namespace KanColle {
 			// Get the response, status, etc.
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse();
 			HttpStatusCode status = response.StatusCode;
+
+			if (debug) {
+				Console.WriteLine("HTTP STATUS CODE: " + status.ToString());
+			}
+
 			if (status != HttpStatusCode.OK) {
 				Console.WriteLine(status);
 				// To implement: Throw an exception here
