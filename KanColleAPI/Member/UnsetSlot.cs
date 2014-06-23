@@ -5,6 +5,13 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace KanColle.Member {
+
+	public class UnsetSlotWrapper {
+		public int api_result { get; set; }
+		public string api_result_msg { get; set; }
+		public UnsetSlot api_data { get; set; }
+	}
+
 	public class UnsetSlot {
 		public List<int> api_slottype1 { get; set; }
 		public List<int> api_slottype2 { get; set; }
@@ -55,7 +62,7 @@ namespace KanColle.Member {
 			if (token.Type == JTokenType.Object) {
 				return token.ToObject<List<int>>();
 			}
-			return null;
+			return new List<int>();
 		}
 
 		public override void WriteJson (JsonWriter writer, object value, JsonSerializer serializer) {

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace KanColle.Request.Kaisou {
-	class Kaisou {
+	public class Kaisou {
 		public static string UNSETSLOT_ALL = "api_req_kaisou/unsetslot_all/";
 		public static string SLOTSET = "api_req_kaisou/slotset/";
 		public static string REMODELING = "api_req_kaisou/remodeling/";

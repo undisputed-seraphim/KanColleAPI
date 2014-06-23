@@ -19,8 +19,11 @@ namespace Sparkler {
 
 		private KanColleProxy kcp;
 		private int fleet_id, run_times;
+		private int solo_ship;
 		private string member_id, ship_list;
 		private bool no_wait { get; set; }
+
+		private Port portData;
 
 		static void Main (string[] args) {
 			Console.OutputEncoding = Encoding.Unicode;
@@ -44,6 +47,7 @@ namespace Sparkler {
 
 			this.member_id = getMemberId();
 			this.ship_list = getShipList(this.fleet_id);
+			this.solo_ship = int.Parse(this.ship_list);
 			/*
 			StreamReader reader = new StreamReader("DATA/dat.txt", Encoding.Unicode);
 			string readin = reader.ReadLine();
@@ -67,7 +71,8 @@ namespace Sparkler {
 		}
 
 		public void run () {
-			Console.WriteLine(this.ship_list);
+			Console.WriteLine("KANMUSU'S ID: " + this.ship_list);
+			Console.WriteLine("INITIAL MORALE: " + getMorale(this.portData, this.solo_ship));
 			
 			int run_count = 0;
 			while (this.run_times != run_count) {
@@ -100,7 +105,8 @@ namespace Sparkler {
 				Console.WriteLine("Second battle results get.");
 				Thread.Sleep(FIVE_SECONDS);
 
-				this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
+				string port_data = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
+				this.portData = JsonConvert.DeserializeObject<KanColleAPI<Port>>(port_data).GetData();
 				Console.WriteLine("Returned to port.");
 
 				this.kcp.proxy(Hokyu.CHARGE, Hokyu.Charge(this.ship_list, ChargeKind.BOTH));
@@ -108,12 +114,24 @@ namespace Sparkler {
 				Thread.Sleep(ONE_SECOND);
 
 				Console.WriteLine("ROUND {0} COMPLETE.", ++run_count);
+				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, this.solo_ship));
 			}
+		}
+
+		private int getMorale (Port port, int ship_id) {
+			int cond;
+			foreach (Ship kanmusu in port.api_ship) {
+				if (kanmusu.api_id == ship_id) {
+					return kanmusu.api_cond;
+				}
+			}
+			return 0;
 		}
 
 		private string getShipList (int fleetNum) {
 			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
 			KanColleAPI<Port> api_data = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result);
+			this.portData = api_data.GetData();
 			try {
 				return api_data.GetData().GetFleetList(fleetNum);
 			} catch (Exception e) {

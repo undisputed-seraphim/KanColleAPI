@@ -1,8 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using System.Reflection;
 
 using KanColle;
+using KanColle.Request.Kaisou;
+using Newtonsoft.Json;
 
 namespace KanColleConsole {
 	class KanColleConsole {
@@ -14,14 +17,16 @@ namespace KanColleConsole {
 			string full_api_token = reader.ReadLine();
 			reader.Close();
 
-			KanColleProxy kcp = new KanColleProxy(full_api_token, true);
-			string context = ApiPort.PORT;
-			string param = ApiPort.port("407966");
+			KanColleProxy kcp = new KanColleProxy(full_api_token, false);
 
-			string ret = kcp.proxyWithFileWrite("output.txt", context, param);
-			Console.WriteLine("Press any key to display the first 100 characters of the output...");
-			Console.Read();
-			Console.WriteLine(ret.Substring(0, 100));
+			Console.WriteLine("ship ID, item ID, shot ID");
+
+			string context = Kaisou.SLOTSET;
+			string param = Kaisou.Slotset(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]));
+			string ret = kcp.proxy(context, param);
+
+			Console.WriteLine("\nRaw Data:");
+			Console.WriteLine(ret);
 		}
 	}
 }

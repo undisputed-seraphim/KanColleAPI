@@ -84,9 +84,8 @@ namespace RunExp {
 			// Debug
 			// Console.WriteLine(postResponse);
 
-			KanColleAPI<MissionStart> start = JsonConvert.DeserializeObject<KanColleAPI<MissionStart>>(postResponse);
-
 			try {
+				KanColleAPI<MissionStart> start = JsonConvert.DeserializeObject<KanColleAPI<MissionStart>>(postResponse);
 				start.GetData().PrintConsole();
 			} catch (Exception e) {
 				Console.WriteLine(parameter);
@@ -104,10 +103,8 @@ namespace RunExp {
 
 			// Debug
 			// Console.WriteLine(postResponse);
-
-			KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
-
 			try {
+				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
 				result.GetData().PrintConsole();
 			} catch (Exception e) {
 				Console.WriteLine(parameter);
@@ -129,8 +126,8 @@ namespace RunExp {
 
 		private string getShipList (int fleetNum) {
 			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
-			KanColleAPI<Port> api_data = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result);
 			try {
+				KanColleAPI<Port> api_data = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result);
 				return api_data.GetData().GetFleetList(fleetNum);
 			} catch (Exception e) {
 
@@ -142,8 +139,8 @@ namespace RunExp {
 
 		private string getMemberId () {
 			String result = this.kcp.proxy(Basic.GET);
-			KanColleAPI<Basic> api_data = JsonConvert.DeserializeObject<KanColleAPI<Basic>>(result);
 			try {
+				KanColleAPI<Basic> api_data = JsonConvert.DeserializeObject<KanColleAPI<Basic>>(result);
 				return api_data.GetData().api_member_id;
 			} catch (Exception e) {
 				Console.WriteLine(result);

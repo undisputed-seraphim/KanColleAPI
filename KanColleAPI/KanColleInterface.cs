@@ -5,7 +5,7 @@ namespace KanColle {
 	public class KanColleAPI<T> {
 		public int api_result { get; set; }
 		public string api_result_msg { get; set; }
-		public T api_data { private get; set; }
+		public T api_data { get; set; }
 
 		public T GetData () {
 			switch (this.api_result) {
