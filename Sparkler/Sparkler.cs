@@ -3,6 +3,7 @@ using KanColle.Member;
 using KanColle.Request.Map;
 using KanColle.Request.Sortie;
 using KanColle.Request.Hokyu;
+using KanColle.Request;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -18,8 +19,7 @@ namespace Sparkler {
 		private const int TEN_SECONDS = 10 * 1000;
 
 		private KanColleProxy kcp;
-		private int fleet_id, run_times;
-		private int solo_ship;
+		private int fleet_id;
 		private string member_id;
 		private string ship_list_string;
 		private int[] ship_list_array;
@@ -37,26 +37,51 @@ namespace Sparkler {
 			int fleet_id = Convert.ToInt32(args[0]),
 				run_times = Convert.ToInt32(args[1]);
 
-			Sparkler sparkler = new Sparkler(full_api_token, fleet_id, run_times);
-			sparkler.run();
-			Console.Read();
+			fleet_id = Math.Abs(fleet_id);
+			run_times = Math.Abs(run_times);
+
+			Sparkler sparkler = new Sparkler(full_api_token, fleet_id);
+			sparkler.run(run_times);
 		}
 
-		public Sparkler (string full_api_token, int fleet_id, int run_times) {
+		public Sparkler (string full_api_token, int fleet_id) {
 			this.kcp = new KanColleProxy(full_api_token);
-			this.fleet_id = Math.Abs(fleet_id);
-			this.run_times = Math.Abs(run_times);
+			this.fleet_id = fleet_id;
 
 			this.member_id = getMemberId();
 			this.ship_list_array = getShipListArray(this.fleet_id);
 		}
 
-		public void run () {
-			Console.WriteLine("KANMUSU'S ID: " + this.ship_list_array);
-			Console.WriteLine("INITIAL MORALE: " + getMorale(this.portData, this.solo_ship));
+		// General procedure: Remove all but flag, then run and replace each iteration.
+		public void run (int run_times) {
+			Console.WriteLine("LIST OF ALL SHIPS IN FLEET THAT WILL BE SPARKLED: " + string.Join(",", this.ship_list_array));
+			string context = Hensei.CHANGE;
+			string param = Hensei.RemoveAll(this.fleet_id);
+			this.kcp.proxy(context, param);
+
+			for (int i = 0; i < this.ship_list_array.Length; i++) {
+				if (this.ship_list_array[i] <= 0) {
+					continue;
+				}
+
+				if (i == this.ship_list_array.Length) {
+					continue;
+				}
+
+				runForOneShip(this.ship_list_array[i], run_times);
+				param = Hensei.Change(this.ship_list_array[i + 1], 1, this.fleet_id);
+				this.kcp.proxy(context, param);
+				Console.WriteLine("");
+				Console.WriteLine("NEXT SHIP.");
+			}
+		}
+
+		public void runForOneShip (int ship_id, int run_times) {
+			Console.WriteLine("KANMUSU'S ID: " + ship_id);
+			Console.WriteLine("INITIAL MORALE: " + getMorale(this.portData, ship_id));
 			
 			int run_count = 0;
-			while (this.run_times != run_count) {
+			while (run_times != run_count) {
 				this.kcp.proxy(MapInfo.MAPINFO);
 				Console.WriteLine("MapInfo done.");
 				this.kcp.proxy(MapCell.MAPCELL, MapCell.Get(1, 1));
@@ -95,7 +120,7 @@ namespace Sparkler {
 				Thread.Sleep(ONE_SECOND);
 
 				Console.WriteLine("ROUND {0} COMPLETE.", ++run_count);
-				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, this.solo_ship));
+				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, ship_id));
 			}
 		}
 

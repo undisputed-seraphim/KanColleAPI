@@ -61,6 +61,7 @@ namespace KanColle {
 			request.KeepAlive = true;
 
 			if (debug) {
+				Console.WriteLine("");
 				Console.WriteLine("REFERER: " + request.Referer);
 				Console.WriteLine("CONTENT LENGTH: " + request.ContentLength);
 			}
