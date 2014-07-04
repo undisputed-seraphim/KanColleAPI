@@ -30,9 +30,6 @@ namespace RunExp {
 
 			RunExp runexp = new RunExp(full_api_token, fleet_id, mission_id, interval);
 
-			string built_date = "21 June 2014, 18:49";
-			Console.WriteLine("RUNEXP is a Kancolle expedition bot.\nThis version was built on {0}\n", built_date);
-
 			while (true) {
 				try {
 					runexp.run();

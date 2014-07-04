@@ -19,10 +19,9 @@ namespace KanColleConsole {
 
 			KanColleProxy kcp = new KanColleProxy(full_api_token, false);
 
-			Console.WriteLine("ship ID, item ID, shot ID");
+			string context = ApiPort.PORT;
+			string param = ApiPort.port("407966");
 
-			string context = Kaisou.SLOTSET;
-			string param = Kaisou.Slotset(int.Parse(args[0]), int.Parse(args[1]), int.Parse(args[2]));
 			string ret = kcp.proxy(context, param);
 
 			Console.WriteLine("\nRaw Data:");

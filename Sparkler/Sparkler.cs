@@ -20,7 +20,9 @@ namespace Sparkler {
 		private KanColleProxy kcp;
 		private int fleet_id, run_times;
 		private int solo_ship;
-		private string member_id, ship_list;
+		private string member_id;
+		private string ship_list_string;
+		private int[] ship_list_array;
 		private bool no_wait { get; set; }
 
 		private Port portData;
@@ -46,32 +48,11 @@ namespace Sparkler {
 			this.run_times = Math.Abs(run_times);
 
 			this.member_id = getMemberId();
-			this.ship_list = getShipList(this.fleet_id);
-			this.solo_ship = int.Parse(this.ship_list);
-			/*
-			StreamReader reader = new StreamReader("DATA/dat.txt", Encoding.Unicode);
-			string readin = reader.ReadLine();
-			reader.Close();
-
-			KanColleAPI<KanColle.Master.Start2> api_data = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Master.Start2>>(readin);
-
-			foreach (KanColle.Master.MapArea map in api_data.GetData().api_mst_maparea) {
-				StreamWriter stream = new StreamWriter("DATA/MAPAREA.txt", true, Encoding.UTF8);
-				stream.WriteLine(map);
-				stream.Flush();
-				stream.Close();
-			}
-
-			foreach (KanColle.Master.MapInfo map in api_data.GetData().api_mst_mapinfo) {
-				StreamWriter stream = new StreamWriter("DATA/MAPINFO.txt", true, Encoding.UTF8);
-				stream.WriteLine(map);
-				stream.Flush();
-				stream.Close();
-			}*/
+			this.ship_list_array = getShipListArray(this.fleet_id);
 		}
 
 		public void run () {
-			Console.WriteLine("KANMUSU'S ID: " + this.ship_list);
+			Console.WriteLine("KANMUSU'S ID: " + this.ship_list_array);
 			Console.WriteLine("INITIAL MORALE: " + getMorale(this.portData, this.solo_ship));
 			
 			int run_count = 0;
@@ -109,7 +90,7 @@ namespace Sparkler {
 				this.portData = JsonConvert.DeserializeObject<KanColleAPI<Port>>(port_data).GetData();
 				Console.WriteLine("Returned to port.");
 
-				this.kcp.proxy(Hokyu.CHARGE, Hokyu.Charge(this.ship_list, ChargeKind.BOTH));
+				this.kcp.proxy(Hokyu.CHARGE, Hokyu.Charge(this.ship_list_string, ChargeKind.BOTH));
 				Console.WriteLine("Refueled.");
 				Thread.Sleep(ONE_SECOND);
 
@@ -119,13 +100,13 @@ namespace Sparkler {
 		}
 
 		private int getMorale (Port port, int ship_id) {
-			int cond;
+			int cond = 0;
 			foreach (Ship kanmusu in port.api_ship) {
 				if (kanmusu.api_id == ship_id) {
 					return kanmusu.api_cond;
 				}
 			}
-			return 0;
+			return cond;
 		}
 
 		private string getShipList (int fleetNum) {
@@ -134,6 +115,21 @@ namespace Sparkler {
 			this.portData = api_data.GetData();
 			try {
 				return api_data.GetData().GetFleetList(fleetNum);
+			} catch (Exception e) {
+				Console.WriteLine(result.Substring(0, 200));
+				Console.WriteLine(e.Message);
+				throw new Exception(e.Message, e);
+			}
+		}
+
+		private int[] getShipListArray (int fleetNum) {
+			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
+			KanColleAPI<Port> api_data = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result);
+			this.portData = api_data.GetData();
+			try {
+				string shipList = api_data.GetData().GetFleetList(fleetNum);
+				this.ship_list_string = shipList;
+				return ToIntArray(shipList, ',');
 			} catch (Exception e) {
 				Console.WriteLine(result.Substring(0, 200));
 				Console.WriteLine(e.Message);
@@ -151,6 +147,10 @@ namespace Sparkler {
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
+		}
+
+		public static int[] ToIntArray (string values, char delimiter) {
+			return Array.ConvertAll(values.Split(delimiter), s => int.Parse(s));
 		}
 	}
 }
