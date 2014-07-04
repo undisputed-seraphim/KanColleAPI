@@ -64,15 +64,16 @@ namespace Sparkler {
 					continue;
 				}
 
-				if (i == this.ship_list_array.Length) {
-					continue;
-				}
-
 				runForOneShip(this.ship_list_array[i], run_times);
+
+				if (i == this.ship_list_array.Length) {
+					Console.WriteLine("FLEET SPARKLING DONE!");
+					break;
+				}
 				param = Hensei.Change(this.ship_list_array[i + 1], 1, this.fleet_id);
 				this.kcp.proxy(context, param);
-				Console.WriteLine("");
-				Console.WriteLine("NEXT SHIP.");
+				Thread.Sleep(FIVE_SECONDS);
+				Console.WriteLine("\n\nNEXT SHIP.");
 			}
 		}
 
@@ -120,7 +121,7 @@ namespace Sparkler {
 				Thread.Sleep(ONE_SECOND);
 
 				Console.WriteLine("ROUND {0} COMPLETE.", ++run_count);
-				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, ship_id));
+				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, ship_id) + "\n");
 			}
 		}
 
