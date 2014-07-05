@@ -1,9 +1,9 @@
 ﻿using KanColle;
 using KanColle.Member;
+using KanColle.Request;
+using KanColle.Request.Hokyu;
 using KanColle.Request.Map;
 using KanColle.Request.Sortie;
-using KanColle.Request.Hokyu;
-using KanColle.Request;
 using Newtonsoft.Json;
 using System;
 using System.IO;
@@ -66,7 +66,7 @@ namespace Sparkler {
 
 				runForOneShip(this.ship_list_array[i], run_times);
 
-				if (i == this.ship_list_array.Length) {
+				if (i == this.ship_list_array.Length - 1) {
 					Console.WriteLine("FLEET SPARKLING DONE!");
 					break;
 				}
@@ -75,6 +75,15 @@ namespace Sparkler {
 				Thread.Sleep(FIVE_SECONDS);
 				Console.WriteLine("\n\nNEXT SHIP.");
 			}
+
+			Console.WriteLine("Rebuilding fleet...");
+			for (int j = 0; j < this.ship_list_array.Length; j++) {
+				param = Hensei.Change(this.ship_list_array[j], j + 1, this.fleet_id);
+				Thread.Sleep(ONE_SECOND);
+				this.kcp.proxy(context, param);
+			}
+
+			Console.WriteLine("ALL JOBS COMPLETED");
 		}
 
 		public void runForOneShip (int ship_id, int run_times) {
