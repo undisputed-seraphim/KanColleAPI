@@ -87,11 +87,22 @@ namespace Sparkler {
 		}
 
 		public void runForOneShip (int ship_id, int run_times) {
+			int morale = getMorale(this.portData, ship_id);
 			Console.WriteLine("KANMUSU'S ID: " + ship_id);
-			Console.WriteLine("INITIAL MORALE: " + getMorale(this.portData, ship_id));
+			Console.WriteLine("INITIAL MORALE: " + morale);
+
+			if (morale >= 81) {
+				Console.WriteLine("Morale is " + morale + ". Skipping...");
+				return;
+			}
 			
 			int run_count = 0;
 			while (run_times != run_count) {
+				if (morale >= 81) {
+					Console.WriteLine("Morale is " + morale + ". Skipping the rest of iterations...");
+					break;
+				}
+
 				this.kcp.proxy(MapInfo.MAPINFO);
 				Console.WriteLine("MapInfo done.");
 				this.kcp.proxy(MapCell.MAPCELL, MapCell.Get(1, 1));
@@ -130,7 +141,8 @@ namespace Sparkler {
 				Thread.Sleep(ONE_SECOND);
 
 				Console.WriteLine("ROUND {0} COMPLETE.", ++run_count);
-				Console.WriteLine("CURRENT MORALE: " + getMorale(this.portData, ship_id) + "\n");
+				morale = getMorale(this.portData, ship_id);
+				Console.WriteLine("CURRENT MORALE: " + morale + "\n");
 			}
 		}
 
