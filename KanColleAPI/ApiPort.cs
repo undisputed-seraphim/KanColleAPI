@@ -13,11 +13,13 @@ namespace KanColle {
 		 */
 		private static long[] old_array = { 1623, 5727, 9278, 3527, 4976, 7180734, 6632, 3708, 4796, 9675, 13, 6631, 2987, 10, 1901, 9881, 1000, 3527 };
 		private static long[] old_array_2 = { 7536, 1882, 2237, 7280, 5686, 7180734, 6632, 1671, 4819, 1353, 13, 8422, 2987, 10, 1601, 6266, 1000, 3640 };
+		private static long[] old_array_3 = { 3791, 8897, 8024, 2139, 8567, 7180734, 6096, 3998, 3086, 4767, 13, 1445, 4179, 10, 7927, 8861, 1000, 8059 };
 
 		/*
 		 * The current array
 		 */
-		private static long[] array = { 3791, 8897, 8024, 2139, 8567, 7180734, 6096, 3998, 3086, 4767, 13, 1445, 4179, 10, 7927, 8861, 1000, 8059 };
+
+		private static long[] array = { 5309, 1153, 4306, 2139, 7464, 6510939, 8897, 8629, 9219, 7279, 13, 1219, 3791, 10, 4137, 7064, 1000, 2518707 };
 
 		public static string PORT = "api_port/port/";
 
@@ -38,6 +40,11 @@ namespace KanColle {
 			return (long) (DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
 		}
 
+		private static long millisSinceUnixEpoch (int year, int month, int day, int hour, int minute, int second) {
+			DateTime custom_date = new DateTime(year, month, day, hour, minute, second);
+			return (long) (custom_date - new DateTime(1970, 1, 1)).TotalMilliseconds;
+		}
+
 		/**
 		 * Current version of the algorithm.
 		 */
@@ -51,15 +58,8 @@ namespace KanColle {
 		private static string __ (long member_id) {
 
 			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
-			string part_2 = (((7180734 * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id)) * array[func(member_id % 10)]).ToString();
-			string part_3 = (random_floor(9000) + 1000).ToString();
-
-			// Debug
-			/*
-			Console.WriteLine(part_1);
-			Console.WriteLine(part_2);
-			Console.WriteLine(part_3);
-			 * */
+			string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id) + array[17]) * array[func(member_id % 10)]).ToString();
+			string part_3 = (random_floor(9 * (int) array[16]) + array[16]).ToString();
 
 			return string.Join("", part_1, part_2, part_3);
 		}
@@ -78,9 +78,9 @@ namespace KanColle {
 			// I have written this simulation instead. Far easier.
 
 			int[] arr = { 1, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
-
 			int[] SHINGATA_ARR = { 3, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
-			return SHINGATA_ARR[input];
+
+			return arr[input];
 		}
 
 		private static int random_floor (int a) {

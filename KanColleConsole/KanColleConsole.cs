@@ -17,7 +17,7 @@ namespace KanColleConsole {
 			string full_api_token = reader.ReadLine();
 			reader.Close();
 
-			KanColleProxy kcp = new KanColleProxy(full_api_token, false);
+			KanColleProxy kcp = new KanColleProxy(full_api_token, true);
 
 			// Port testing 
 			string context = ApiPort.PORT;
