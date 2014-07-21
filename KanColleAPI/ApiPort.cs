@@ -92,7 +92,7 @@ namespace KanColle {
 		}
 
 		/**
-		 * Obsolete version of the algorithm.
+		 * Obsolete version of the algorithm kept for legacy purposes.
 		 */
 		private static string _1 (long userIdStr) {
 			long part1 = (cR() * 1000) + (userIdStr % 1000);
