@@ -4,19 +4,19 @@ using System.Text;
 namespace KanColle {
     public class ApiPort {
 
-		private static int RADIX = 31;
-		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
-		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };
-
 		/*
 		 * Old array of values kept for reference.
 		 */
+
+		private static int RADIX = 31;
+		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
+		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };
 		private static long[] old_array = { 1623, 5727, 9278, 3527, 4976, 7180734, 6632, 3708, 4796, 9675, 13, 6631, 2987, 10, 1901, 9881, 1000, 3527 };
 		private static long[] old_array_2 = { 7536, 1882, 2237, 7280, 5686, 7180734, 6632, 1671, 4819, 1353, 13, 8422, 2987, 10, 1601, 6266, 1000, 3640 };
 		private static long[] old_array_3 = { 3791, 8897, 8024, 2139, 8567, 7180734, 6096, 3998, 3086, 4767, 13, 1445, 4179, 10, 7927, 8861, 1000, 8059 };
 
 		/*
-		 * The current array
+		 * The current array in use
 		 */
 
 		private static long[] array = { 5309, 1153, 4306, 2139, 7464, 6510939, 8897, 8629, 9219, 7279, 13, 1219, 3791, 10, 4137, 7064, 1000, 2518707 };
