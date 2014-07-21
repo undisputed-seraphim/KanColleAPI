@@ -35,6 +35,7 @@ Sparkler
 Another simple cmd line program that sends a single ship out on 1-1 sparkle battles.
 You specify which fleet to send out and how many times to sparkle.
 This program will tell you the morale/condition of the ship every loop.
+[UPDATE] Now this program will skip iterations if the morale is 81 or greater.
 Unfortunately, you can only go 1-1 with this map.
 
 To-do
