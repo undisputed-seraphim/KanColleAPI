@@ -107,6 +107,14 @@ namespace RunExp {
 			try {
 				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
 				result.GetData().PrintConsole();
+
+				if (result.GetData().GetResult().Equals(ExpeditionResult.FAIL)) {
+					Console.WriteLine("Mission has FAILED! Current mission loop will be aborted.\nPlease check your fleet lineup and start again.");
+					Console.WriteLine("Press any key to exit this program.");
+					Console.Read();
+					Environment.Exit(2);
+				}
+
 			} catch (Exception e) {
 				Console.WriteLine(parameter);
 				Console.WriteLine(postResponse);
