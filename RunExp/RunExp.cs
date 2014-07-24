@@ -166,7 +166,7 @@ namespace RunExp {
 		 * When it reawakens, it will end the mission before resuming normal operation.
 		 */
 		private void checkIfExistingMission () {
-			long missionTime = this.port.api_deck_port[this.fleet_id].api_mission[3] / 1000;
+			long missionTime = this.port.api_deck_port[this.fleet_id].api_mission[2] / 1000;
 
 			if (missionTime != 0) {
 				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
