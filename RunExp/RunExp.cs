@@ -166,7 +166,7 @@ namespace RunExp {
 		 * When it reawakens, it will end the mission before resuming normal operation.
 		 */
 		private void checkIfExistingMission () {
-			long missionTime = this.port.api_deck_port[this.fleet_id].api_mission[2] / 1000;
+			long missionTime = this.port.api_deck_port[this.fleet_id - 1].api_mission[2] / 1000;
 
 			if (missionTime != 0) {
 				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
@@ -174,8 +174,8 @@ namespace RunExp {
 				Console.WriteLine("It will return in " + missionEnd);
 				Console.WriteLine("This program will sleep until that time before it resumes.");
 
-				// Sleep.
-				TimeSpan sleepTime = (missionEnd - DateTime.UtcNow);
+				// Sleep, in seconds.
+				int sleepTime = (int) ((missionEnd - DateTime.Now).TotalSeconds);
 				Thread.Sleep(sleepTime);
 
 				// Wake and end mission.
@@ -188,7 +188,7 @@ namespace RunExp {
 		}
 
 		private static DateTime timeUnixEpochToDotNet (long unixTime) {
-			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(unixTime);
+			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(unixTime).ToLocalTime();
 		}
 	}
 }
