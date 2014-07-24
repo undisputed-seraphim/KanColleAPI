@@ -17,6 +17,9 @@ namespace RunExp {
 		private string ship_list, member_id;
 		private int run_count;
 
+		// Port is an object that is frequently updated.
+		private Port port;
+
 		static void Main (string[] args) {
 			Console.OutputEncoding = Encoding.Unicode;
 
@@ -60,11 +63,12 @@ namespace RunExp {
 		}
 
 		public void run () {
+			checkIfExistingMission();
 			start();
 			Console.WriteLine("This expedition has run for {0} times!", this.run_count++);
 			Thread.Sleep(this.interval * 60 * 1000);
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
-			this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
+			getPort();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 			result();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
@@ -121,13 +125,17 @@ namespace RunExp {
 			// Console.WriteLine(postResponse);
 		}
 
-		private string getShipList (int fleetNum) {
+		private String getPort () {
 			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
-			try {
-				KanColleAPI<Port> api_data = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result);
-				return api_data.GetData().GetFleetList(fleetNum);
-			} catch (Exception e) {
+			this.port = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result).GetData();
+			return result;
+		}
 
+		private string getShipList (int fleetNum) {
+			String result = getPort();
+			try {
+				return this.port.GetFleetList(fleetNum);
+			} catch (Exception e) {
 				Console.WriteLine(result);
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
@@ -151,6 +159,36 @@ namespace RunExp {
 			stream.Write(input);
 			stream.Flush();
 			stream.Close();
+		}
+
+		/*
+		 * Checks if there is already a mission running, and stalls the program until that mission ends.
+		 * When it reawakens, it will end the mission before resuming normal operation.
+		 */
+		private void checkIfExistingMission () {
+			long missionTime = this.port.api_deck_port[this.fleet_id].api_mission[3] / 1000;
+
+			if (missionTime != 0) {
+				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
+				Console.WriteLine("There is already a mission running for this fleet.");
+				Console.WriteLine("It will return in " + missionEnd);
+				Console.WriteLine("This program will sleep until that time before it resumes.");
+
+				// Sleep.
+				TimeSpan sleepTime = (missionEnd - DateTime.UtcNow);
+				Thread.Sleep(sleepTime);
+
+				// Wake and end mission.
+				getPort();
+				Thread.Sleep(1000);
+				result();
+				Thread.Sleep(1000);
+				charge();
+			}
+		}
+
+		private static DateTime timeUnixEpochToDotNet (long unixTime) {
+			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(unixTime);
 		}
 	}
 }
