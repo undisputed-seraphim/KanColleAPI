@@ -171,12 +171,12 @@ namespace RunExp {
 			if (missionTime != 0) {
 				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
 				Console.WriteLine("There is already a mission running for this fleet.");
-				Console.WriteLine("It will return in " + missionEnd);
-				Console.WriteLine("This program will sleep until that time before it resumes.");
+				Console.WriteLine("It will return on " + missionEnd);
 
 				// Sleep, in seconds.
 				int sleepTime = (int) ((missionEnd - DateTime.Now).TotalSeconds);
-				Thread.Sleep(sleepTime);
+				Console.WriteLine("This program will sleep for {0} minutes and {1} seconds before it resumes.", sleepTime / 60, sleepTime % 60);
+				Thread.Sleep(sleepTime * 1000);
 
 				// Wake and end mission.
 				getPort();
