@@ -21,6 +21,22 @@ namespace KanColle.Request.Mission {
 		public override string ToString () {
 			return this.result;
 		}
+
+		/**
+		 * Defaults to FAIL.
+		 */
+		public static ExpeditionResult GetExpeditionResult (int i) {
+			i = i % 3;
+			switch (i) {
+				default: 
+				case 0:
+					return ExpeditionResult.FAIL;
+				case 1:
+					return ExpeditionResult.SUCCESS;
+				case 2:
+					return ExpeditionResult.GREAT_SUCCESS;
+			}
+		}
 	}
 
 
@@ -77,6 +93,10 @@ namespace KanColle.Request.Mission {
 			public int api_useitem_id { get; set; }
 			public String api_useitem_name { get; set; }
 			public int api_useitem_count { get; set; }
+		}
+
+		public ExpeditionResult GetResult() {
+			return ExpeditionResult.GetExpeditionResult(this.api_clear_result);
 		}
 
 		public void PrintConsole () {
