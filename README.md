@@ -1,7 +1,12 @@
 Recent Updates
 ==========
-I have merged RunExp and Sparkler into this single Visual Studio solution.
-I will be deleting RunExp soon.
+RunExp now waits for the previous mission to end before attempting to start a new one.
+
+Previously it would attempt to start a new one anyway, but fail if there is an existing mission.
+
+It will also end the mission and refuel the ships, making the transition seamless.
+
+Additionally, the program will abort the loop if any mission fails.
 
 Getting the algorithm to generate api_port is getting harder and harder.
 I fear that I may not be able to get it sooner. Relying on Japanese BBS to get the algorithm now.
@@ -35,8 +40,8 @@ Sparkler
 Another simple cmd line program that sends a single ship out on 1-1 sparkle battles.
 You specify which fleet to send out and how many times to sparkle.
 This program will tell you the morale/condition of the ship every loop.
+
 [UPDATE] Now this program will skip iterations if the morale is 81 or greater.
-Unfortunately, you can only go 1-1 with this map.
 
 To-do
 ========
