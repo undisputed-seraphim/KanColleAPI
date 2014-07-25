@@ -60,10 +60,12 @@ namespace RunExp {
 			Console.WriteLine(this.member_id);
 			Console.WriteLine(this.ship_list);
 			*/
+
+			// Run once only.
+			checkIfExistingMission();
 		}
 
 		public void run () {
-			checkIfExistingMission();
 			start();
 			Console.WriteLine("This expedition has run for {0} times!", this.run_count++);
 			Thread.Sleep(this.interval * 60 * 1000);
