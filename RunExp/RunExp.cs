@@ -110,6 +110,7 @@ namespace RunExp {
 				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
 				result.GetData().PrintConsole();
 
+				// If mission fails, abort loop completely.
 				if (result.GetData().GetResult().Equals(ExpeditionResult.FAIL)) {
 					Console.WriteLine("Mission has FAILED! Current mission loop will be aborted.\nPlease check your fleet lineup and start again.");
 					Console.WriteLine("Press any key to exit this program.");
@@ -180,11 +181,13 @@ namespace RunExp {
 
 			if (missionTime != 0) {
 				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
+				int sleepTime = (int) ((missionEnd - DateTime.Now).TotalSeconds);
+				if (sleepTime < 1) { return; } // 
+				
 				Console.WriteLine("There is already a mission running for this fleet.");
 				Console.WriteLine("It will return on " + missionEnd);
 
 				// Sleep, in seconds.
-				int sleepTime = (int) ((missionEnd - DateTime.Now).TotalSeconds);
 				Console.WriteLine("This program will sleep for {0} minutes and {1} seconds before it resumes.", sleepTime / 60, sleepTime % 60);
 				Thread.Sleep(sleepTime * 1000);
 
