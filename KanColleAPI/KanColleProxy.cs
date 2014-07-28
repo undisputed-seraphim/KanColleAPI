@@ -8,7 +8,7 @@ namespace KanColle {
 	public sealed class KanColleProxy {
 
 		private static string HEADER_REFERER =		"{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";
-		private static string HEADER_USER_AGENT =	"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:26.0) Gecko/20100101 Firefox/26.0";
+		private static string HEADER_USER_AGENT =	"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
 		private static string HEADER_ACCEPT =		"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 		private static string HEADER_CONTENT_TYPE = "application/x-www-form-urlencoded";
 

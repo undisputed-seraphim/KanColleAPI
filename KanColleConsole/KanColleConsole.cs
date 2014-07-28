@@ -23,11 +23,6 @@ namespace KanColleConsole {
 			string context = ApiPort.PORT;
 			string param = ApiPort.port("407966");
 			
-			/*
-			string context = Hensei.CHANGE;
-			string param = Hensei.RemoveAll(1);
-			*/
-			
 			string ret = kcp.proxy(context, param);
 
 			Console.WriteLine("\nRaw Data:");
