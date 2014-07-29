@@ -5,7 +5,7 @@ namespace KanColle {
     public class ApiPort {
 
 		/*
-		 * Old array of values kept for reference.
+		 * Old arrays of values kept for reference.
 		 */
 		
 		private static int RADIX = 31;
@@ -16,7 +16,6 @@ namespace KanColle {
 //		private static long[] array = { 7536, 1882, 2237, 7280, 5686, 7180734, 6632, 1671, 4819, 1353, 13, 8422, 2987, 10, 1601, 6266, 1000, 3640 };
 //		private static long[] array = { 3791, 8897, 8024, 2139, 8567, 7180734, 6096, 3998, 3086, 4767, 13, 1445, 4179, 10, 7927, 8861, 1000, 8059 };
 //		private static long[] array = { 5309, 1153, 4306, 2139, 7464, 6510939, 8897, 8629, 9219, 7279, 13, 1219, 3791, 10, 4137, 7064, 1000, 2518707 };
-		
 
 		/*
 		 * The current array in use
@@ -80,7 +79,7 @@ namespace KanColle {
 			// I have written this simulation instead. Far easier.
 
 			int[] arr = { 1, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
-			int[] SHINGATA_ARR = { 3, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
+//			int[] SHINGATA_ARR = { 3, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
 
 			return arr[input];
 		}
