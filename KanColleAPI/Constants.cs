@@ -1,4 +1,4 @@
-﻿public class Constants {
+﻿public static class Constants {
 
 	// Universal.
 	public const string HEADER_CONTENT_TYPE = "application/x-www-form-urlencoded";
