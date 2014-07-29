@@ -1,7 +1,13 @@
-﻿public static class Constants {
+﻿/*
+ * This is the class that holds all constants to be used within the KanColle assembly.
+ * 
+ * This file is not mature yet, do not attempt to change other files until this is complete.
+ */
+public static class KanColleConstants {
 
-	// Universal.
+	// Headers for KanColleProxy
 	public const string HEADER_CONTENT_TYPE = "application/x-www-form-urlencoded";
+	public const string HEADER_REFERER = "{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";
 	
 	// Firefox.
 	public const string HEADER_FIREFOX_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
@@ -14,4 +20,7 @@
 	// Chrome.
 	public const string HEADER_CHROME_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36";
 	public const string HEADER_CHROME_ACCEPT = "*/*";
+
+	// GET parameters
+	public static string DEFAULT_GET { get { return "api_token={0}&api_verno=1"; } }
 }
