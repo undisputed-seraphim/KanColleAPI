@@ -7,6 +7,7 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
+using System.Linq;
 
 namespace RunExp {
 
@@ -16,6 +17,7 @@ namespace RunExp {
 		private int fleet_id, mission_id, interval;
 		private string ship_list, member_id;
 		private int run_count;
+		private int[] accumulated;
 
 		// Port is an object that is frequently updated.
 		private Port port;
@@ -54,6 +56,7 @@ namespace RunExp {
 
 			this.member_id = getMemberId();
 			this.ship_list = getShipList(fleet_id);
+			this.accumulated = new int[4] { 0, 0, 0, 0 };
 
 			// Debug.
 			/*
@@ -108,7 +111,9 @@ namespace RunExp {
 			// Console.WriteLine(postResponse);
 			try {
 				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
-				result.GetData().PrintConsole();
+				int[] getMaterials = result.GetData().PrintConsole();
+				this.accumulated.Zip(getMaterials, (x, y) => x + y);
+				Console.WriteLine("Cumulative resource acquired: {0} fuel, {1} ammo, {2} steel, {3} bauxite.", this.accumulated[0], this.accumulated[1], this.accumulated[2], this.accumulated[3]);
 
 				// If mission fails, abort loop completely.
 				if (result.GetData().GetResult().Equals(ExpeditionResult.FAIL)) {

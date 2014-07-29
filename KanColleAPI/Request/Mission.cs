@@ -99,7 +99,7 @@ namespace KanColle.Request.Mission {
 			return ExpeditionResult.GetExpeditionResult(this.api_clear_result);
 		}
 
-		public void PrintConsole () {
+		public int[] PrintConsole () {
 			string clear_result = "MISSION RESULT: {0} {1}";
 			switch (this.api_clear_result) {
 				default:
@@ -122,6 +122,13 @@ namespace KanColle.Request.Mission {
 			if (this.api_useitem_flag[0] > 0) {
 				Console.WriteLine("You have also received a {0}", this.api_get_item1.api_useitem_name);
 			}
+
+			int[] ret = new int[4];
+			ret[0] = this.api_get_material[0];
+			ret[1] = this.api_get_material[1];
+			ret[2] = this.api_get_material[2];
+			ret[3] = this.api_get_material[3];
+			return ret;
 		}
 	}
 }
