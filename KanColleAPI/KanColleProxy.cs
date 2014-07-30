@@ -107,8 +107,4 @@ namespace KanColle {
 			return output;
 		}
 	}
-
-	public enum UserAgent {
-		FIREFOX, CHROME, FLASH_13
-	}
 }
