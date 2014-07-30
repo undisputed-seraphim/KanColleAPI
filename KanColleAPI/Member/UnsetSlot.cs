@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using System;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 
 namespace KanColle.Member {
-
 	public class UnsetSlotWrapper {
 		public int api_result { get; set; }
 		public string api_result_msg { get; set; }

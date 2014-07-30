@@ -7,7 +7,6 @@ namespace KanColle {
 		/*
 		 * Old arrays of values kept for reference.
 		 */
-		
 		private static int RADIX = 31;
 		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
 		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };

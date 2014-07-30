@@ -1,6 +1,5 @@
 ﻿
 namespace KanColle.Master {
-
 	// An enum of all maps in kancolle.
 	public sealed class Map {
 		private readonly int stage;

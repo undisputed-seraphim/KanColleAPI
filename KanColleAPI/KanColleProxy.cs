@@ -4,7 +4,6 @@ using System.Net;
 using System.Text;
 
 namespace KanColle {
-
 	public sealed class KanColleProxy {
 
 		private static string HEADER_REFERER =		"{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";

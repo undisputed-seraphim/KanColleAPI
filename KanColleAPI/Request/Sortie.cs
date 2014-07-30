@@ -2,7 +2,6 @@
 using System.Text;
 
 namespace KanColle.Request.Sortie {
-
 	public class Sortie {
 		public static string BATTLE = "api_req_sortie/battle";
 		public static string BATTLERESULT = "api_req_sortie/battleresult";

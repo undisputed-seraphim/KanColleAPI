@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace KanColle.Request {
+namespace KanColle.Request.Hensei {
 	public class Hensei {
 
 		public static string CHANGE = "api_req_hensei/change/";

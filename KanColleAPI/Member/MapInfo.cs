@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace KanColle.Member {
-	
 	public class MapInfo {
 		public int api_id { get; set; }
 		public int api_cleared { get; set; }

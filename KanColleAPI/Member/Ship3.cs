@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 namespace KanColle.Member {
-
 	public class Ship3 {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }

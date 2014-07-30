@@ -1,7 +1,6 @@
 ﻿using System;
 
 namespace KanColle {
-
 	public class KanColleAPI<T> {
 		public int api_result { get; set; }
 		public string api_result_msg { get; set; }

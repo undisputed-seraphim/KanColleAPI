@@ -1,6 +1,6 @@
 ﻿using KanColle;
 using KanColle.Member;
-using KanColle.Request;
+using KanColle.Request.Hensei;
 using KanColle.Request.Hokyu;
 using KanColle.Request.Map;
 using KanColle.Request.Sortie;

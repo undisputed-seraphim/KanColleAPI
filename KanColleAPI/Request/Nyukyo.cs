@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
 namespace KanColle.Request.Nyukyo {
-
 	public class Nyukyo {
 		public static string START = "api_req_nyukyo/start/";
 

@@ -2,7 +2,6 @@
 using System.Text;
 
 namespace KanColle.Request.Mission {
-
 	// TYPESAFE ENUM PATTERN! WOO!
 	// http://stackoverflow.com/questions/424366/c-sharp-string-enums
 	public sealed class ExpeditionResult {

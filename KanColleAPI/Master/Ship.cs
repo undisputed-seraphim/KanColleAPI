@@ -1,7 +1,6 @@
 ﻿using System;
 
 namespace KanColle.Master {
-
 	public class Ship : Iidentifiable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }

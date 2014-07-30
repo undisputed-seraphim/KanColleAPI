@@ -1,6 +1,5 @@
 ﻿
 namespace KanColle.Member {
-
 	public class Port {
 		public Material[] api_material { get; set; }
 		public Deck[] api_deck_port { get; set; }
