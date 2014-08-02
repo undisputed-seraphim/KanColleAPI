@@ -5,9 +5,9 @@ using KanColle.Request.Mission;
 using Newtonsoft.Json;
 using System;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Linq;
 
 namespace RunExp {
 
@@ -55,7 +55,8 @@ namespace RunExp {
 			this.run_count = 0;
 
 			this.member_id = getMemberId();
-			this.ship_list = getShipList(fleet_id);
+			getPort();
+			getShipList(fleet_id);
 			this.accumulated = new int[4] { 0, 0, 0, 0 };
 
 			// Debug.
@@ -77,6 +78,7 @@ namespace RunExp {
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 			result();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
+			getShipList(this.fleet_id);	// Get an updated list of ships.
 			charge();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 		}
@@ -131,30 +133,30 @@ namespace RunExp {
 			}
 		}
 
+		// Charge is an idempotent function that never fails, so it does not need to be surrounded with try/catch.
 		private void charge () {
 			Console.WriteLine();
 			Console.WriteLine("!!***** REFUEL *****!!");
 			string parameter = Hokyu.Charge(this.ship_list);
 			string postResponse = this.kcp.proxy(Hokyu.CHARGE, parameter);
-
-			// Debug
-			// Console.WriteLine(postResponse);
 		}
 
+		// This function is available only if the member_id has already been obtained.
+		// Otherwise it will throw an API error.
 		private String getPort () {
 			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
 			this.port = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result).GetData();
 			return result;
 		}
 
-		private string getShipList (int fleetNum) {
-			String result = getPort();
+		// This function assumes there is a recently updated copy of Port data available.
+		// It does not request its own copy.
+		// The old behavior was that this function would request its own copy of Port. That is no longer the case.
+		private void getShipList (int fleetNum) {
 			try {
-				return this.port.GetFleetList(fleetNum);
+				this.ship_list = this.port.GetFleetList(fleetNum);
 			} catch (Exception e) {
-				Console.WriteLine(result);
 				Console.WriteLine(e.Message);
-				throw new Exception(e.Message, e);
 			}
 		}
 
@@ -170,6 +172,7 @@ namespace RunExp {
 			}
 		}
 
+		// For debugging purposes.
 		private static void writeToFile (string input, string path) {
 			StreamWriter stream = new StreamWriter(path, false, Encoding.UTF8);
 			stream.Write(input);
