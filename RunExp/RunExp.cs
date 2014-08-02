@@ -5,7 +5,7 @@ using KanColle.Request.Mission;
 using Newtonsoft.Json;
 using System;
 using System.IO;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading;
 
@@ -114,7 +114,12 @@ namespace RunExp {
 			try {
 				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
 				int[] getMaterials = result.GetData().PrintConsole();
-				this.accumulated.Zip(getMaterials, (x, y) => x + y);
+
+				this.accumulated[0] += getMaterials[0];
+				this.accumulated[1] += getMaterials[1];
+				this.accumulated[2] += getMaterials[2];
+				this.accumulated[3] += getMaterials[3];
+				//this.accumulated.Zip(getMaterials, (x, y) => x + y); // Didn't work for some reason.
 				Console.WriteLine("Cumulative resource acquired: {0} fuel, {1} ammo, {2} steel, {3} bauxite.", this.accumulated[0], this.accumulated[1], this.accumulated[2], this.accumulated[3]);
 
 				// If mission fails, abort loop completely.
