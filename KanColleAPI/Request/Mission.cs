@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Text;
 
 namespace KanColle.Request.Mission {
@@ -130,4 +132,22 @@ namespace KanColle.Request.Mission {
 			return ret;
 		}
 	}
+	/*
+	public static class MissionResultConverter :JsonConverter {
+		public override bool CanConvert (Type objectType) {
+			return (objectType == typeof(int[]));
+		}
+
+		public override object ReadJson (JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
+			JToken token = JToken.Load(reader);
+			if (token.Type == JTokenType.Object) {
+				return token.ToObject<int[]>();
+			}
+			return new int[] { -1, -1, -1, -1 };
+		}
+
+		public override void WriteJson (JsonWriter writer, object value, JsonSerializer serializer) {
+			throw new NotImplementedException();
+		}
+	}*/	
 }
