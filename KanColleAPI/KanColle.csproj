@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPort.cs" />
+    <Compile Include="Expedition.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />

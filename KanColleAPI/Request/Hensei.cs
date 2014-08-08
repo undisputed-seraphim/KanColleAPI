@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 namespace KanColle.Request.Hensei {
 	public class Hensei {
-
 		public static string CHANGE = "api_req_hensei/change/";
 
 		public static string RemoveAll (int fleet_id) {
