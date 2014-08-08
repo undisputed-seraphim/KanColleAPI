@@ -7,6 +7,7 @@ namespace KanColle.Member {
 		public Ship[] api_ship { get; set; }
 		public Basic api_basic { get; set; }
 		public ActionLog[] api_log { get; set; }
+		public int api_combined_flag { get; set; }
 
 		public static string PORT = "api_port/port/";
 
@@ -71,6 +72,8 @@ namespace KanColle.Member {
 		public int[] api_sakuteki { get; set; }
 		public int[] api_lucky { get; set; }
 		public int api_locked { get; set; }
+		public int api_locked_equip { get; set; }
+		public int api_sally_area { get; set; }
 	}
 
 	public class NDock {
@@ -121,6 +124,7 @@ namespace KanColle.Member {
 		public int api_firstflag { get; set; }
 		public int api_tutorial_progress { get; set; }
 		public int[] api_pvp { get; set; }
+		public int api_large_dock { get; set; }
 
 		public static string GET = "api_get_member/basic/";
 	}
