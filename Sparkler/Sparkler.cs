@@ -72,7 +72,7 @@ namespace Sparkler {
 				}
 				param = Hensei.Change(this.ship_list_array[i + 1], 1, this.fleet_id);
 				this.kcp.proxy(context, param);
-				Thread.Sleep(FIVE_SECONDS);
+				Thread.Sleep(ONE_SECOND * 2);
 				Console.WriteLine("\n\nNEXT SHIP.");
 			}
 
