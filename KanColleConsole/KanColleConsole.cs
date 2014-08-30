@@ -7,8 +7,6 @@ using KanColle;
 using KanColle.Request;
 using Newtonsoft.Json;
 
-using KanColleBot;
-
 namespace KanColleConsole {
 	class KanColleConsole {
 

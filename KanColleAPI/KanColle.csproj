@@ -30,6 +30,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AxInterop.ShockwaveFlashObjects">
+      <HintPath>..\KanColleConsole\bin\Release\AxInterop.ShockwaveFlashObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.ShockwaveFlashObjects">
+      <HintPath>..\KanColleConsole\bin\Release\Interop.ShockwaveFlashObjects.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -46,6 +53,10 @@
   <ItemGroup>
     <Compile Include="ApiPort.cs" />
     <Compile Include="Expedition.cs" />
+    <Compile Include="Flash\ExternalEventCallArgs.cs" />
+    <Compile Include="Flash\ExternalInterfaceCall.cs" />
+    <Compile Include="Flash\ExternalInterfaceProxy.cs" />
+    <Compile Include="Flash\ExternalInterfaceSerializer.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />
