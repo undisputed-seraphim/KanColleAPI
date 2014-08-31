@@ -52,7 +52,7 @@ namespace KanColle.Flash.External {
 				object result = ExternalInterfaceSerializer.DecodeResult(response);
 				return result;
 			} catch (COMException) {
-				throw;
+				return "null string";
 			}
 		}
 
