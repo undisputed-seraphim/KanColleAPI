@@ -1,5 +1,5 @@
-﻿using System.Windows.Forms;
-using AxShockwaveFlashObjects;
+﻿using AxShockwaveFlashObjects;
+using System.Windows.Forms;
 
 namespace KanColleConsole {
 	partial class KanColleConsole {
