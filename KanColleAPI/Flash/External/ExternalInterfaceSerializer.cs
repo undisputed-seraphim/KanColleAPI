@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using System.Xml;
 
-namespace KanColle.Flash {
+namespace KanColle.Flash.External {
 	class ExternalInterfaceSerializer {
 		#region Constructor
 

@@ -1,7 +1,7 @@
 ﻿using AxShockwaveFlashObjects;
 using System.Runtime.InteropServices;
 
-namespace KanColle.Flash {
+namespace KanColle.Flash.External {
 
 	/// <summary>
 	/// Facilitates External Interface communication between a .NET application and a Shockwave

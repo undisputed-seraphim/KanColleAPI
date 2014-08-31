@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace KanColle.Flash {
+namespace KanColle.Flash.External {
 	public delegate object ExternalInterfaceCallEventHandler (object sender, ExternalInterfaceCallEventArgs e);
 
 	/// <summary>

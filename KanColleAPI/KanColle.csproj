@@ -57,12 +57,6 @@
     <Compile Include="Flash\External\ExternalInterfaceCall.cs" />
     <Compile Include="Flash\External\ExternalInterfaceProxy.cs" />
     <Compile Include="Flash\External\ExternalInterfaceSerializer.cs" />
-    <Compile Include="Flash\KanColleConsole.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Flash\KanColleConsole.Designer.cs">
-      <DependentUpon>KanColleConsole.cs</DependentUpon>
-    </Compile>
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />
@@ -92,11 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Flash\KanColleConsole.resx">
-      <DependentUpon>KanColleConsole.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using KanColle.Flash;
+using KanColle.Flash.External;
 
 namespace KanColleConsole {
 	public partial class KanColleConsole :Form {

@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Text;
 
-namespace KanColle.Flash {
+namespace KanColle.Flash.External {
 	public class ExternalInterfaceCall {
 
 		#region Private Fields
