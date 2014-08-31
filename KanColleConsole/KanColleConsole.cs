@@ -36,21 +36,22 @@ namespace KanColleConsole {
 			MessageBox.Show(obj.ToString());
 		}
 		#endregion
-
+		/*
 		protected override void WndProc (ref Message m) {
 			if (m.Msg == WM_API_PORT) {
+				Console.WriteLine("ENtry Success!");
 				string param = m.WParam.ToInt32().ToString();
-				object obj = proxy.Call("asFunction", param);
+				object obj = proxy.Call("api_port", param);
 				System.IO.File.WriteAllText("api_port", obj.ToString());
 				return;
 			}
 			base.WndProc(ref m);
-		}
+		}*/
 
 		private void KanColleConsole_Load (object sender, EventArgs e) {
 			this.Visible = false;
-			//TODO: This
-			this.Handle.ToInt64();
+			System.IO.File.WriteAllText("Handle", this.Handle.ToInt64().ToString());
+			System.IO.File.WriteAllText("__abcde__.txt", this.proxy.Call("api_mission", null).ToString());
 		}
 	}
 }

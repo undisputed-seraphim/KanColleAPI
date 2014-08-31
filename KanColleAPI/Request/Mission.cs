@@ -45,20 +45,21 @@ namespace KanColle.Request.Mission {
 		public static string START = "api_req_mission/start/";
 		public static string RESULT = "api_req_mission/result/";
 
-		public static string Start (int fleet_id, int mission_id) {
+		public static string Start (int fleet_id, int mission_id, int hash) {
 			StringBuilder str = new StringBuilder();
-			str.AppendFormat("api_verno={0}&", 1);
 			str.AppendFormat("api_mission_id={0}&", mission_id);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_deck_id={0}", fleet_id);
+			str.AppendFormat("api_deck_id={0}&", fleet_id);
+			str.AppendFormat("api_mission={0}&", hash);
+			str.AppendFormat("api_verno={0}&", 1);
+			str.Append("api_token={0}");
 			return str.ToString();
 		}
 
 		public static string Result (int fleet_id) {
 			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_deck_id={0}&", fleet_id);
 			str.AppendFormat("api_verno={0}&", 1);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_deck_id={0}", fleet_id);
+			str.Append("api_token={0}");
 			return str.ToString();
 		}
 	}

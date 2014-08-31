@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Windows.Forms;
 
+using KanColle;
+using KanColle.Flash;
+
 namespace KanColleConsole {
 	class KanColleConsoleApp {
 

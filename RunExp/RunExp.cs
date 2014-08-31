@@ -86,7 +86,12 @@ namespace RunExp {
 		private void start () {
 			Console.WriteLine();
 			Console.WriteLine("!!***** NEW MISSION *****!!");
-			string parameter = Mission.Start(this.fleet_id, this.mission_id);
+			System.Diagnostics.Process proc = System.Diagnostics.Process.Start("KanColleConsole.exe");
+			Thread.Sleep(300);
+			proc.Kill();
+			string mission_hash = File.ReadAllText("__abcde__.txt");
+
+			string parameter = Mission.Start(this.fleet_id, this.mission_id, int.Parse(mission_hash));
 			string postResponse = this.kcp.proxy(Mission.START, parameter);
 
 			// Debug
