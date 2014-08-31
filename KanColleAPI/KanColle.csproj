@@ -53,10 +53,10 @@
   <ItemGroup>
     <Compile Include="ApiPort.cs" />
     <Compile Include="Expedition.cs" />
-    <Compile Include="Flash\ExternalEventCallArgs.cs" />
-    <Compile Include="Flash\ExternalInterfaceCall.cs" />
-    <Compile Include="Flash\ExternalInterfaceProxy.cs" />
-    <Compile Include="Flash\ExternalInterfaceSerializer.cs" />
+    <Compile Include="Flash\External\ExternalEventCallArgs.cs" />
+    <Compile Include="Flash\External\ExternalInterfaceCall.cs" />
+    <Compile Include="Flash\External\ExternalInterfaceProxy.cs" />
+    <Compile Include="Flash\External\ExternalInterfaceSerializer.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />

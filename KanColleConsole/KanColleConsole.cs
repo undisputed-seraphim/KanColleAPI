@@ -1,32 +1,65 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
 using System.Text;
-using System.Reflection;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-using KanColle;
-using KanColle.Request;
-using Newtonsoft.Json;
+using KanColle.Flash;
+using AxShockwaveFlashObjects;
 
 namespace KanColleConsole {
-	class KanColleConsole {
+	public partial class KanColleConsole :Form {
+		const int WM_APP = 0x8000;
+		const int WM_API_PORT = WM_APP + 1;
 
-		static void Main (string[] args) {
-			Console.OutputEncoding = Encoding.Unicode;
-			
-			StreamReader reader = new StreamReader("api_token.txt");
-			string full_api_token = reader.ReadLine();
-			reader.Close();
+		private ExternalInterfaceProxy proxy;
 
-			KanColleProxy kcp = new KanColleProxy(full_api_token, true);
+		public KanColleConsole () {
+			InitializeComponent();
 
-			// Port testing 
-			string context = ApiPort.PORT;
-			string param = ApiPort.port("407966");
-			
-			string ret = kcp.proxy(context, param);
+			// Read in the swf file.
+			string swfPath = System.IO.Directory.GetCurrentDirectory() + "\\api_port.swf";
+			this.flash.LoadMovie(0, swfPath);
 
-			Console.WriteLine("\nRaw Data:");
-			Console.WriteLine(ret);
+			// Set up the proxy for the flash file.
+			this.proxy = new ExternalInterfaceProxy(this.flash);
+		}
+
+		#region Button OnClicks
+		private void ApiPort_OnClick (object sender, EventArgs e) {
+			object obj = this.proxy.Call("api_port", this.UserID.Text);
+			MessageBox.Show(obj.ToString());
+		}
+
+		private void ApiMission_OnClick (object sender, EventArgs e) {
+			object obj = this.proxy.Call("api_mission", null);
+			MessageBox.Show(obj.ToString());
+		}
+
+		private void ApiQuest_OnClick (object sender, EventArgs e) {
+			object obj = this.proxy.Call("api_quest", null);
+			MessageBox.Show(obj.ToString());
+		}
+		#endregion
+
+		protected override void WndProc (ref Message m) {
+			if (m.Msg == WM_API_PORT) {
+				string param = m.WParam.ToInt32().ToString();
+				object obj = proxy.Call("asFunction", param);
+				System.IO.File.WriteAllText("api_port", obj.ToString());
+				return;
+			}
+			base.WndProc(ref m);
+		}
+
+		private void KanColleConsole_Load (object sender, EventArgs e) {
+			this.Visible = false;
+			//TODO: This
+			this.Handle.ToInt64();
 		}
 	}
 }
