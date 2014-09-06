@@ -125,12 +125,7 @@ namespace KanColle.Request.Mission {
 				Console.WriteLine("You have also received a {0}", this.api_get_item1.api_useitem_name);
 			}
 
-			int[] ret = new int[4];
-			ret[0] = this.api_get_material[0];
-			ret[1] = this.api_get_material[1];
-			ret[2] = this.api_get_material[2];
-			ret[3] = this.api_get_material[3];
-			return ret;
+			return this.api_get_material;
 		}
 	}
 	/*

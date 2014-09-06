@@ -21,6 +21,10 @@ namespace KanColle {
 
 		public static string PORT = "api_port/port/";
 
+		public static string port (int memberID) {
+			return port(memberID.ToString());
+		}
+
 		public static string port (string memberId) {
 			long userIdStr = long.Parse(memberId);
 

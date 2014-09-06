@@ -87,7 +87,7 @@ namespace RunExp {
 			Console.WriteLine();
 			Console.WriteLine("!!***** NEW MISSION *****!!");
 			System.Diagnostics.Process proc = System.Diagnostics.Process.Start("KanColleConsole.exe");
-			Thread.Sleep(300);
+			Thread.Sleep(400);
 			proc.Kill();
 			string mission_hash = File.ReadAllText("__abcde__.txt");
 
