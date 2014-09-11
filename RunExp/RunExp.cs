@@ -55,7 +55,7 @@ namespace RunExp {
 			this.run_count = 0;
 
 			this.member_id = getMemberId();
-			getPort();
+			this.port = this.kcp.GetPort(this.member_id);
 			getShipList(fleet_id);
 			this.accumulated = new int[4] { 0, 0, 0, 0 };
 
@@ -74,7 +74,7 @@ namespace RunExp {
 			Console.WriteLine("This expedition has run for {0} times!", this.run_count++);
 			Thread.Sleep(this.interval * 60 * 1000);
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
-			getPort();
+			this.port = this.kcp.GetPort(this.member_id);
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 			result();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
@@ -151,14 +151,6 @@ namespace RunExp {
 			string postResponse = this.kcp.proxy(Hokyu.CHARGE, parameter);
 		}
 
-		// This function is available only if the member_id has already been obtained.
-		// Otherwise it will throw an API error.
-		private String getPort () {
-			String result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
-			this.port = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result).GetData();
-			return result;
-		}
-
 		// This function assumes there is a recently updated copy of Port data available.
 		// It does not request its own copy.
 		// The old behavior was that this function would request its own copy of Port. That is no longer the case.
@@ -211,7 +203,7 @@ namespace RunExp {
                 }
 
 				// Wake and end mission.
-				getPort();
+				this.port = this.kcp.GetPort(this.member_id);
 				Thread.Sleep(1000);
 				result();
 				Thread.Sleep(1000);

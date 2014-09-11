@@ -37,6 +37,10 @@
 			this.Update = new System.Windows.Forms.Button();
 			this.StartAll = new System.Windows.Forms.Button();
 			this.StopAll = new System.Windows.Forms.Button();
+			this.Fleet_2_Worker = new System.ComponentModel.BackgroundWorker();
+			this.Fleet_3_Worker = new System.ComponentModel.BackgroundWorker();
+			this.Fleet_4_Worker = new System.ComponentModel.BackgroundWorker();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			((System.ComponentModel.ISupportInitialize)(this.flash)).BeginInit();
 			this.SuspendLayout();
 			// 
@@ -103,6 +107,7 @@
 			// Fleet_2_DropDown
 			// 
 			this.Fleet_2_DropDown.FormattingEnabled = true;
+			//this.Fleet_2_DropDown.DataSource;
 			this.Fleet_2_DropDown.Location = new System.Drawing.Point(20, 20);
 			this.Fleet_2_DropDown.Name = "Fleet_2_DropDown";
 			this.Fleet_2_DropDown.Size = new System.Drawing.Size(120, 21);
@@ -130,11 +135,12 @@
 			// flash
 			// 
 			this.flash.Enabled = true;
-			this.flash.Location = new System.Drawing.Point(20, 200);
+			this.flash.Location = new System.Drawing.Point(20, 350);
 			this.flash.Name = "flash";
 			this.flash.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("flash.OcxState")));
-			this.flash.Size = new System.Drawing.Size(305, 21);
+			this.flash.Size = new System.Drawing.Size(305, 50);
 			this.flash.TabIndex = 9;
+			this.flash.Visible = false;
 			// 
 			// Update
 			// 
@@ -167,11 +173,21 @@
 			this.StopAll.UseVisualStyleBackColor = true;
 			this.StopAll.Click += new System.EventHandler(this.StopAll_Click);
 			// 
+			// textBox1
+			// 
+			this.textBox1.Location = new System.Drawing.Point(20, 180);
+			this.textBox1.Multiline = true;
+			this.textBox1.Name = "textBox1";
+			this.textBox1.ReadOnly = true;
+			this.textBox1.Size = new System.Drawing.Size(305, 150);
+			this.textBox1.TabIndex = 13;
+			// 
 			// RunExpKai
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
 			this.ClientSize = new System.Drawing.Size(349, 412);
+			this.Controls.Add(this.textBox1);
 			this.Controls.Add(this.StopAll);
 			this.Controls.Add(this.StartAll);
 			this.Controls.Add(this.Update);
@@ -190,6 +206,7 @@
 			this.Load += new System.EventHandler(this.RunExpKai_Load);
 			((System.ComponentModel.ISupportInitialize)(this.flash)).EndInit();
 			this.ResumeLayout(false);
+			this.PerformLayout();
 
 		}
 
@@ -208,6 +225,10 @@
 		private System.Windows.Forms.Button Update;
 		private System.Windows.Forms.Button StartAll;
 		private System.Windows.Forms.Button StopAll;
+		private System.ComponentModel.BackgroundWorker Fleet_2_Worker;
+		private System.ComponentModel.BackgroundWorker Fleet_3_Worker;
+		private System.ComponentModel.BackgroundWorker Fleet_4_Worker;
+		private System.Windows.Forms.TextBox textBox1;
 	}
 }
 

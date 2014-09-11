@@ -3,6 +3,8 @@ using System.IO;
 using System.Net;
 using System.Text;
 
+using Newtonsoft.Json;
+
 namespace KanColle {
 	public sealed class KanColleProxy {
 
@@ -105,5 +107,49 @@ namespace KanColle {
 
 			return output;
 		}
+
+		#region Convenience methods
+		// For getting some of the more important, commonly-used data
+
+		public KanColle.Member.Basic GetBasic () {
+			try {
+				string json_response = this.proxy(KanColle.Member.Basic.GET);
+				KanColleAPI<KanColle.Member.Basic> basic = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Basic>>(json_response);
+				return basic.GetData();
+			} catch (Exception e) {
+				if (debug) {
+					Console.WriteLine(e.Message);
+				}
+				return null;
+			}
+		}
+
+		public KanColle.Master.Start2 GetStart2 () {
+			try {
+				string json_response = this.proxy(KanColle.Master.Start2.GET);
+				KanColleAPI<KanColle.Master.Start2> start2 = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Master.Start2>>(json_response);
+				return start2.GetData();
+			} catch (Exception e) {
+				if (debug) {
+					Console.WriteLine(e.Message);
+				}
+				return null;
+			}
+		}
+
+		public KanColle.Member.Port GetPort (string member_id) {
+			try {
+				string json_response = this.proxy(ApiPort.PORT, ApiPort.port(member_id));
+				KanColleAPI<KanColle.Member.Port> port = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Port>>(json_response);
+				return port.GetData();
+			} catch (Exception e) {
+				if (debug) {
+					Console.WriteLine(e.Message);
+				}
+				return null;
+			}
+		}
+
+		#endregion
 	}
 }

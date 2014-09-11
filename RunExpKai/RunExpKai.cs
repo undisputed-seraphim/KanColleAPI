@@ -9,6 +9,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Threading;
+using System.ComponentModel;
 
 namespace RunExpKai {
 	public partial class RunExpKai :Form {
@@ -23,6 +24,7 @@ namespace RunExpKai {
 		private Port port;
 		private int[][] fleet_lists;
 		private int[][] accumulated;
+		private KanColle.Master.Mission[] mission_list;
 
 		public RunExpKai () {
 			InitializeComponent();
@@ -41,8 +43,10 @@ namespace RunExpKai {
 			this.kcp = new KanColleProxy(full_api_token);
 
 			// Run once on program startup to fetch initial data.
-			GetMemberID();
-			GetPort();
+			this.member_id = int.Parse(this.kcp.GetBasic().api_member_id);
+			this.port = this.kcp.GetPort(this.member_id.ToString());
+			this.mission_list = this.kcp.GetStart2().api_mst_mission;
+
 			this.fleet_lists = new int[4][];
 			this.fleet_lists[0] = null;
 			this.fleet_lists[1] = this.port.api_deck_port[1].api_ship;
@@ -50,33 +54,6 @@ namespace RunExpKai {
 			this.fleet_lists[3] = this.port.api_deck_port[3].api_ship;
 			this.accumulated = new int[4][];
 		}
-
-		#region Command Logic
-
-		private string GetPort () {
-			try {
-				string result = this.kcp.proxy(ApiPort.PORT, ApiPort.port(this.member_id));
-				this.port = JsonConvert.DeserializeObject<KanColleAPI<Port>>(result).GetData();
-				return result;
-			} catch (Exception e) {
-				Console.WriteLine(e);
-				throw new Exception(e.Message, e);
-			}
-		}
-
-		private int GetMemberID () {
-			try {
-				string result = this.kcp.proxy(Basic.GET);
-				KanColleAPI<Basic> basic = JsonConvert.DeserializeObject<KanColleAPI<Basic>>(result);
-				this.member_id = int.Parse(basic.GetData().api_member_id);
-				return this.member_id;
-			} catch (Exception e) {
-				Console.WriteLine(e);
-				throw new Exception(e.Message, e);
-			}
-		}
-
-		#endregion
 
 		#region Flash interface
 
@@ -100,11 +77,11 @@ namespace RunExpKai {
 		#region Main Logic
 
 		private void start (int fleet_id, int mission_id) {
-			string param = Mission.Start(fleet_id, mission_id, GetMission_Flash());
-			string response = this.kcp.proxy(Mission.START, param);
+			string param = KanColle.Request.Mission.Mission.Start(fleet_id, mission_id, GetMission_Flash());
+			string response = this.kcp.proxy(KanColle.Request.Mission.Mission.START, param);
 
 			try {
-				KanColleAPI<MissionStart> start = JsonConvert.DeserializeObject<KanColleAPI<MissionStart>>(postResponse);
+				KanColleAPI<MissionStart> start = JsonConvert.DeserializeObject<KanColleAPI<MissionStart>>(response);
 				start.GetData().PrintConsole();
 			} catch (Exception e) {
 				Console.WriteLine(param);
@@ -120,8 +97,8 @@ namespace RunExpKai {
 		}
 
 		private void result (int fleet_id) {
-			string parameter = Mission.Result(fleet_id);
-			string postResponse = this.kcp.proxy(Mission.RESULT, parameter);
+			string parameter = KanColle.Request.Mission.Mission.Result(fleet_id);
+			string postResponse = this.kcp.proxy(KanColle.Request.Mission.Mission.RESULT, parameter);
 
 			try {
 				KanColleAPI<MissionResult> result = JsonConvert.DeserializeObject<KanColleAPI<MissionResult>>(postResponse);
@@ -129,7 +106,7 @@ namespace RunExpKai {
 				// If mission fails, abort loop completely.
 				if (result.GetData().GetResult().Equals(ExpeditionResult.FAIL)) {
 					Console.WriteLine("Mission has FAILED! Current mission loop will be aborted.\nPlease check your fleet lineup and start again.");
-					Console.WriteLine("Press any key to exit this program.");
+					Console.WriteLine("Press any key to exit this program."); // Not really supposde to exit...
 					Console.Read();
 					Environment.Exit(2);
 				}
@@ -155,27 +132,43 @@ namespace RunExpKai {
 		}
 
 		private void Fleet_2_Start_Click (object sender, EventArgs e) {
-
+			if (Fleet_2_Worker.IsBusy == false) {
+				//TODO: Do stuff
+				int expedition_id = Fleet_2_DropDown.SelectedItem;
+			}
 		}
 
 		private void Fleet_2_Pause_Click (object sender, EventArgs e) {
-
+			if (Fleet_2_Worker.WorkerSupportsCancellation) {
+				//TODO: Pause or cancel.
+				Fleet_2_Worker.CancelAsync();
+			}
 		}
 
 		private void Fleet_3_Start_Click (object sender, EventArgs e) {
-
+			if (Fleet_3_Worker.IsBusy == false) {
+				// TODO: Do stuff
+			}
 		}
 
 		private void Fleet_3_Pause_Click (object sender, EventArgs e) {
-
+			if (Fleet_3_Worker.WorkerSupportsCancellation == true) {
+				//TODO: Pause or cancel.
+				Fleet_3_Worker.CancelAsync();
+			}
 		}
 
 		private void Fleet_4_Start_Click (object sender, EventArgs e) {
-
+			if (Fleet_4_Worker.IsBusy == false) {
+				//TODO: Do stuff
+			}
 		}
 
 		private void Fleet_4_Pause_Click (object sender, EventArgs e) {
-
+			if (Fleet_4_Worker.WorkerSupportsCancellation == true) {
+				//TODO: Pause or cancel.
+				Fleet_4_Worker.CancelAsync();
+			}
 		}
 
 		private void Fleet_2_DropDown_SelectedIndexChanged (object sender, EventArgs e) {
@@ -191,15 +184,36 @@ namespace RunExpKai {
 		}
 
 		private void StartAll_Click (object sender, EventArgs e) {
-
+			Fleet_2_Start_Click(sender, e);
+			Fleet_3_Start_Click(sender, e);
+			Fleet_4_Start_Click(sender, e);
 		}
 
 		private void StopAll_Click (object sender, EventArgs e) {
-
+			Fleet_2_Pause_Click(sender, e);
+			Fleet_3_Pause_Click(sender, e);
+			Fleet_4_Pause_Click(sender, e);
 		}
 
 		private void Update_Click (object sender, EventArgs e) {
+			this.kcp.GetPort(this.member_id.ToString());
+		}
 
+		#endregion
+
+		#region Background Workers
+
+		private void Fleet_2_Expedition_Executor (object sender, DoWorkEventArgs e) {
+			BackgroundWorker worker = sender as BackgroundWorker;
+
+			while (true) {
+				if (worker.CancellationPending == true) {
+					e.Cancel = true;
+					break;
+				} else {
+
+				}
+			}
 		}
 
 		#endregion
@@ -233,7 +247,7 @@ namespace RunExpKai {
 					Thread.Sleep(sleepTime * 1000);
 				}
 				// Wake and end mission.
-				GetPort();
+				this.port = this.kcp.GetPort(this.member_id.ToString());
 				Thread.Sleep(1000);
 				result(fleet_id);
 				Thread.Sleep(1000);

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{AA6C512F-2127-4FCD-AC9A-51D085E14FC0}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>KanColle</RootNamespace>
     <AssemblyName>KanColleAPI</AssemblyName>
@@ -56,12 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiPort.cs" />
-    <Compile Include="Expedition.cs" />
     <Compile Include="Flash\External\ExternalEventCallArgs.cs" />
     <Compile Include="Flash\External\ExternalInterfaceCall.cs" />
     <Compile Include="Flash\External\ExternalInterfaceProxy.cs" />
     <Compile Include="Flash\External\ExternalInterfaceSerializer.cs" />
     <Compile Include="Flash\Handler.cs" />
+    <Compile Include="KanColle.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />
