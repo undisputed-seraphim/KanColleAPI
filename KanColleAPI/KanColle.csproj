@@ -61,7 +61,6 @@
     <Compile Include="Flash\External\ExternalInterfaceProxy.cs" />
     <Compile Include="Flash\External\ExternalInterfaceSerializer.cs" />
     <Compile Include="Flash\Handler.cs" />
-    <Compile Include="KanColle.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />

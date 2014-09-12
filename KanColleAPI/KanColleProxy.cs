@@ -4,6 +4,7 @@ using System.Net;
 using System.Text;
 
 using Newtonsoft.Json;
+using KanColle.Member;
 
 namespace KanColle {
 	public sealed class KanColleProxy {

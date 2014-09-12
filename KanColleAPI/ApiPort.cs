@@ -7,17 +7,16 @@ namespace KanColle {
 		/*
 		 * Old arrays of values kept for reference.
 		 */
-		private static int RADIX = 31;
-		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
-		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };
-		
+//		private static int RADIX = 31;
+//		private static string[] LOCAL_3 = { "244", "bjc", "6jj", "4rl", "8qa", "64q", "38a", "9ir", "7h1", "929", "118" };
+//		private static long[] SF = { 1802, 9814, 5616, 4168, 7492, 5188, 2765, 8118, 6381, 7636 };
 //		private static long[] array = { 1623, 5727, 9278, 3527, 4976, 7180734, 6632, 3708, 4796, 9675, 13, 6631, 2987, 10, 1901, 9881, 1000, 3527 };
 //		private static long[] array = { 7536, 1882, 2237, 7280, 5686, 7180734, 6632, 1671, 4819, 1353, 13, 8422, 2987, 10, 1601, 6266, 1000, 3640 };
 //		private static long[] array = { 3791, 8897, 8024, 2139, 8567, 7180734, 6096, 3998, 3086, 4767, 13, 1445, 4179, 10, 7927, 8861, 1000, 8059 };
 //		private static long[] array = { 5309, 1153, 4306, 2139, 7464, 6510939, 8897, 8629, 9219, 7279, 13, 1219, 3791, 10, 4137, 7064, 1000, 2518707 };
 //		private static long[] array = { 6170, 5086, 7404, 2139, 3658, 6510939, 8897, 1997, 6321, 9417, 13, 7819, 3791, 10, 9194, 3978, 1000, 2518707 };
-
-		private static long[] array = { 7032, 5046, 9693, 2139, 8206, 6510939, 8897, 2065, 6433, 3688, 13, 4766, 3791, 10, 4391, 9752, 1000, 2518707 };
+//		private static long[] array = { 7032, 5046, 9693, 2139, 8206, 6510939, 8897, 2065, 6433, 3688, 13, 4766, 3791, 10, 4391, 9752, 1000, 2518707 };
+		private static long[] array = { 6180, 7415, 8024, 2139, 4055, 6510939, 8897, 1725, 3464, 9259, 13, 6524, 3791, 10, 5272, 6433, 1000, 2518707 };
 
 		public static string PORT = "api_port/port/";
 
@@ -80,7 +79,6 @@ namespace KanColle {
 			// I have written this simulation instead. Far easier.
 
 			int[] arr = { 1, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
-//			int[] SHINGATA_ARR = { 3, 7, 8, 0, 11, 4, 2, 9, 15, 14 };
 
 			return arr[input];
 		}
@@ -96,6 +94,7 @@ namespace KanColle {
 		/**
 		 * Obsolete version of the algorithm kept for legacy purposes.
 		 */
+		/*
 		private static string _1 (long userIdStr) {
 			long part1 = (cR() * 1000) + (userIdStr % 1000);
 			long part2_1 = 9999999999L - (long) Math.Floor((double) millisSinceUnixEpoch() / (double) 1000);
@@ -114,10 +113,12 @@ namespace KanColle {
 			double cS = 1000 + Math.Floor(new System.Random().NextDouble() * 8999);
 			return (int) cS;
 		}
+		 * */
 
 		/**
 		 * Obsolete version of the algorithm kept for legacy purposes.
 		 */
+		/*
 		private static string _2 (long userIdStr) {
 			long part1 = gI(LOCAL_3[10]) + (userIdStr % gI(LOCAL_3[10]));
 			long part2 = (9999999999L - (long) Math.Floor((double) millisSinceUnixEpoch() / gI(LOCAL_3[10])) - userIdStr) * gI(LOCAL_3[userIdStr % 10]);
@@ -134,5 +135,6 @@ namespace KanColle {
 		private static int gI (string s) {
 			return Convert.ToInt32(s, RADIX);
 		}
+		 * */
     }
 }

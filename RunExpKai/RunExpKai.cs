@@ -134,7 +134,7 @@ namespace RunExpKai {
 		private void Fleet_2_Start_Click (object sender, EventArgs e) {
 			if (Fleet_2_Worker.IsBusy == false) {
 				//TODO: Do stuff
-				int expedition_id = Fleet_2_DropDown.SelectedItem;
+				//int expedition_id = Fleet_2_DropDown.SelectedItem;
 			}
 		}
 
