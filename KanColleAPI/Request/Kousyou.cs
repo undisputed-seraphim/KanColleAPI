@@ -6,19 +6,20 @@ namespace KanColle.Request.Kousyou {
 		public static string DESTROYITEM = "api_req_kousyou/destroyitem2/";
 		public static string CREATESHIP = "api_erq/kousyou/createship/";
 		public static string DESTROYSHIP = "api_req_kousyou/destroyship/";
+		public static string CREATEITEM = "api_req_kousyou/createitem/";
 
 		public static string GetShip (int kdock_id) {
 			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_kdock_id={0}&", kdock_id);
 			str.AppendFormat("api_verno={0}&", 1);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_kdock_id={0}", kdock_id);
+			str.Append("api_token={0}");
 			return str.ToString();
 		}
 
 		public static string DestroyItem (params int[] slotitem_ids) {
 			StringBuilder str = new StringBuilder();
-			str.AppendFormat("api_verno={0}&", 1);
 			str.AppendFormat("api_slotitem_ids={0}&", string.Join(",", slotitem_ids));
+			str.AppendFormat("api_verno={0}&", 1);
 			str.Append("api_token={0}");
 			return str.ToString();
 		}
@@ -33,16 +34,27 @@ namespace KanColle.Request.Kousyou {
 			str.AppendFormat("api_kdock_id={0}&", kdock_id);
 			str.AppendFormat("api_large_flag={0}&", large_flag);
 			str.AppendFormat("api_highspeed={0}&", highspeed);
-			str.Append("api_token={0}&");
 			str.AppendFormat("api_verno={0}&", 1);
+			str.Append("api_token={0}");
 			return str.ToString();
 		}
 
 		public static string GetDestroyShip (int ship_id) {
 			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_ship_id={0&}", ship_id);
 			str.AppendFormat("api_verno={0}&", 1);
-			str.Append("api_token={0}&");
-			str.AppendFormat("api_ship_id={0}", ship_id);
+			str.Append("api_token={0}");
+			return str.ToString();
+		}
+
+		public static string CreateItem (int fuel, int ammo, int steel, int baux) {
+			StringBuilder str = new StringBuilder();
+			str.AppendFormat("api_item1={0}&", fuel);
+			str.AppendFormat("api_item2={0}&", ammo);
+			str.AppendFormat("api_item3={0}&", steel);
+			str.AppendFormat("api_item4={0}&", baux);
+			str.AppendFormat("api_verno={0}&", 1);
+			str.Append("api_token={0}");
 			return str.ToString();
 		}
 	}
@@ -80,5 +92,19 @@ namespace KanColle.Request.Kousyou {
 
 	public class DestroyShip {
 		public int[] api_material { get; set; }
+	}
+
+	public class CreateItem {
+		public int api_create_flag { get; set; }
+		public int api_shizai_flag { get; set; }
+		public string api_fdata { get; set; }
+		public int[] api_material { get; set; }
+		public int api_type3 { get; set; }
+		public int[] api_unsetslot { get; set; }
+
+		class Api_Slot_Item {
+			public int api_id { get; set; }
+			public int api_slotitem_id { get; set; }
+		}
 	}
 }
