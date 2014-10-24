@@ -53,5 +53,9 @@ namespace KanColleConsole {
 			System.IO.File.WriteAllText("Handle", this.Handle.ToInt64().ToString());
 			System.IO.File.WriteAllText("__abcde__.txt", this.proxy.Call("api_mission", null).ToString());
 		}
+
+		private void flash_Enter (object sender, EventArgs e) {
+
+		}
 	}
 }

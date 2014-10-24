@@ -69,7 +69,7 @@ namespace KanColleConsole {
 			this.UserID.MaxLength = 10;
 			this.UserID.MinimumSize = new System.Drawing.Size(75, 25);
 			this.UserID.Name = "UserID";
-			this.UserID.Size = new System.Drawing.Size(75, 25);
+			this.UserID.Size = new System.Drawing.Size(75, 20);
 			this.UserID.TabIndex = 4;
 			this.UserID.Text = "123456";
 			// 
@@ -81,6 +81,7 @@ namespace KanColleConsole {
 			this.flash.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("flash.OcxState")));
 			this.flash.Size = new System.Drawing.Size(400, 200);
 			this.flash.TabIndex = 5;
+			this.flash.Enter += new System.EventHandler(this.flash_Enter);
 			// 
 			// KanColleConsole
 			// 
@@ -98,6 +99,7 @@ namespace KanColleConsole {
 			((System.ComponentModel.ISupportInitialize)(this.flash)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
+
 		}
 
 		#endregion
