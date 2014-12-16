@@ -1,15 +1,9 @@
 Recent Updates
 ==========
-RunExp now waits for the previous mission to end before attempting to start a new one.
+Recent Updates @ 16 Dec '14:
+Now I'm quite busy and don't really have the time to keep making new stuff. RunExp is quite stable except for 2 known issues (1 - Sometimes more than 1 expedition will try to access the same __abcd__ text file and cause read/write conflicts and 2 - I need to make the program more resilient against network lags and timeouts)
 
-Previously it would attempt to start a new one anyway, but fail if there is an existing mission.
-
-It will also end the mission and refuel the ships, making the transition seamless.
-
-Additionally, the program will abort the loop if any mission fails.
-
-Getting the algorithm to generate api_port is getting harder and harder.
-I fear that I may not be able to get it sooner. Relying on Japanese BBS to get the algorithm now.
+Suffice to say don't expect any major changes except bug fixes any time soon.
 
 Overview
 ==========
