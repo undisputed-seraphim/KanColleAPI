@@ -5,6 +5,8 @@ Now I'm quite busy and don't really have the time to keep making new stuff. RunE
 
 Suffice to say don't expect any major changes except bug fixes any time soon.
 
+**NOTE: RapidCraft might be removed because I'm a little too lazy to develop it.
+
 Overview
 ==========
 This solution contains a few things:

@@ -69,10 +69,19 @@ namespace KanColle {
 			}
 
 			// Get stream, write, flush and close.
-			Stream requestStream = request.GetRequestStream();
-			requestStream.Write(bytearray, 0, bytearray.Length);
-			requestStream.Flush();
-			requestStream.Close();
+			bool notSuccessful = true;
+			while (notSuccessful) {
+				try {
+					Stream requestStream = request.GetRequestStream();
+					requestStream.Write(bytearray, 0, bytearray.Length);
+					requestStream.Flush();
+					requestStream.Close();
+					notSuccessful = false;
+				} catch (WebException error) {
+					// Sleep, then continue trying
+					System.Threading.Thread.Sleep(250);
+				}
+			}
 
 			// Get the response, status, etc.
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse();

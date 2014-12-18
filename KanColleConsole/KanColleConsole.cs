@@ -1,15 +1,17 @@
 ﻿using KanColle.Flash.External;
 using System;
 using System.Windows.Forms;
+using System.IO;
+using System.Threading;
 
 namespace KanColleConsole {
-	public partial class KanColleConsole :Form {
+	public partial class KanColleConsole : Form {
 		const int WM_APP = 0x8000;
 		const int WM_API_PORT = WM_APP + 1;
 
 		private ExternalInterfaceProxy proxy;
 
-		public KanColleConsole () {
+		public KanColleConsole() {
 			InitializeComponent();
 
 			// Read in the swf file.
@@ -21,17 +23,17 @@ namespace KanColleConsole {
 		}
 
 		#region Button OnClicks
-		private void ApiPort_OnClick (object sender, EventArgs e) {
+		private void ApiPort_OnClick(object sender, EventArgs e) {
 			object obj = this.proxy.Call("api_port", this.UserID.Text);
 			MessageBox.Show(obj.ToString());
 		}
 
-		private void ApiMission_OnClick (object sender, EventArgs e) {
+		private void ApiMission_OnClick(object sender, EventArgs e) {
 			object obj = this.proxy.Call("api_mission", null);
 			MessageBox.Show(obj.ToString());
 		}
 
-		private void ApiQuest_OnClick (object sender, EventArgs e) {
+		private void ApiQuest_OnClick(object sender, EventArgs e) {
 			object obj = this.proxy.Call("api_quest", null);
 			MessageBox.Show(obj.ToString());
 		}
@@ -48,13 +50,23 @@ namespace KanColleConsole {
 			base.WndProc(ref m);
 		}*/
 
-		private void KanColleConsole_Load (object sender, EventArgs e) {
+		private void KanColleConsole_Load(object sender, EventArgs e) {
 			this.Visible = false;
-			System.IO.File.WriteAllText("Handle", this.Handle.ToInt64().ToString());
-			System.IO.File.WriteAllText("__abcde__.txt", this.proxy.Call("api_mission", null).ToString());
+			bool notSuccessful = true;
+
+			while (notSuccessful) {
+				try {
+					System.IO.File.WriteAllText("Handle", this.Handle.ToInt64().ToString());
+					System.IO.File.WriteAllText("__abcde__.txt", this.proxy.Call("api_mission", null).ToString());
+					notSuccessful = false;
+				} catch (IOException err) {
+					// Sleep, then continue trying.
+					Thread.Sleep(250);
+				}
+			}
 		}
 
-		private void flash_Enter (object sender, EventArgs e) {
+		private void flash_Enter(object sender, EventArgs e) {
 
 		}
 	}
