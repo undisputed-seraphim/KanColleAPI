@@ -1,7 +1,7 @@
 Recent Updates
 ==========
 Recent Updates @ 16 Dec '14:
-Now I'm quite busy and don't really have the time to keep making new stuff. RunExp is quite stable except for 2 known issues (1 - Sometimes more than 1 expedition will try to access the same __abcd__ text file and cause read/write conflicts and 2 - I need to make the program more resilient against network lags and timeouts)
+Now I'm quite busy and don't really have the time to keep making new stuff. RunExp is quite stable. I fixed two outstanding bugs recently.
 
 Suffice to say don't expect any major changes except bug fixes any time soon.
 
