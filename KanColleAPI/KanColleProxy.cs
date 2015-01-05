@@ -79,6 +79,7 @@ namespace KanColle {
 					notSuccessful = false;
 				} catch (WebException error) {
 					// Sleep, then continue trying
+                    Console.WriteLine(error.ToString());
 					System.Threading.Thread.Sleep(250);
 				}
 			}

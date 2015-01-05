@@ -59,8 +59,9 @@ namespace KanColleConsole {
 					System.IO.File.WriteAllText("Handle", this.Handle.ToInt64().ToString());
 					System.IO.File.WriteAllText("__abcde__.txt", this.proxy.Call("api_mission", null).ToString());
 					notSuccessful = false;
-				} catch (IOException err) {
+				} catch (IOException error) {
 					// Sleep, then continue trying.
+                    Console.WriteLine(error.ToString());
 					Thread.Sleep(250);
 				}
 			}
