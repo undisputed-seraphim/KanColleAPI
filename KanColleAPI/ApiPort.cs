@@ -65,11 +65,14 @@ namespace KanColle {
 
 		private static string __ (long member_id) {
 
-			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
-			string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id) + array[17]) * array[func(member_id % 10)]).ToString();
-			string part_3 = (random_floor(9 * (int) array[16]) + array[16]).ToString();
+            string part_0 = (random_floor(32768) + 32768).ToString();
 
-			return string.Join("", part_1, part_2, part_3);
+			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
+			//string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id) + array[17]) * array[func(member_id % 10)]).ToString();
+            string part_2 = ((((long.Parse(member_id.ToString().Substring(0, 4)) + 1000) * (array[5] + long.Parse(part_0)) - time_floor()) + (array[17] + (9 * long.Parse(part_0))) - member_id) * array[func(member_id % 10)]).ToString();
+            string part_3 = (random_floor(9 * (int) array[16]) + array[16]).ToString();
+
+			return string.Join("", part_1, part_2, part_3, part_0);
 		}
 
 		private static int func (long input) {
@@ -97,51 +100,5 @@ namespace KanColle {
 		private static long time_floor () {
 			return millisSinceUnixEpoch() / 1000;
 		}
-
-		/**
-		 * Obsolete version of the algorithm kept for legacy purposes.
-		 */
-		/*
-		private static string _1 (long userIdStr) {
-			long part1 = (cR() * 1000) + (userIdStr % 1000);
-			long part2_1 = 9999999999L - (long) Math.Floor((double) millisSinceUnixEpoch() / (double) 1000);
-			long part2_2 = (part2_1 - userIdStr) * SF[userIdStr % 10];
-			long part3 = cS();
-
-			return part1 + "" + part2_2 + "" + part3;
-		}
-
-		private static int cR () {
-			double cR = 1 + Math.Floor(new System.Random().NextDouble() * 9);
-			return (int) cR;
-		}
-
-		private static int cS () {
-			double cS = 1000 + Math.Floor(new System.Random().NextDouble() * 8999);
-			return (int) cS;
-		}
-		 * */
-
-		/**
-		 * Obsolete version of the algorithm kept for legacy purposes.
-		 */
-		/*
-		private static string _2 (long userIdStr) {
-			long part1 = gI(LOCAL_3[10]) + (userIdStr % gI(LOCAL_3[10]));
-			long part2 = (9999999999L - (long) Math.Floor((double) millisSinceUnixEpoch() / gI(LOCAL_3[10])) - userIdStr) * gI(LOCAL_3[userIdStr % 10]);
-			string part3 = cN() + cN() + cN() + cN();
-
-			return part1 + "" + part2 + "" + part3;
-		}
-
-		private static string cN () {
-			int cN = (int) Math.Floor(new System.Random().NextDouble() * 10);
-			return Convert.ToString(cN);
-		}
-
-		private static int gI (string s) {
-			return Convert.ToInt32(s, RADIX);
-		}
-		 * */
     }
 }
