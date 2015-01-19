@@ -48,7 +48,7 @@ namespace RunExp {
 		}
 
 		public RunExp (string full_api_token, int fleet_id, int mission_id, int interval) {
-			this.kcp = new KanColleProxy(full_api_token, true);
+			this.kcp = new KanColleProxy(full_api_token);
 			this.fleet_id = fleet_id;
 			this.mission_id = mission_id;
 			this.interval = interval;
