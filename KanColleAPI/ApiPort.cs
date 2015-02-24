@@ -24,10 +24,10 @@ namespace KanColle {
 //		private static long[] array = { 3398, 2613, 4165, 2139, 9662, 6510939, 8897, 1512, 8024, 9389, 13, 4901, 3791, 10, 1161, 8465, 1000, 2518707 };
 //		private static long[] array = { 3599, 5795, 2992, 2139, 2689, 6510939, 8897, 1832, 5794, 6622, 13, 7783, 3791, 10, 9853, 2440, 1000, 2518707 };
 //		private static long[] array = { 9514, 8207, 4082, 2139, 8501, 6510939, 8897, 1465, 4355, 2499, 13, 6558, 3791, 10, 6556, 3026, 1000, 2518707 };
-//      private static long[] array = { 5888, 7810, 3901, 2139, 8413, 4131807, 8897, 5444, 9683, 7159, 13, 4810, 3791, 10, 5342, 2211, 1000, 1876153 };
-//      private static long[] array = { 8238, 4537, 3282, 2139, 5781, 4131807, 8897, 4739, 9122, 9516, 13, 7330, 3791, 10, 8455, 2727, 1000, 1876153 };
-//      private static long[] array = { 2867, 6569, 2722, 2139, 3681, 4131807, 8897, 6193, 8277, 9888, 13, 6798, 3791, 10, 8955, 3339, 1000, 1876153 };
-        private static long[] array = { 3101, 7566, 5167, 2139, 9031, 4131807, 8897, 9973, 4140, 6130, 13, 8957, 3791, 10, 6321, 8845, 1000, 1876153 };
+//		private static long[] array = { 5888, 7810, 3901, 2139, 8413, 4131807, 8897, 5444, 9683, 7159, 13, 4810, 3791, 10, 5342, 2211, 1000, 1876153 };
+//		private static long[] array = { 8238, 4537, 3282, 2139, 5781, 4131807, 8897, 4739, 9122, 9516, 13, 7330, 3791, 10, 8455, 2727, 1000, 1876153 };
+//		private static long[] array = { 2867, 6569, 2722, 2139, 3681, 4131807, 8897, 6193, 8277, 9888, 13, 6798, 3791, 10, 8955, 3339, 1000, 1876153 };
+		private static long[] array = { 3101, 7566, 5167, 2139, 9031, 4131807, 8897, 9973, 4140, 6130, 13, 8957, 3791, 10, 6321, 8845, 1000, 1876153 };
 
 		public static string PORT = "api_port/port/";
 
@@ -68,13 +68,11 @@ namespace KanColle {
 		}
 
 		private static string __ (long member_id) {
-
-            string part_0 = (random_floor(32768) + 32768).ToString();
-
+			string part_0 = (random_floor(32768) + 32768).ToString();
 			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
 			//string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id) + array[17]) * array[func(member_id % 10)]).ToString();
-            string part_2 = ((((long.Parse(member_id.ToString().Substring(0, 4)) + 1000) * (array[5] + long.Parse(part_0)) - time_floor()) + (array[17] + (9 * long.Parse(part_0))) - member_id) * array[func(member_id % 10)]).ToString();
-            string part_3 = (random_floor(9 * (int) array[16]) + array[16]).ToString();
+			string part_2 = ((((long.Parse(member_id.ToString().Substring(0, 4)) + 1000) * (array[5] + long.Parse(part_0)) - time_floor()) + (array[17] + (9 * long.Parse(part_0))) - member_id) * array[func(member_id % 10)]).ToString();
+			string part_3 = (random_floor(9 * (int) array[16]) + array[16]).ToString();
 
 			return string.Join("", part_1, part_2, part_3, part_0);
 		}
