@@ -29,6 +29,13 @@ namespace RunExp {
 			string full_api_token = reader.ReadLine();
 			reader.Close();
 
+			if (args.Length < 3) {
+				Console.WriteLine("USAGE: Requires exactly 3 arguments. ");
+				Console.WriteLine("Fleet ID, Mission ID, mission interval (minutes)");
+				Console.WriteLine("RunExp will now exit.");
+				Environment.Exit(0);
+			}
+
 			int fleet_id = Convert.ToInt32(args[0]),
 				mission_id = Convert.ToInt32(args[1]),
 				interval = Convert.ToInt32(args[2]);
