@@ -61,7 +61,7 @@ namespace KanColleConsole {
 					notSuccessful = false;
 				} catch (IOException error) {
 					// Sleep, then continue trying.
-                    Console.WriteLine(error.ToString());
+					Console.WriteLine(error.ToString());
 					Thread.Sleep(250);
 				}
 			}
