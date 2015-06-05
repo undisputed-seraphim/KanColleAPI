@@ -37,11 +37,11 @@ namespace KanColle {
 
 		public static string PORT = "api_port/port/";
 
-		public static string port( int memberID ) {
+		public static string port(int memberID) {
 			return port(memberID.ToString());
 		}
 
-		public static string port( string memberId ) {
+		public static string port(string memberId) {
 			long userIdStr = long.Parse(memberId);
 
 			StringBuilder str = new StringBuilder();
@@ -55,37 +55,37 @@ namespace KanColle {
 
 		// Generates a unix epoch time in milliseconds.
 		private static long millisSinceUnixEpoch() {
-			return (long)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalMilliseconds;
+			return (long)( DateTime.UtcNow - new DateTime(1970, 1, 1) ).TotalMilliseconds;
 		}
 
-		private static long millisSinceUnixEpoch( int year, int month, int day, int hour, int minute, int second ) {
+		private static long millisSinceUnixEpoch(int year, int month, int day, int hour, int minute, int second) {
 			DateTime custom_date = new DateTime(year, month, day, hour, minute, second);
-			return (long)(custom_date - new DateTime(1970, 1, 1)).TotalMilliseconds;
+			return (long)( custom_date - new DateTime(1970, 1, 1) ).TotalMilliseconds;
 		}
 
 		/**
 		 * Current version of the algorithm.
 		 */
-		private static string api_port( string args ) {
+		private static string api_port(string args) {
 			int member_id = int.Parse(args);
 			string api_port = __((long)member_id);
 			//Console.WriteLine("DEBUG API_PORT OUTPUT: " + api_port);
 			return api_port;
 		}
 
-		private static string __( long member_id ) {
+		private static string __(long member_id) {
 
-			string part_0 = (random_floor(32768) + 32768).ToString();
+			string part_0 = ( random_floor(32768) + 32768 ).ToString();
 
-			string part_1 = ((random_floor(9) + 1) * 1000 + (member_id % 1000)).ToString();
+			string part_1 = ( ( random_floor(9) + 1 ) * 1000 + ( member_id % 1000 ) ).ToString();
 			//string part_2 = (((array[5] * long.Parse(member_id.ToString().Substring(0, 4))) - (time_floor() + member_id) + array[17]) * array[func(member_id % 10)]).ToString();
-			string part_2 = ((((long.Parse(member_id.ToString().Substring(0, 4)) + 1000) * (array[5] + long.Parse(part_0)) - time_floor()) + (array[17] + (9 * long.Parse(part_0))) - member_id) * array[func(member_id % 10)]).ToString();
-			string part_3 = (random_floor(9 * (int)array[16]) + array[16]).ToString();
+			string part_2 = ( ( ( ( long.Parse(member_id.ToString().Substring(0, 4)) + 1000 ) * ( array[5] + long.Parse(part_0) ) - time_floor() ) + ( array[17] + ( 9 * long.Parse(part_0) ) ) - member_id ) * array[func(member_id % 10)] ).ToString();
+			string part_3 = ( random_floor(9 * (int)array[16]) + array[16] ).ToString();
 
 			return string.Join("", part_1, part_2, part_3, part_0);
 		}
 
-		private static int func( long input ) {
+		private static int func(long input) {
 			string sqrt13 = Math.Sqrt(array[array[13]]).ToString(); // 3.605551275463989
 
 			//Original function pseudocode:
@@ -103,7 +103,7 @@ namespace KanColle {
 			return arr[input];
 		}
 
-		private static int random_floor( int a ) {
+		private static int random_floor(int a) {
 			return (int)Math.Floor(new System.Random().NextDouble() * a);
 		}
 

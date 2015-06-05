@@ -22,7 +22,7 @@ namespace RunExp {
 		// Port is an object that is frequently updated.
 		private Port port;
 
-		static void Main (string[] args) {
+		static void Main(string[] args) {
 			Console.OutputEncoding = Encoding.Unicode;
 
 			StreamReader reader = new StreamReader("api_token.txt");
@@ -54,7 +54,7 @@ namespace RunExp {
 			Console.WriteLine("Exiting...");
 		}
 
-		public RunExp (string full_api_token, int fleet_id, int mission_id, int interval) {
+		public RunExp(string full_api_token, int fleet_id, int mission_id, int interval) {
 			this.kcp = new KanColleProxy(full_api_token);
 			this.fleet_id = fleet_id;
 			this.mission_id = mission_id;
@@ -76,7 +76,7 @@ namespace RunExp {
 			checkIfExistingMission();
 		}
 
-		public void run () {
+		public void run() {
 			start();
 			Console.WriteLine("This expedition has run for {0} times!", this.run_count++);
 			Thread.Sleep(this.interval * 60 * 1000);
@@ -85,12 +85,12 @@ namespace RunExp {
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 			result();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
-			getShipList(this.fleet_id);	// Get an updated list of ships.
+			getShipList(this.fleet_id); // Get an updated list of ships.
 			charge();
 			Thread.Sleep(1000); // Sleep for one second for buffer time.
 		}
 
-		private void start () {
+		private void start() {
 			Console.WriteLine();
 			Console.WriteLine("!!***** NEW MISSION *****!!");
 			System.Diagnostics.Process proc = System.Diagnostics.Process.Start("KanColleConsole.exe");
@@ -115,7 +115,7 @@ namespace RunExp {
 			}
 		}
 
-		private void result () {
+		private void result() {
 			Console.WriteLine();
 			Console.WriteLine("!!***** MISSION RESULTS *****!!");
 			string parameter = Mission.Result(this.fleet_id);
@@ -151,7 +151,7 @@ namespace RunExp {
 		}
 
 		// Charge is an idempotent function that never fails, so it does not need to be surrounded with try/catch.
-		private void charge () {
+		private void charge() {
 			Console.WriteLine();
 			Console.WriteLine("!!***** REFUEL *****!!");
 			string parameter = Hokyu.Charge(this.ship_list);
@@ -161,7 +161,7 @@ namespace RunExp {
 		// This function assumes there is a recently updated copy of Port data available.
 		// It does not request its own copy.
 		// The old behavior was that this function would request its own copy of Port. That is no longer the case.
-		private void getShipList (int fleetNum) {
+		private void getShipList(int fleetNum) {
 			try {
 				this.ship_list = this.port.GetFleetList(fleetNum);
 			} catch (Exception e) {
@@ -169,7 +169,7 @@ namespace RunExp {
 			}
 		}
 
-		private string getMemberId () {
+		private string getMemberId() {
 			String result = this.kcp.proxy(Basic.GET);
 			try {
 				KanColleAPI<Basic> api_data = JsonConvert.DeserializeObject<KanColleAPI<Basic>>(result);
@@ -182,7 +182,7 @@ namespace RunExp {
 		}
 
 		// For debugging purposes.
-		private static void writeToFile (string input, string path) {
+		private static void writeToFile(string input, string path) {
 			StreamWriter stream = new StreamWriter(path, false, Encoding.UTF8);
 			stream.Write(input);
 			stream.Flush();
@@ -193,21 +193,21 @@ namespace RunExp {
 		 * Checks if there is already a mission running, and stalls the program until that mission ends.
 		 * When it reawakens, it will end the mission before resuming normal operation.
 		 */
-		private void checkIfExistingMission () {
+		private void checkIfExistingMission() {
 			long missionTime = this.port.api_deck_port[this.fleet_id - 1].api_mission[2] / 1000;
 
 			if (missionTime != 0) {
 				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
-				int sleepTime = (int) ((missionEnd - DateTime.Now).TotalSeconds);
+				int sleepTime = (int)( ( missionEnd - DateTime.Now ).TotalSeconds );
 				if (sleepTime > 1) {
 
-                    Console.WriteLine("There is already a mission running for this fleet.");
-                    Console.WriteLine("It will return on " + missionEnd);
+					Console.WriteLine("There is already a mission running for this fleet.");
+					Console.WriteLine("It will return on " + missionEnd);
 
-                    // Sleep, in seconds.
-                    Console.WriteLine("This program will sleep for {0} minutes and {1} seconds before it resumes.", sleepTime / 60, sleepTime % 60);
-                    Thread.Sleep(sleepTime * 1000);
-                }
+					// Sleep, in seconds.
+					Console.WriteLine("This program will sleep for {0} minutes and {1} seconds before it resumes.", sleepTime / 60, sleepTime % 60);
+					Thread.Sleep(sleepTime * 1000);
+				}
 
 				// Wake and end mission.
 				this.port = this.kcp.GetPort(this.member_id);
@@ -218,7 +218,7 @@ namespace RunExp {
 			}
 		}
 
-		private static DateTime timeUnixEpochToDotNet (long unixTime) {
+		private static DateTime timeUnixEpochToDotNet(long unixTime) {
 			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(unixTime).ToLocalTime();
 		}
 	}

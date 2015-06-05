@@ -9,9 +9,9 @@ using KanColle.Member;
 namespace KanColle {
 	public sealed class KanColleProxy {
 
-		private static string HEADER_REFERER =		"{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";
-		private static string HEADER_USER_AGENT =	"Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
-		private static string HEADER_ACCEPT =		"text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
+		private static string HEADER_REFERER = "{0}kcs/mainD2.swf?api_token={1}/[[DYNAMIC]]/1";
+		private static string HEADER_USER_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:31.0) Gecko/20100101 Firefox/31.0";
+		private static string HEADER_ACCEPT = "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8";
 		private static string HEADER_CONTENT_TYPE = "application/x-www-form-urlencoded";
 
 		public const string DEFAULT_GET = "api_token={0}&api_verno=1";
@@ -21,20 +21,20 @@ namespace KanColle {
 
 		public bool debug { get; set; }
 
-		public KanColleProxy (string api_token, string server, bool debug = false) {
+		public KanColleProxy(string api_token, string server, bool debug = false) {
 			this.USER_API_TOKEN = api_token;
 			this.USER_SERVER = server;
 			this.debug = debug;
 		}
 
-		public KanColleProxy (string input, bool debug = false) {
+		public KanColleProxy(string input, bool debug = false) {
 			string[] tokens = input.Split(new string[] { "kcs/mainD2.swf?api_token=" }, StringSplitOptions.None);
 			this.USER_SERVER = tokens[0];
 			this.USER_API_TOKEN = tokens[1];
 			this.debug = debug;
 		}
 
-		public string proxy (string context, string parameter = DEFAULT_GET) {
+		public string proxy(string context, string parameter = DEFAULT_GET) {
 #if DEBUG
 			Console.WriteLine("API TOKEN: " + this.USER_API_TOKEN);
 			Console.WriteLine("SERVER: " + this.USER_SERVER);
@@ -42,7 +42,7 @@ namespace KanColle {
 
 			Uri uri = new Uri(this.USER_SERVER + "kcsapi/" + context);
 			string referer = string.Format(HEADER_REFERER, this.USER_SERVER, this.USER_API_TOKEN);
-			HttpWebRequest request = (HttpWebRequest) WebRequest.Create(uri);
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
 			parameter = String.Format(parameter, this.USER_API_TOKEN);
 			byte[] bytearray = Encoding.ASCII.GetBytes(parameter);
 
@@ -79,13 +79,13 @@ namespace KanColle {
 					notSuccessful = false;
 				} catch (WebException error) {
 					// Sleep, then continue trying
-                    Console.WriteLine(error.ToString());
+					Console.WriteLine(error.ToString());
 					System.Threading.Thread.Sleep(250);
 				}
 			}
 
 			// Get the response, status, etc.
-			HttpWebResponse response = (HttpWebResponse) request.GetResponse();
+			HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 			HttpStatusCode status = response.StatusCode;
 
 #if DEBUG
@@ -108,7 +108,7 @@ namespace KanColle {
 			return output;
 		}
 
-		public string proxyWithFileWrite (string path, string context, string parameter = DEFAULT_GET) {
+		public string proxyWithFileWrite(string path, string context, string parameter = DEFAULT_GET) {
 			string output = proxy(context, parameter);
 
 			StreamWriter fileStream = new StreamWriter(path, false, Encoding.UTF8);
@@ -119,10 +119,10 @@ namespace KanColle {
 			return output;
 		}
 
-#region Convenience methods
+		#region Convenience methods
 		// For getting some of the more important, commonly-used data
 
-		public KanColle.Member.Basic GetBasic () {
+		public KanColle.Member.Basic GetBasic() {
 			try {
 				string json_response = this.proxy(KanColle.Member.Basic.GET);
 				KanColleAPI<KanColle.Member.Basic> basic = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Basic>>(json_response);
@@ -135,7 +135,7 @@ namespace KanColle {
 			}
 		}
 
-		public KanColle.Master.Start2 GetStart2 () {
+		public KanColle.Master.Start2 GetStart2() {
 			try {
 				string json_response = this.proxy(KanColle.Master.Start2.GET);
 				KanColleAPI<KanColle.Master.Start2> start2 = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Master.Start2>>(json_response);
@@ -148,7 +148,7 @@ namespace KanColle {
 			}
 		}
 
-		public KanColle.Member.Port GetPort (string member_id) {
+		public KanColle.Member.Port GetPort(string member_id) {
 			try {
 				string json_response = this.proxy(ApiPort.PORT, ApiPort.port(member_id));
 				KanColleAPI<KanColle.Member.Port> port = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Port>>(json_response);
@@ -161,6 +161,6 @@ namespace KanColle {
 			}
 		}
 
-#endregion
+		#endregion
 	}
 }
