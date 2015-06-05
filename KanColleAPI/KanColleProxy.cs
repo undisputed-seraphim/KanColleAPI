@@ -35,10 +35,10 @@ namespace KanColle {
 		}
 
 		public string proxy (string context, string parameter = DEFAULT_GET) {
-			if (debug) {
-				Console.WriteLine("API TOKEN: " + this.USER_API_TOKEN);
-				Console.WriteLine("SERVER: " + this.USER_SERVER);
-			}
+#if DEBUG
+			Console.WriteLine("API TOKEN: " + this.USER_API_TOKEN);
+			Console.WriteLine("SERVER: " + this.USER_SERVER);
+#endif
 
 			Uri uri = new Uri(this.USER_SERVER + "kcsapi/" + context);
 			string referer = string.Format(HEADER_REFERER, this.USER_SERVER, this.USER_API_TOKEN);
@@ -46,11 +46,11 @@ namespace KanColle {
 			parameter = String.Format(parameter, this.USER_API_TOKEN);
 			byte[] bytearray = Encoding.ASCII.GetBytes(parameter);
 
-			if (debug) {
-				Console.WriteLine("CONTEXT: " + context);
-				Console.WriteLine("URI: " + uri);
-				Console.WriteLine("PARAMETER: " + parameter);
-			}
+#if DEBUG
+			Console.WriteLine("CONTEXT: " + context);
+			Console.WriteLine("URI: " + uri);
+			Console.WriteLine("PARAMETER: " + parameter);
+#endif
 
 			// Set headers and method.
 			request.Method = "POST";
@@ -62,11 +62,11 @@ namespace KanColle {
 			request.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
 			request.KeepAlive = true;
 
-			if (debug) {
-				Console.WriteLine("");
-				Console.WriteLine("REFERER: " + request.Referer);
-				Console.WriteLine("CONTENT LENGTH: " + request.ContentLength);
-			}
+#if DEBUG
+			Console.WriteLine("");
+			Console.WriteLine("REFERER: " + request.Referer);
+			Console.WriteLine("CONTENT LENGTH: " + request.ContentLength);
+#endif
 
 			// Get stream, write, flush and close.
 			bool notSuccessful = true;
@@ -88,9 +88,9 @@ namespace KanColle {
 			HttpWebResponse response = (HttpWebResponse) request.GetResponse();
 			HttpStatusCode status = response.StatusCode;
 
-			if (debug) {
-				Console.WriteLine("HTTP STATUS CODE: " + status);
-			}
+#if DEBUG
+			Console.WriteLine("HTTP STATUS CODE: " + status);
+#endif
 
 			if (status != HttpStatusCode.OK) {
 				Console.WriteLine(status);
@@ -119,7 +119,7 @@ namespace KanColle {
 			return output;
 		}
 
-		#region Convenience methods
+#region Convenience methods
 		// For getting some of the more important, commonly-used data
 
 		public KanColle.Member.Basic GetBasic () {
@@ -128,9 +128,9 @@ namespace KanColle {
 				KanColleAPI<KanColle.Member.Basic> basic = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Basic>>(json_response);
 				return basic.GetData();
 			} catch (Exception e) {
-				if (debug) {
-					Console.WriteLine(e.Message);
-				}
+#if DEBUG
+				Console.WriteLine(e.Message);
+#endif
 				return null;
 			}
 		}
@@ -141,9 +141,9 @@ namespace KanColle {
 				KanColleAPI<KanColle.Master.Start2> start2 = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Master.Start2>>(json_response);
 				return start2.GetData();
 			} catch (Exception e) {
-				if (debug) {
-					Console.WriteLine(e.Message);
-				}
+#if DEBUG
+				Console.WriteLine(e.Message);
+#endif
 				return null;
 			}
 		}
@@ -154,13 +154,13 @@ namespace KanColle {
 				KanColleAPI<KanColle.Member.Port> port = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Port>>(json_response);
 				return port.GetData();
 			} catch (Exception e) {
-				if (debug) {
-					Console.WriteLine(e.Message);
-				}
+#if DEBUG
+				Console.WriteLine(e.Message);
+#endif
 				return null;
 			}
 		}
 
-		#endregion
+#endregion
 	}
 }

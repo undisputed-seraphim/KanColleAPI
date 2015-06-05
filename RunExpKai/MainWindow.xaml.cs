@@ -20,9 +20,6 @@ namespace RunExpKai {
 
 		public MainWindow() {
 			InitializeComponent();
-
-			// Read in the api_port swf file
-			string swf_path = System.IO.Directory.GetCurrentDirectory() + "\\api_port.swf";
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -48,10 +45,11 @@ namespace RunExpKai {
 
 			this.flashproxy = new ExternalInterfaceProxy(flash);
 
+			//string msg = this.flashproxy.Call("api_mission", null).ToString();
 		}
 
 		private void WinFormsHost_ChildChanged(object sender, System.Windows.Forms.Integration.ChildChangedEventArgs e) {
-
+			// Do nothing. This should not have any changes.
 		}
 
 		private void api_token_box_TextChanged(object sender, TextChangedEventArgs e) {
@@ -60,8 +58,11 @@ namespace RunExpKai {
 
 		private void apitoken_apply_Click(object sender, RoutedEventArgs e) {
 			//System.Windows.MessageBox.Show("Clicked");
-
+			System.Windows.MessageBox.Show(this.api_token_box.Text);
 			this.kcproxy = new KanColleProxy(this.api_token_box.Text);
+			// Update the PORT api.
+			this.kcproxy.GetPort()
+
 			// Save api token to user config file here
 		}
 
@@ -98,10 +99,6 @@ namespace RunExpKai {
 		}
 
 		private void Fleet_4_Stop_Click(object sender, RoutedEventArgs e) {
-
-		}
-
-		private void flash_Enter(object sender, System.EventArgs e) {
 
 		}
 	}

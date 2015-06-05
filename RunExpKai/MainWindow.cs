@@ -23,6 +23,11 @@ using KanColle.Request.Mission;
 namespace RunExpKai {
 	partial class MainWindow {
 
+		private KanColle.Member.Port port;
+
+		private void update() {
+		}
+
 		private void run() {
 
 		}
@@ -46,6 +51,22 @@ namespace RunExpKai {
 		}
 
 		private void refuel() {
+		}
+
+		private string GetMemberID() {
+			String result = this.kcproxy.proxy(KanColle.Member.Basic.GET);
+			try {
+				KanColleAPI<KanColle.Member.Basic> api_data = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Basic>>(result);
+				return api_data.GetData().api_member_id;
+			} catch (Exception e) {
+				Console.WriteLine(result);
+				Console.WriteLine(e.Message);
+				throw new Exception(e.Message, e);
+			}
+		}
+
+		private static DateTime timeUnixEpochToDotNet(long unixTime) {
+			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(unixTime).ToLocalTime();
 		}
 	}
 }
