@@ -137,6 +137,9 @@ namespace KanColle {
 			}
 		}
 
+		// WARNING: Start2 currently cannot be parsed because the server returns some invalid JSON (there are stray quotation marks
+		// in the returned data that causes the parser to panic).
+		// Since data in Start2 tend to be static anyway, please find a workaround such as by preloading data manually instead of dynamically.
 		public KanColle.Master.Start2 GetStart2() {
 			try {
 				string json_response = this.proxy(KanColle.Master.Start2.GET);
@@ -164,5 +167,14 @@ namespace KanColle {
 		}
 
 		#endregion
+
+		public static T ParseArbitraryJSON<T>(string filepath) {
+			StreamReader reader = new StreamReader(filepath);
+			string input = reader.ReadToEnd();
+			reader.Close();
+
+			T parsed_json = JsonConvert.DeserializeObject<T>(input);
+			return parsed_json;
+		}
 	}
 }

@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 using AxShockwaveFlashObjects;
 using KanColle;
@@ -21,7 +22,15 @@ namespace RunExpKai {
 			InitializeComponent();
 			// Initialization stuff
 
-			 // Try to read from user prefs
+			// Try to read from user prefs
+
+			// Update UI elements if user data is available
+
+			// Put in mission list into ComboBoxes
+			KanColle.Master.Mission[] missions = KanColleProxy.ParseArbitraryJSON<KanColle.Master.Mission[]>("missionlist.dat");
+			this.Fleet_2_Select.ItemsSource = missions;
+			this.Fleet_3_Select.ItemsSource = missions;
+			this.Fleet_4_Select.ItemsSource = missions;
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -64,14 +73,6 @@ namespace RunExpKai {
 			this.MemberID = GetMemberID();
 			this.port = this.kcproxy.GetPort(this.MemberID);
 			this.start2 = this.kcproxy.GetStart2();
-
-			this.kcproxy.proxyWithFileWrite("start2", KanColle.Master.Start2.GET);
-
-			// Update UI elements, especially the ComboBoxes
-			//KanColle.Master.Mission[] missions = this.start2.api_mst_mission;
-			//this.Fleet_2_Select.ItemsSource = missions;
-			//this.Fleet_3_Select.ItemsSource = missions;
-			//this.Fleet_4_Select.ItemsSource = missions;
 
 			this.DisplayNameBox.Content = this.port.api_basic.api_nickname;
 			this.MemberIDBox.Content = this.MemberID;

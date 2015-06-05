@@ -67,6 +67,7 @@
     <Compile Include="Master\Furniture.cs" />
     <Compile Include="Master\Map.cs" />
     <Compile Include="Master\Mission.cs" />
+    <Compile Include="Master\MstConst.cs" />
     <Compile Include="Master\Ship.cs" />
     <Compile Include="Master\SlotItem.cs" />
     <Compile Include="Master\Start2.cs" />

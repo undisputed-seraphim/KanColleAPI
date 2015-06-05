@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 namespace KanColle.Master {
 	public class Mission : Iidentifiable {
 		public int api_id { get; set; }
@@ -12,5 +13,11 @@ namespace KanColle.Master {
 		public int[] api_win_item1 { get; set; }
 		public int[] api_win_item2 { get; set; }
 		public int api_return_flag { get; set; }
+		
+		public override string ToString() {
+			TimeSpan span = TimeSpan.FromMinutes(api_time);
+			string length = span.ToString(@"hh\:mm");
+			return string.Format("{0}. {1} {2}", api_id, length, api_name);
+		}
 	}
 }
