@@ -2,6 +2,7 @@
 using KanColle.Request.Mission;
 using Newtonsoft.Json;
 using System;
+using System.Windows.Threading;
 
 namespace RunExpKai {
 	partial class MainWindow {
@@ -11,12 +12,13 @@ namespace RunExpKai {
 		private string MemberID;
 
 		private KanColle.Master.Mission fleet_2_mission, fleet_3_mission, fleet_4_mission;
+		
 
 		private void update() {
 		}
 
 		private void run() {
-
+			DispatcherTimer timer = new DispatcherTimer();
 		}
 
 
@@ -38,6 +40,10 @@ namespace RunExpKai {
 		}
 
 		private void refuel() {
+		}
+
+		private string GetShipList(int fleet_id) {
+			
 		}
 
 		private string GetMemberID() {
