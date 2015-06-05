@@ -29,6 +29,8 @@ namespace KanColle {
 
 		public KanColleProxy(string input, bool debug = false) {
 			string[] tokens = input.Split(new string[] { "kcs/mainD2.swf?api_token=" }, StringSplitOptions.None);
+			if (tokens.Length != 2)
+				throw new KancolleInvalidAPITokenException("This API token is in an invalid format.");
 			this.USER_SERVER = tokens[0];
 			this.USER_API_TOKEN = tokens[1];
 			this.debug = debug;

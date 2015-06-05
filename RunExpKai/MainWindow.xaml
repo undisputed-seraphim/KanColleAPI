@@ -21,7 +21,7 @@
             <TextBox x:Name="api_token_box" Margin="10" TextWrapping="Wrap" TextChanged="api_token_box_TextChanged" FontSize="18.667" ToolTip="Enter your API token here"/>
             <Button x:Name="apitoken_apply" Content="Apply" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="83" Height="32" Click="apitoken_apply_Click" IsEnabled="False"/>
         </Grid>
-        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid Grid.Row="2" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
@@ -31,7 +31,7 @@
             <Button x:Name="Fleet_2_Start" Content="Start" Grid.Column="1" Margin="10" Click="Fleet_2_Start_Click"/>
             <Button x:Name="Fleet_2_Stop" Content="Stop" Grid.Column="2" Margin="10" Click="Fleet_2_Stop_Click"/>
         </Grid>
-        <Grid Grid.Row="2" Grid.ColumnSpan="2">
+        <Grid Grid.Row="3" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
@@ -41,7 +41,7 @@
             <Button x:Name="Fleet_3_Start" Content="Start" Grid.Column="1" Margin="10" Click="Fleet_3_Start_Click"/>
             <Button x:Name="Fleet_3_Stop" Content="Stop" Grid.Column="2" Margin="10" Click="Fleet_3_Stop_Click"/>
         </Grid>
-        <Grid Grid.Row="3" Grid.ColumnSpan="2">
+        <Grid Grid.Row="4" Grid.ColumnSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
@@ -51,11 +51,17 @@
             <Button x:Name="Fleet_4_Start" Content="Start" Grid.Column="1" Margin="10" Click="Fleet_4_Start_Click"/>
             <Button x:Name="Fleet_4_Stop" Content="Stop" Grid.Column="2" Margin="10" Click="Fleet_4_Stop_Click"/>
         </Grid>
-        <Grid x:Name="grid_winformshost" Grid.Row="5" Grid.ColumnSpan="2">
+        <Grid x:Name="grid_winformshost" Grid.Row="5">
             <WindowsFormsHost x:Name="WinFormsHost" HorizontalAlignment="Left" Height="31" Margin="10,10,0,0" VerticalAlignment="Top" Width="497" ChildChanged="WinFormsHost_ChildChanged"/>
         </Grid>
         <Grid Grid.Row="6" Background="#FF424242" Grid.ColumnSpan="2">
-            <TextBlock x:Name="ConsoleOutput" Margin="10" TextWrapping="Wrap" Foreground="White" FontSize="16" Grid.ColumnSpan="2"/>
+            <ScrollViewer Margin="10">
+                <TextBlock x:Name="ConsoleOutput" TextWrapping="Wrap" Foreground="White" FontSize="16"/>
+            </ScrollViewer>
         </Grid>
+        <Label x:Name="DisplayNameLabel" Content="Name:" HorizontalAlignment="Left" Margin="10,10,0,10" Grid.Row="1" FontSize="16"/>
+        <Label x:Name="DisplayNameBox" Content="" Margin="66,10,0,10" Grid.Row="1" FontSize="16" HorizontalAlignment="Left" Width="75"/>
+        <Label x:Name="MemberIDLabel" Content="Member ID:" HorizontalAlignment="Left" Margin="141,10,0,10" Grid.Row="1" FontSize="16"/>
+        <Label x:Name="MemberIDBox" Content="" HorizontalAlignment="Left" Margin="234,10,0,10" Grid.Row="1" FontSize="16" RenderTransformOrigin="-0.933,0.441" Width="75"/>
     </Grid>
 </Window>

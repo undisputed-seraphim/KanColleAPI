@@ -24,6 +24,9 @@ namespace RunExpKai {
 	partial class MainWindow {
 
 		private KanColle.Member.Port port;
+		private KanColleProxy kcproxy;
+		private KanColle.Master.Start2 start2;
+		private string MemberID;
 
 		private void update() {
 		}
@@ -54,7 +57,7 @@ namespace RunExpKai {
 		}
 
 		private string GetMemberID() {
-			String result = this.kcproxy.proxy(KanColle.Member.Basic.GET);
+			string result = this.kcproxy.proxy(KanColle.Member.Basic.GET);
 			try {
 				KanColleAPI<KanColle.Member.Basic> api_data = JsonConvert.DeserializeObject<KanColleAPI<KanColle.Member.Basic>>(result);
 				return api_data.GetData().api_member_id;
@@ -63,6 +66,20 @@ namespace RunExpKai {
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
+		}
+
+		private void GetMissionList() {
+			
+		}
+
+		// @param fleet_id is a natural number.
+		private void CheckIfExistingMission(int fleet_id) {
+			long missionTime = this.port.api_deck_port[fleet_id - 1].api_mission[2] / 1000;
+
+			if (missionTime != 0) {
+				DateTime missionEnd = timeUnixEpochToDotNet(missionTime);
+			}
+
 		}
 
 		private static DateTime timeUnixEpochToDotNet(long unixTime) {

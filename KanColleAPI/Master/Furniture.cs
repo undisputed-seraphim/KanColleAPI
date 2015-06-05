@@ -9,6 +9,7 @@ namespace KanColle.Master {
 		public int api_rarity { get; set; }
 		public int api_price { get; set; }
 		public int api_saleflg { get; set; }
+		public int api_season { get; set; }
 	}
 
 	public class FurnitureGraph : Iidentifiable {

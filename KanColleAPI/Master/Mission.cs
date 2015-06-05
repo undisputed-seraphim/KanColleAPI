@@ -11,5 +11,6 @@ namespace KanColle.Master {
 		public float api_use_bull { get; set; }
 		public int[] api_win_item1 { get; set; }
 		public int[] api_win_item2 { get; set; }
+		public int api_return_flag { get; set; }
 	}
 }

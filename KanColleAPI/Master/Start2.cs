@@ -18,8 +18,9 @@ namespace KanColle.Master {
 		public MapBgm[] api_mst_mapbgm { get; set; }
 		public MapCell[] api_mst_mapcell { get; set; }
 		public Mission[] api_mst_mission { get; set; }
-		public Object api_mst_const { get; set; }
+		public MstConst api_mst_const { get; set; }
 		public ShipUpgrade[] api_mst_shipupgrade { get; set; }
+		public BGM[] api_mst_bgm { get; set; }
 
 		public static string GET = "api_start2/";
 	}

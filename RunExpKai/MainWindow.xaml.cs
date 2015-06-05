@@ -12,7 +12,6 @@ namespace RunExpKai {
 	public partial class MainWindow : Window {
 
 		// Members
-		private KanColleProxy kcproxy;
 		private ExternalInterfaceProxy flashproxy;
 		bool fleet_2_isrunning, fleet_3_isrunning, fleet_4_isrunning;
 
@@ -20,6 +19,9 @@ namespace RunExpKai {
 
 		public MainWindow() {
 			InitializeComponent();
+			// Initialization stuff
+
+			 // Try to read from user prefs
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -57,11 +59,22 @@ namespace RunExpKai {
 		}
 
 		private void apitoken_apply_Click(object sender, RoutedEventArgs e) {
-			//System.Windows.MessageBox.Show("Clicked");
-			System.Windows.MessageBox.Show(this.api_token_box.Text);
+			// Update MemberID, then update Port API and Start2
 			this.kcproxy = new KanColleProxy(this.api_token_box.Text);
-			// Update the PORT api.
-			this.kcproxy.GetPort()
+			this.MemberID = GetMemberID();
+			this.port = this.kcproxy.GetPort(this.MemberID);
+			this.start2 = this.kcproxy.GetStart2();
+
+			this.kcproxy.proxyWithFileWrite("start2", KanColle.Master.Start2.GET);
+
+			// Update UI elements, especially the ComboBoxes
+			//KanColle.Master.Mission[] missions = this.start2.api_mst_mission;
+			//this.Fleet_2_Select.ItemsSource = missions;
+			//this.Fleet_3_Select.ItemsSource = missions;
+			//this.Fleet_4_Select.ItemsSource = missions;
+
+			this.DisplayNameBox.Content = this.port.api_basic.api_nickname;
+			this.MemberIDBox.Content = this.MemberID;
 
 			// Save api token to user config file here
 		}

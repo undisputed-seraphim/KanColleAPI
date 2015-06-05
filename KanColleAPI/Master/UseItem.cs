@@ -23,4 +23,9 @@ namespace KanColle.Master {
 		public List<int> api_cabinet_1 { get; set; }
 		public List<int> api_cabinet_2 { get; set; }
 	}
+
+	public class BGM {
+		public int api_id { get; set; }
+		public string api_name { get; set; }
+	}
 }
