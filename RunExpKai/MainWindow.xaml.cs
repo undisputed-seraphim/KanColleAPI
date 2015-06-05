@@ -1,10 +1,8 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using System.Linq;
-
-using AxShockwaveFlashObjects;
+﻿using AxShockwaveFlashObjects;
 using KanColle;
 using KanColle.Flash.External;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace RunExpKai {
 	/// <summary>
@@ -72,7 +70,6 @@ namespace RunExpKai {
 			this.kcproxy = new KanColleProxy(this.api_token_box.Text);
 			this.MemberID = GetMemberID();
 			this.port = this.kcproxy.GetPort(this.MemberID);
-			this.start2 = this.kcproxy.GetStart2();
 
 			this.DisplayNameBox.Content = this.port.api_basic.api_nickname;
 			this.MemberIDBox.Content = this.MemberID;
@@ -81,15 +78,15 @@ namespace RunExpKai {
 		}
 
 		private void Fleet_2_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+			this.fleet_2_mission = this.Fleet_2_Select.SelectedItem as KanColle.Master.Mission;
 		}
 
 		private void Fleet_3_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+			this.fleet_3_mission = this.Fleet_3_Select.SelectedItem as KanColle.Master.Mission;
 		}
 
 		private void Fleet_4_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-
+			this.fleet_4_mission = this.Fleet_4_Select.SelectedItem as KanColle.Master.Mission;
 		}
 
 		private void Fleet_2_Start_Click(object sender, RoutedEventArgs e) {

@@ -1,32 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using Newtonsoft.Json;
-using AxShockwaveFlashObjects;
-
-using KanColle;
+﻿using KanColle;
 using KanColle.Request.Mission;
+using Newtonsoft.Json;
+using System;
 
 namespace RunExpKai {
 	partial class MainWindow {
 
 		private KanColle.Member.Port port;
 		private KanColleProxy kcproxy;
-		private KanColle.Master.Start2 start2;
 		private string MemberID;
+
+		private KanColle.Master.Mission fleet_2_mission, fleet_3_mission, fleet_4_mission;
 
 		private void update() {
 		}
@@ -66,10 +50,6 @@ namespace RunExpKai {
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
-		}
-
-		private void GetMissionList() {
-			
 		}
 
 		// @param fleet_id is a natural number.

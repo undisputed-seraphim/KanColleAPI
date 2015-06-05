@@ -14,10 +14,11 @@ namespace KanColle.Master {
 		public int[] api_win_item2 { get; set; }
 		public int api_return_flag { get; set; }
 		
+		// For the ComboBoxes.
 		public override string ToString() {
 			TimeSpan span = TimeSpan.FromMinutes(api_time);
 			string length = span.ToString(@"hh\:mm");
-			return string.Format("{0}. {1} {2}", api_id, length, api_name);
+			return string.Format("{0}. {1}   {2}", api_id.ToString("D2"), length, api_name);
 		}
 	}
 }

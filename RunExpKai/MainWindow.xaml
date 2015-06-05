@@ -1,7 +1,7 @@
-﻿<Window x:Name="RunExpKai" x:Class="RunExpKai.MainWindow"
+﻿<Window x:Name="RunExp改" x:Class="RunExpKai.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="RunExpKai" Height="650" Width="525" Loaded="RunExpKai_Loaded">
+        Title="RunExp改" Height="650" Width="525" Loaded="RunExpKai_Loaded">
     <Grid>
 
         <Grid.RowDefinitions>
