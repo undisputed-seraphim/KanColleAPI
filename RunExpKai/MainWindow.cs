@@ -15,6 +15,11 @@ namespace RunExpKai {
 
 		private RunExp Fleet2, Fleet3, Fleet4;
 
+		public int fuel { get; set; }
+		public int ammo { get; set; }
+		public int steel { get; set; }
+		public int baux { get; set; }
+
 		private void UpdateMemberShipList() {
 			KanColle.Member.Ship[] Ships = this.Port.api_ship;
 			foreach (KanColle.Member.Ship Ship in Ships) {

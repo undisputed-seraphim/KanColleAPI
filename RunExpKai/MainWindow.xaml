@@ -141,10 +141,10 @@
                             </TransformGroup>
                         </Image.RenderTransform>
                     </Image>
-                    <Label x:Name="Fuel_Amount" Content="99999" Grid.Column="1" FontSize="16" VerticalContentAlignment="Center" ToolTip="Amount of fuel collected this session"/>
-                    <Label x:Name="Ammo_Amount" Content="99999" Grid.Column="3" FontSize="16" VerticalContentAlignment="Center" ToolTip="Amount of ammo collected this session"/>
-                    <Label x:Name="Steel_Amount" Content="99999" Grid.Column="5" VerticalContentAlignment="Center" FontSize="16" ToolTip="Amount of steel collected this session"/>
-                    <Label x:Name="Baux_Amount" Content="99999" Grid.Column="7" FontSize="16" VerticalContentAlignment="Center" ToolTip="AMount of bauxite collected this session"/>
+                    <Label x:Name="Fuel_Amount" Content="0" Grid.Column="1" FontSize="16" VerticalContentAlignment="Center" ToolTip="Amount of fuel collected this session"/>
+                    <Label x:Name="Ammo_Amount" Content="0" Grid.Column="3" FontSize="16" VerticalContentAlignment="Center" ToolTip="Amount of ammo collected this session"/>
+                    <Label x:Name="Steel_Amount" Content="0" Grid.Column="5" VerticalContentAlignment="Center" FontSize="16" ToolTip="Amount of steel collected this session"/>
+                    <Label x:Name="Baux_Amount" Content="0" Grid.Column="7" FontSize="16" VerticalContentAlignment="Center" ToolTip="AMount of bauxite collected this session"/>
                 </Grid>
             </Grid>
         </Grid>

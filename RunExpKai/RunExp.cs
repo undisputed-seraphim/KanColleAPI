@@ -1,5 +1,6 @@
 ﻿using KanColle;
 using KanColle.Request.Mission;
+using KanColle.Request.Hokyu;
 using System;
 using System.Windows.Threading;
 using Newtonsoft.Json;
@@ -12,22 +13,11 @@ namespace RunExpKai {
 		private KanColle.Master.Mission FleetMission;
 		private bool IsRunning;
 		public KanColleProxy Proxy { private get; set; }
+		private MainWindow mw;		// The window that contains this. YES I KNOW THERE IS TIGHT COUPLING
 
-		public RunExp() {
+		public RunExp(MainWindow window) {
 			this.Timer = new DispatcherTimer();
-		}
-
-		private void Expedition_Iteration(object sender, EventArgs e) {
-			
-		}
-
-		public void Start() {
-			this.IsRunning = true;
-			this.Timer.Start();
-		}
-
-		public void Stop() {
-			this.Timer.Stop();
+			this.mw = window;
 		}
 
 		public void NewMission(KanColle.Master.Mission Mission) {
@@ -41,6 +31,23 @@ namespace RunExpKai {
 			this.Timer.Tick += Expedition_Iteration;
 		}
 
+		private void Expedition_Iteration(object sender, EventArgs e) {
+			if (IsRunning) {
+
+			} else {
+				this.Timer.Stop();
+			}
+		}
+
+		public void Start() {
+			this.IsRunning = true;
+			this.Timer.Start();
+		}
+
+		public void Stop() {
+			this.Timer.Stop();
+		}
+
 		private void result(int fleet_id) {
 			string parameter = Mission.Result(fleet_id);
 			string post_response = this.Proxy.proxy(Mission.RESULT, parameter);
@@ -50,12 +57,22 @@ namespace RunExpKai {
 			// If mission fails, abort completely.
 			if (result.GetData().GetResult().Equals(ExpeditionResult.FAIL)) {
 				this.IsRunning = false;
+				// Write status to Main Window.
+				this.mw.ConsoleOutput.Text += string.Format("Expedition for {0} has FAILED! Please check your fleet!\n", this.FleetMission.api_name);
 			} else {
-				int[] GetMaterials = result.GetData().PrintConsole();
+				this.mw.fuel += result.api_data.api_get_material[0];
+				this.mw.ammo += result.api_data.api_get_material[1];
+				this.mw.steel += result.api_data.api_get_material[2];
+				this.mw.baux += result.api_data.api_get_material[3];
+
+				this.mw.ConsoleOutput.Text += string.Format("Expedition {0} has successfully returned!\n", this.FleetMission.api_name);
+				this.mw.UpdateCollectedResourcesUI();
 			}
 		}
 
 		private void refuel() {
+			string parameter = Hokyu.Charge(string.Join(",",this.ShipList));
+			string postResponse = this.Proxy.proxy(Hokyu.CHARGE, parameter);
 		}
 	}
 }

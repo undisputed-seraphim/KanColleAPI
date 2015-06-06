@@ -23,9 +23,9 @@ namespace RunExpKai {
 			// Update UI elements if user data is available
 
 			// Initialize RunExps.
-			this.Fleet2 = new RunExp();
-			this.Fleet3 = new RunExp();
-			this.Fleet4 = new RunExp();
+			this.Fleet2 = new RunExp(this);
+			this.Fleet3 = new RunExp(this);
+			this.Fleet4 = new RunExp(this);
 
 			// Initialize member ship list but do nothing
 			this.ShipList_Member = new Dictionary<int, KanColle.Member.Ship>();
@@ -48,6 +48,12 @@ namespace RunExpKai {
 			this.Fleet_2_Select.ItemsSource = this.MissionList_Master.Values;
 			this.Fleet_3_Select.ItemsSource = this.MissionList_Master.Values;
 			this.Fleet_4_Select.ItemsSource = this.MissionList_Master.Values;
+
+			// Set collected values for this session to 0.
+			this.fuel = 0;
+			this.ammo = 0;
+			this.steel = 0;
+			this.baux = 0;
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -92,6 +98,7 @@ namespace RunExpKai {
 
 			this.DisplayNameBox.Content = this.Port.api_basic.api_nickname;
 			this.MemberIDBox.Content = this.MemberID;
+			this.ConsoleOutput.Text += string.Format("New API token registered! Welcome, {0}\n", this.Port.api_basic.api_nickname);
 
 			// Update code-behind stuff
 			UpdateMemberShipList();
@@ -102,6 +109,11 @@ namespace RunExpKai {
 			this.Fleet_2_Ships.Content = this.ListShipNames(this.Fleet2.ShipList);
 			this.Fleet_3_Ships.Content = this.ListShipNames(this.Fleet3.ShipList);
 			this.Fleet_4_Ships.Content = this.ListShipNames(this.Fleet4.ShipList);
+
+			this.Fuel_Amount.Content = this.fuel = 0;
+			this.Ammo_Amount.Content = this.ammo = 0;
+			this.Steel_Amount.Content = this.steel = 0;
+			this.Baux_Amount.Content = this.baux = 0;
 
 			// Save api token to user config file here
 		}
@@ -140,6 +152,13 @@ namespace RunExpKai {
 
 		private void Fleet_4_Stop_Click(object sender, RoutedEventArgs e) {
 			this.Fleet4.Stop();
+		}
+
+		public void UpdateCollectedResourcesUI() {
+			this.Fuel_Amount.Content = this.fuel;
+			this.Ammo_Amount.Content = this.ammo;
+			this.Steel_Amount.Content = this.steel;
+			this.Baux_Amount.Content = this.baux;
 		}
 	}
 }
