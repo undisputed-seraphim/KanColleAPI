@@ -12,11 +12,7 @@ namespace RunExpKai {
 	/// </summary>
 	public partial class MainWindow : Window {
 
-		// Members
 		private ExternalInterfaceProxy flashproxy;
-		bool fleet_2_isrunning, fleet_3_isrunning, fleet_4_isrunning;
-
-		// Worker threads
 
 		public MainWindow() {
 			InitializeComponent();
@@ -25,6 +21,11 @@ namespace RunExpKai {
 			// Try to read from user prefs
 
 			// Update UI elements if user data is available
+
+			// Initialize RunExps.
+			this.Fleet2 = new RunExp();
+			this.Fleet3 = new RunExp();
+			this.Fleet4 = new RunExp();
 
 			// Initialize member ship list but do nothing
 			this.ShipList_Member = new Dictionary<int, KanColle.Member.Ship>();
@@ -84,57 +85,61 @@ namespace RunExpKai {
 		}
 
 		private void apitoken_apply_Click(object sender, RoutedEventArgs e) {
-			// Update MemberID, then update Port API and Start2
-			this.kcproxy = new KanColleProxy(this.api_token_box.Text);
+			// Update MemberID, then update Port API
+			this.KCProxy = new KanColleProxy(this.api_token_box.Text);
 			this.MemberID = GetMemberID();
-			this.port = this.kcproxy.GetPort(this.MemberID);
+			this.Port = this.KCProxy.GetPort(this.MemberID);
 
-			this.DisplayNameBox.Content = this.port.api_basic.api_nickname;
+			this.DisplayNameBox.Content = this.Port.api_basic.api_nickname;
 			this.MemberIDBox.Content = this.MemberID;
 
+			// Update code-behind stuff
 			UpdateMemberShipList();
 			UpdateFleetList();
-			System.Windows.Forms.MessageBox.Show(string.Join(", ", this.fleet_2_shiplist));
-			this.Fleet_2_Ships.Content = this.ListShipNames(this.fleet_2_shiplist);
-			this.Fleet_3_Ships.Content = this.ListShipNames(this.fleet_3_shiplist);
-			this.Fleet_4_Ships.Content = this.ListShipNames(this.fleet_4_shiplist);
+			FleetUpdatePorts();
+
+			// Update ship list in UI
+			this.Fleet_2_Ships.Content = this.ListShipNames(this.Fleet2.ShipList);
+			this.Fleet_3_Ships.Content = this.ListShipNames(this.Fleet3.ShipList);
+			this.Fleet_4_Ships.Content = this.ListShipNames(this.Fleet4.ShipList);
+
 			// Save api token to user config file here
 		}
 
 		private void Fleet_2_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			this.fleet_2_mission = this.Fleet_2_Select.SelectedItem as KanColle.Master.Mission;
+			this.Fleet2.NewMission(this.Fleet_2_Select.SelectedItem as KanColle.Master.Mission);
 		}
 
 		private void Fleet_3_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			this.fleet_3_mission = this.Fleet_3_Select.SelectedItem as KanColle.Master.Mission;
+			this.Fleet3.NewMission(this.Fleet_3_Select.SelectedItem as KanColle.Master.Mission);
 		}
 
 		private void Fleet_4_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-			this.fleet_4_mission = this.Fleet_4_Select.SelectedItem as KanColle.Master.Mission;
+			this.Fleet4.NewMission(this.Fleet_4_Select.SelectedItem as KanColle.Master.Mission);
 		}
 
 		private void Fleet_2_Start_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet2.Start();
 		}
 
 		private void Fleet_3_Start_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet3.Start();
 		}
 
 		private void Fleet_4_Start_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet4.Start();
 		}
 
 		private void Fleet_2_Stop_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet2.Stop();
 		}
 
 		private void Fleet_3_Stop_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet3.Stop();
 		}
 
 		private void Fleet_4_Stop_Click(object sender, RoutedEventArgs e) {
-
+			this.Fleet4.Stop();
 		}
 	}
 }

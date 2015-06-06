@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="RunExp.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -115,6 +116,18 @@
       <Project>{aa6c512f-2127-4fcd-ac9a-51d085e14fc0}</Project>
       <Name>KanColle</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ammo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="fuel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="steel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="baux.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
