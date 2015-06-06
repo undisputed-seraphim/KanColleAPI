@@ -23,10 +23,6 @@ namespace KanColle {
 		}
 	}
 
-	interface Iidentifiable {
-		int api_id { get; set; }
-	}
-
 	public class KancolleInvalidAPITokenException :Exception {
 		public static string DEFAULT_MESSAGE = "{0}: The API token appears to be invalid or malformed.";
 

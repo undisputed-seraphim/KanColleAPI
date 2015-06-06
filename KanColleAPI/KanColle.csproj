@@ -47,6 +47,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -61,6 +62,8 @@
     <Compile Include="Flash\External\ExternalInterfaceProxy.cs" />
     <Compile Include="Flash\External\ExternalInterfaceSerializer.cs" />
     <Compile Include="Flash\Handler.cs" />
+    <Compile Include="Interfaces\IIdentifable.cs" />
+    <Compile Include="Interfaces\INameable.cs" />
     <Compile Include="KanColleConstants.cs" />
     <Compile Include="KanColleInterface.cs" />
     <Compile Include="KanColleProxy.cs" />

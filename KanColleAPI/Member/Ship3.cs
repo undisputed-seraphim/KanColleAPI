@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace KanColle.Member {
-	public class Ship3 {
+	public class Ship3 : IIdentifable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public int api_ship_id { get; set; }
@@ -33,6 +33,8 @@ namespace KanColle.Member {
 
 		public static string SHIP3 = "api_get_member/ship3/";
 		public static string SHIP2 = "api_get_member/ship2/";
+
+		public int ID() { return this.api_id; }
 
 		public static string Ship2 (int sort_key = 5, int sort_order = 2) {
 			StringBuilder str = new StringBuilder();

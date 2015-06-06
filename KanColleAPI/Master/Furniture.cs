@@ -1,6 +1,6 @@
 ﻿
 namespace KanColle.Master {
-	public class Furniture : Iidentifiable {
+	public class Furniture : IIdentifable {
 		public int api_id { get; set; }
 		public int api_type { get; set; }
 		public int api_no { get; set; }
@@ -10,13 +10,17 @@ namespace KanColle.Master {
 		public int api_price { get; set; }
 		public int api_saleflg { get; set; }
 		public int api_season { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 
-	public class FurnitureGraph : Iidentifiable {
+	public class FurnitureGraph : IIdentifable {
 		public int api_id { get; set; }
 		public int api_type { get; set; }
 		public int api_no { get; set; }
 		public string api_filename { get; set; }
 		public string api_version { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 }

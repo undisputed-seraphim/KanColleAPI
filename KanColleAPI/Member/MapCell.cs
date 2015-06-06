@@ -1,7 +1,7 @@
 ﻿using System.Text;
 
 namespace KanColle.Member {
-	public class MapCell {
+	public class MapCell : IIdentifable {
 		public int api_id { get; set; }
 		public int api_passed { get; set; }
 
@@ -19,5 +19,7 @@ namespace KanColle.Member {
 		public override string ToString () {
 			return string.Format("api_id={0}\tapi_passed={1}", this.api_id, this.api_passed);
 		}
+
+		public int ID() { return this.api_id; }
 	}
 }

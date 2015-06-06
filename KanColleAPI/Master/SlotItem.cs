@@ -1,6 +1,6 @@
 ﻿
 namespace KanColle.Master {
-	public class SlotItem : Iidentifiable {
+	public class SlotItem : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public string api_name { get; set; }
@@ -27,18 +27,26 @@ namespace KanColle.Master {
 		public int[] api_broken { get; set; }
 		public string api_info { get; set; }
 		public string api_usebull { get; set; }
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 	}
 
-	public class SlotItemType : Iidentifiable {
+	public class SlotItemType : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public string api_name { get; set; }
 		public int api_show_flag { get; set; }
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 	}
 
-	public class SlotItemGraph : Iidentifiable {
+	public class SlotItemGraph : IIdentifable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public string api_filename { get; set; }
 		public string api_version { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 }

@@ -3,16 +3,24 @@ using KanColle.Request.Mission;
 using Newtonsoft.Json;
 using System;
 using System.Windows.Threading;
+using System.Collections.Generic;
 
 namespace RunExpKai {
 	partial class MainWindow {
 
+		private readonly IDictionary<int, KanColle.Master.Ship> ShipList_Master;
+		private readonly IDictionary<int, KanColle.Master.Mission> MissionList_Master;
+
+		private IDictionary<int, KanColle.Member.Ship> ShipList_Member;
+
 		private KanColle.Member.Port port;
+		private KanColle.Master.Start2 start2;
 		private KanColleProxy kcproxy;
 		private string MemberID;
 
 		private KanColle.Master.Mission fleet_2_mission, fleet_3_mission, fleet_4_mission;
-		
+		private int[] fleet_2_shiplist, fleet_3_shiplist, fleet_4_shiplist;
+		private KanColle.Member.Ship[] f2shiplist;
 
 		private void update() {
 		}
@@ -42,8 +50,22 @@ namespace RunExpKai {
 		private void refuel() {
 		}
 
-		private string GetShipList(int fleet_id) {
-			
+		private void UpdateMemberShipList() {
+			KanColle.Member.Ship[] Ships = this.port.api_ship;
+			foreach (KanColle.Member.Ship Ship in Ships) {
+				if (!this.ShipList_Member.ContainsKey(Ship.ID()))
+					this.ShipList_Member.Add(Ship.ID(), Ship);
+			}
+		}
+
+		private void UpdateFleetList() {
+			if (this.port == null) {
+				this.port = this.kcproxy.GetPort(this.MemberID);
+				UpdateMemberShipList();
+			}
+			this.fleet_2_shiplist = this.port.api_deck_port[1].api_ship;
+			this.fleet_3_shiplist = this.port.api_deck_port[2].api_ship;
+			this.fleet_4_shiplist = this.port.api_deck_port[3].api_ship;
 		}
 
 		private string GetMemberID() {
@@ -56,6 +78,19 @@ namespace RunExpKai {
 				Console.WriteLine(e.Message);
 				throw new Exception(e.Message, e);
 			}
+		}
+
+		private string ListShipNames(int[] shiplist) {
+			var ret = new System.Text.StringBuilder();
+
+			foreach (int i in shiplist) {
+				if (i == -1)
+					continue;
+				string ShipName = this.ShipList_Master[this.ShipList_Member[i].api_ship_id].Name();
+				ret.AppendFormat("{0} ", ShipName);
+			}
+
+			return ret.ToString();
 		}
 
 		// @param fleet_id is a natural number.

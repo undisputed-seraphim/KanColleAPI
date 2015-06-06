@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 namespace KanColle.Member {
-	public class UseItem : Iidentifiable {
+	public class UseItem : IIdentifable, INameable {
 		public int api_member_id { get; set; }
 		public int api_id { get; set; }
 		public int api_value { get; set; }
@@ -13,5 +13,9 @@ namespace KanColle.Member {
 		public int api_count { get; set; }
 
 		public static string USEITEM = "api_get_member/useitem/";
+
+		public int ID() { return this.api_id; }
+
+		public string Name() { return this.api_name; }
 	}
 }

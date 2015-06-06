@@ -18,13 +18,15 @@ namespace KanColle.Member {
 		}
 	}
 
-	public class Material {
+	public class Material : IIdentifable {
 		public int api_member_id { get; set; }
 		public int api_id { get; set; }
 		public int api_value { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 
-	public class Deck {
+	public class Deck : IIdentifable, INameable {
 		public int api_member_id { get; set; }
 		public int api_id { get; set; }
 		public string api_name { get; set; }
@@ -34,6 +36,9 @@ namespace KanColle.Member {
 		public int[] api_ship { get; set; }
 
 		public static string GET = "api_get_member/deck/";
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 
 		public string GetShipList (bool SkipEmptyPositions) {
 
@@ -45,7 +50,7 @@ namespace KanColle.Member {
 		}
 	}
 
-	public class Ship {
+	public class Ship : IIdentifable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public int api_ship_id { get; set; }
@@ -75,10 +80,12 @@ namespace KanColle.Member {
 		public int[] api_lucky { get; set; }
 		public int api_locked { get; set; }
 		public int api_locked_equip { get; set; }
-		public int? api_sally_area { get; set; }		// Available only during events
+		public int? api_sally_area { get; set; }        // Available only during events
+
+		public int ID() { return this.api_id; }
 	}
 
-	public class NDock {
+	public class NDock : IIdentifable {
 		public int api_member_id { get; set; }
 		public int api_id { get; set; }
 		public int api_state { get; set; }
@@ -91,6 +98,8 @@ namespace KanColle.Member {
 		public int api_item4 { get; set; }
 
 		public static string GET = "api_get_member/ndock/";
+
+		public int ID() { return this.api_id; }
 	}
 
 	public class Basic {

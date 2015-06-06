@@ -41,7 +41,7 @@ namespace KanColle.Master {
 		}
 	}
 
-	public class MapArea : Iidentifiable {
+	public class MapArea : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public string api_name { get; set; }
 		public int api_type { get; set; }
@@ -49,9 +49,12 @@ namespace KanColle.Master {
 		public override string ToString () {
 			return string.Format("{0}\t{1}\t{2}", api_id, api_type, api_name);
 		}
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 	}
 
-	public class MapInfo : Iidentifiable {
+	public class MapInfo : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public int api_maparea_id { get; set; }
 		public int api_no { get; set; }
@@ -67,23 +70,30 @@ namespace KanColle.Master {
 		public override string ToString () {
 			return string.Format("{0}\t{1}\t{2}\t{3}\t{4}\t{5}", api_id, api_maparea_id, api_no, api_name, api_max_maphp, api_required_defeat_count);
 		}
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 	}
 
-	public class MapBgm : Iidentifiable {
+	public class MapBgm : IIdentifable {
 		public int api_id { get; set; }
 		public int api_maparea_id { get; set; }
 		public int api_no { get; set; }
 		public int[] api_map_bgm { get; set; }
 		public int[] api_boss_bgm { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 
-	public class MapCell {
+	public class MapCell : IIdentifable {
 		public int api_map_no { get; set; }
 		public int api_maparea_id { get; set; }
 		public int api_mapinfo_no { get; set; }
 		public int api_id { get; set; }
 		public int api_no { get; set; }
 		public int api_color_no { get; set; }
+
+		public int ID() { return this.api_id; }
 	}
 
 	/*

@@ -1,8 +1,10 @@
 ﻿using AxShockwaveFlashObjects;
 using KanColle;
 using KanColle.Flash.External;
+using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace RunExpKai {
 	/// <summary>
@@ -24,11 +26,27 @@ namespace RunExpKai {
 
 			// Update UI elements if user data is available
 
-			// Put in mission list into ComboBoxes
+			// Initialize member ship list but do nothing
+			this.ShipList_Member = new Dictionary<int, KanColle.Member.Ship>();
+
+			// Read in master ship list
+			KanColle.Master.Ship[] ships = KanColleProxy.ParseArbitraryJSON<KanColle.Master.Ship[]>("shiplist.dat");
+			this.ShipList_Master = new Dictionary<int, KanColle.Master.Ship>();
+			foreach (KanColle.Master.Ship ship in ships) {
+				this.ShipList_Master.Add(ship.ID(), ship);
+			}
+
+			// Read in master mission list
 			KanColle.Master.Mission[] missions = KanColleProxy.ParseArbitraryJSON<KanColle.Master.Mission[]>("missionlist.dat");
-			this.Fleet_2_Select.ItemsSource = missions;
-			this.Fleet_3_Select.ItemsSource = missions;
-			this.Fleet_4_Select.ItemsSource = missions;
+			this.MissionList_Master = new Dictionary<int, KanColle.Master.Mission>();
+			foreach (KanColle.Master.Mission mission in missions) {
+				this.MissionList_Master.Add(mission.ID(), mission);
+			}
+
+			// Put in mission list into ComboBoxes
+			this.Fleet_2_Select.ItemsSource = this.MissionList_Master.Values;
+			this.Fleet_3_Select.ItemsSource = this.MissionList_Master.Values;
+			this.Fleet_4_Select.ItemsSource = this.MissionList_Master.Values;
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -74,6 +92,12 @@ namespace RunExpKai {
 			this.DisplayNameBox.Content = this.port.api_basic.api_nickname;
 			this.MemberIDBox.Content = this.MemberID;
 
+			UpdateMemberShipList();
+			UpdateFleetList();
+			System.Windows.Forms.MessageBox.Show(string.Join(", ", this.fleet_2_shiplist));
+			this.Fleet_2_Ships.Content = this.ListShipNames(this.fleet_2_shiplist);
+			this.Fleet_3_Ships.Content = this.ListShipNames(this.fleet_3_shiplist);
+			this.Fleet_4_Ships.Content = this.ListShipNames(this.fleet_4_shiplist);
 			// Save api token to user config file here
 		}
 

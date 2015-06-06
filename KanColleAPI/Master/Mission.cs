@@ -1,7 +1,7 @@
 ﻿using System;
 
 namespace KanColle.Master {
-	public class Mission : Iidentifiable {
+	public class Mission : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public int api_maparea_id { get; set; }
 		public string api_name { get; set; }
@@ -20,5 +20,8 @@ namespace KanColle.Master {
 			string length = span.ToString(@"hh\:mm");
 			return string.Format("{0}. {1}   {2}", api_id.ToString("D2"), length, api_name);
 		}
+
+		public int ID() { return this.api_id; }
+		public string Name() { return this.api_name; }
 	}
 }
