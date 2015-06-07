@@ -1,5 +1,5 @@
 ﻿namespace KanColle {
 	public interface INameable {
-		string Name();
+		string api_name { get; set; }
 	}
 }

@@ -1,6 +1,10 @@
 ﻿using System;
 
 namespace KanColle.Master {
+
+	// Jyne 2015 Update: Some fields apparently no longer in use.
+	// Thus they have been commented out.
+
 	public class Ship : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
@@ -55,55 +59,5 @@ namespace KanColle.Master {
 		public int api_fuel_max { get; set; }
 		public int api_bull_max { get; set; }
 		public int api_voicef { get; set; }
-
-		public int ID() { return this.api_id; }
-		public string Name() { return this.api_name; }
-	}
-
-	public class ShipGraph : IIdentifable {
-		public int api_id { get; set; }
-		public int api_sortno { get; set; }
-		public string api_filename { get; set; }
-		public string api_version { get; set; }
-		public int[] api_boko_n { get; set; }
-		public int[] api_boko_d { get; set; }
-		public int[] api_kaisyu_n { get; set; }
-		public int[] api_kaisyu_d { get; set; }
-		public int[] api_kaizo_n { get; set; }
-		public int[] api_kaizo_d { get; set; }
-		public int[] api_map_n { get; set; }
-		public int[] api_map_d { get; set; }
-		public int[] api_ensyuf_n { get; set; }
-		public int[] api_ensyuf_d { get; set; }
-		public int[] api_ensyue_n { get; set; }
-		public int[] api_battle_n { get; set; }
-		public int[] api_battle_d { get; set; }
-		public int[] api_weda { get; set; }
-		public int[] api_wedb { get; set; }
-
-		public int ID() { return this.api_id; }
-	}
-
-	public class ShipUpgrade : IIdentifable {
-		public int api_id { get; set; }
-		public int api_original_ship_id { get; set; }
-		public int api_upgrade_type { get; set; }
-		public int api_upgrade_level { get; set; }
-		public int api_drawing_count { get; set; }
-		public int api_sortno { get; set; }
-
-		public int ID() { return this.api_id; }
-	}
-
-	public class ShipType : IIdentifable, INameable {
-		public int api_id { get; set; }
-		public int api_sortno { get; set; }
-		public string api_name { get; set; }
-		public int api_scnt { get; set; }
-		public int api_kcnt { get; set; }
-		public Object api_equip_type { get; set; }
-
-		public int ID() { return this.api_id; }
-		public string Name() { return this.api_name; }
 	}
 }

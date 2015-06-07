@@ -23,8 +23,8 @@ namespace RunExpKai {
 		private void UpdateMemberShipList() {
 			KanColle.Member.Ship[] Ships = this.Port.api_ship;
 			foreach (KanColle.Member.Ship Ship in Ships) {
-				if (!this.ShipList_Member.ContainsKey(Ship.ID()))
-					this.ShipList_Member.Add(Ship.ID(), Ship);
+				if (!this.ShipList_Member.ContainsKey(Ship.api_id))
+					this.ShipList_Member.Add(Ship.api_id, Ship);
 			}
 		}
 
@@ -58,7 +58,7 @@ namespace RunExpKai {
 			foreach (int i in shiplist) {
 				if (i == -1)
 					continue;
-				string ShipName = this.ShipList_Master[this.ShipList_Member[i].api_ship_id].Name();
+				string ShipName = this.ShipList_Master[this.ShipList_Member[i].api_ship_id].api_name;
 				ret.AppendFormat("{0} ", ShipName);
 			}
 			return ret.ToString();

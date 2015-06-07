@@ -1,7 +1,6 @@
-﻿using System.Text;
+﻿namespace KanColle.Member {
 
-namespace KanColle.Member {
-	public class Ship3 : IIdentifable {
+	public class Ship : IIdentifable {
 		public int api_id { get; set; }
 		public int api_sortno { get; set; }
 		public int api_ship_id { get; set; }
@@ -30,17 +29,7 @@ namespace KanColle.Member {
 		public int[] api_sakuteki { get; set; }
 		public int[] api_lucky { get; set; }
 		public int api_locked { get; set; }
-
-		public static string SHIP3 = "api_get_member/ship3/";
-		public static string SHIP2 = "api_get_member/ship2/";
-
-		public static string Ship2 (int sort_key = 5, int sort_order = 2) {
-			StringBuilder str = new StringBuilder();
-			str.AppendFormat("api_sort_key={0}&", sort_key);
-			str.Append("api_token={0}&");
-			str.AppendFormat("spi_sort_order={0}&", sort_order);
-			str.AppendFormat("api_verno={0}", 1);
-			return str.ToString();
-		}
+		public int api_locked_equip { get; set; }
+		public int? api_sally_area { get; set; }        // Available only during events
 	}
 }

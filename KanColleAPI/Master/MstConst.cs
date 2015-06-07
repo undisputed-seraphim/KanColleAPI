@@ -1,6 +1,7 @@
 ﻿
 
 namespace KanColle.Master {
+
 	public class MstConst {
 		public DpFlagQuest api_dpflag_quest { get; set; }
 		public BokoMaxShips api_boko_max_ships { get; set; }

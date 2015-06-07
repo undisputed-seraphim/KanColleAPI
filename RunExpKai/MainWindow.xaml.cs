@@ -34,14 +34,14 @@ namespace RunExpKai {
 			KanColle.Master.Ship[] ships = KanColleProxy.ParseArbitraryJSON<KanColle.Master.Ship[]>("shiplist.dat");
 			this.ShipList_Master = new Dictionary<int, KanColle.Master.Ship>();
 			foreach (KanColle.Master.Ship ship in ships) {
-				this.ShipList_Master.Add(ship.ID(), ship);
+				this.ShipList_Master.Add(ship.api_id, ship);
 			}
 
 			// Read in master mission list
 			KanColle.Master.Mission[] missions = KanColleProxy.ParseArbitraryJSON<KanColle.Master.Mission[]>("missionlist.dat");
 			this.MissionList_Master = new Dictionary<int, KanColle.Master.Mission>();
 			foreach (KanColle.Master.Mission mission in missions) {
-				this.MissionList_Master.Add(mission.ID(), mission);
+				this.MissionList_Master.Add(mission.api_id, mission);
 			}
 
 			// Put in mission list into ComboBoxes

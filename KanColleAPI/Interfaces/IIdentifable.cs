@@ -1,5 +1,5 @@
 ﻿namespace KanColle {
 	public interface IIdentifable {
-		int ID();
+		int api_id { get; set; }
 	}
 }

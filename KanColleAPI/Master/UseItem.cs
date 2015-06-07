@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 
 namespace KanColle.Master {
+
 	public class UseItem : IIdentifable, INameable {
 		public int api_id { get; set; }
 		public int api_usetype { get; set; }
@@ -9,9 +10,6 @@ namespace KanColle.Master {
 		public string api_name { get; set; }
 		public string[] api_description { get; set; }
 		public int api_price { get; set; }
-
-		public int ID() { return this.api_id; }
-		public string Name() { return this.api_name; }
 	}
 
 	public class PayItem : IIdentifable, INameable {
@@ -21,9 +19,6 @@ namespace KanColle.Master {
 		public string api_description { get; set; }
 		public int[] api_item { get; set; }
 		public int api_price { get; set; }
-
-		public int ID() { return this.api_id; }
-		public string Name() { return this.api_name; }
 	}
 
 	public class ItemShop {

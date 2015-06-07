@@ -1,6 +1,7 @@
 ﻿using System;
 
 namespace KanColle.Master {
+
 	public class Start2 {
 		public Ship[] api_mst_ship { get; set; }
 		public ShipGraph[] api_mst_shipgraph { get; set; }
