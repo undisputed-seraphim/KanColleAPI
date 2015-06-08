@@ -64,8 +64,8 @@
     <Compile Include="Flash\Handler.cs" />
     <Compile Include="Interfaces\IIdentifable.cs" />
     <Compile Include="Interfaces\INameable.cs" />
-    <Compile Include="KanColleConstants.cs" />
-    <Compile Include="KanColleInterface.cs" />
+    <Compile Include="Constants.cs" />
+    <Compile Include="KanColleAPI.cs" />
     <Compile Include="KanColleProxy.cs" />
     <Compile Include="Master\Furniture.cs" />
     <Compile Include="Master\FurnitureGraph.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="Request\Map.cs" />
     <Compile Include="Request\Mission.cs" />
     <Compile Include="Request\Nyukyo.cs" />
+    <Compile Include="Teitoku.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

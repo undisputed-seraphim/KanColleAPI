@@ -4,7 +4,7 @@
  * This file is not mature yet, do not attempt to change other files until this is complete.
  */
 namespace KanColle {
-	public static class KanColleConstants {
+	public static class Constants {
 
 		// Headers for KanColleProxy
 		public const string HEADER_CONTENT_TYPE = "application/x-www-form-urlencoded";

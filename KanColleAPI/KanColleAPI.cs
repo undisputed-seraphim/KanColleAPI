@@ -2,7 +2,7 @@
 
 namespace KanColle {
 	public class KanColleAPI<T> {
-		public int api_result { get; set; }
+		private int api_result { get; set; }
 		public string api_result_msg { get; set; }
 		public T api_data { get; set; }
 
