@@ -4,7 +4,7 @@ using KanColle.Flash.External;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using System.Linq;
+using System.IO;
 
 namespace RunExpKai {
 	/// <summary>
@@ -17,8 +17,6 @@ namespace RunExpKai {
 		public MainWindow() {
 			InitializeComponent();
 			// Initialization stuff
-
-			// Try to read from user prefs
 
 			// Update UI elements if user data is available
 
@@ -54,6 +52,20 @@ namespace RunExpKai {
 			this.ammo = 0;
 			this.steel = 0;
 			this.baux = 0;
+
+			// Try to read from user prefs
+			// and preload them.
+			if (!File.Exists("settings.ini")) {
+				File.Create("settings.ini");
+			} else {
+				StreamReader reader = new StreamReader("settings.ini");
+				string api_token = reader.ReadLine();
+				string fleet2settings = reader.ReadLine();
+				string fleet3settings = reader.ReadLine();
+				string fleet4settings = reader.ReadLine();
+
+				this.Api_Token_Box.Text = api_token;
+			}
 		}
 
 		// Stuff here taken from WPF tutorial
@@ -92,7 +104,7 @@ namespace RunExpKai {
 
 		private void apitoken_apply_Click(object sender, RoutedEventArgs e) {
 			// Update MemberID, then update Port API
-			this.KCProxy = new KanColleProxy(this.api_token_box.Text);
+			this.KCProxy = new KanColleProxy(this.Api_Token_Box.Text);
 			this.MemberID = GetMemberID();
 			this.Port = this.KCProxy.GetPort(this.MemberID);
 
@@ -116,6 +128,8 @@ namespace RunExpKai {
 			this.Baux_Amount.Content = this.baux = 0;
 
 			// Save api token to user config file here
+			TextWriter writer = new StreamWriter("settings.ini");
+
 		}
 
 		private void Fleet_2_Select_SelectionChanged(object sender, SelectionChangedEventArgs e) {

@@ -18,7 +18,7 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="5*"/>
             </Grid.ColumnDefinitions>
-            <TextBox x:Name="api_token_box" Margin="10" TextWrapping="Wrap" TextChanged="api_token_box_TextChanged" FontSize="13.333" ToolTip="Enter your API token here" VerticalContentAlignment="Center"/>
+            <TextBox x:Name="Api_Token_Box" Margin="10" TextWrapping="Wrap" TextChanged="api_token_box_TextChanged" FontSize="13.333" ToolTip="Enter your API token here" VerticalContentAlignment="Center"/>
             <Button x:Name="apitoken_apply" Content="Apply" Grid.Column="1" Margin="10,10,10,0" VerticalAlignment="Top" Height="32" Click="apitoken_apply_Click" IsEnabled="False"/>
         </Grid>
         <Grid Grid.Row="2" Grid.ColumnSpan="2">

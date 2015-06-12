@@ -1,6 +1,7 @@
 ﻿using KanColle;
 using System;
 using System.Collections.Generic;
+using System.Xml;
 
 namespace RunExpKai {
 	partial class MainWindow {
@@ -75,6 +76,36 @@ namespace RunExpKai {
 
 		private static DateTime timeUnixEpochToDotNet(long unixTime) {
 			return new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddSeconds(unixTime).ToLocalTime();
+		}
+
+		private void SaveData() {
+			XmlWriter writer = XmlWriter.Create("settings.xml");
+			writer.WriteStartDocument();
+				writer.WriteStartElement("API_Token");
+					writer.WriteElementString("Token", this.KCProxy.USER_API_TOKEN);
+					writer.WriteElementString("Server", this.KCProxy.USER_SERVER);
+				writer.WriteEndElement();
+
+				writer.WriteElementString("Fleet2", ( this.Fleet_2_Select.SelectedItem as KanColle.Master.Mission ).api_id.ToString());
+				writer.WriteElementString("Fleet3", ( this.Fleet_3_Select.SelectedItem as KanColle.Master.Mission ).api_id.ToString());
+				writer.WriteElementString("Fleet4", ( this.Fleet_4_Select.SelectedItem as KanColle.Master.Mission ).api_id.ToString());
+			writer.WriteEndDocument();
+
+			writer.Flush();
+			writer.Close();
+		}
+
+		private void ReadData() {
+			XmlReader reader = XmlReader.Create("settings.xml");
+
+			while (reader.Read()) {
+				if (reader.IsStartElement()) {
+					switch (reader.Name) {
+
+					}
+				}
+
+			}
 		}
 	}
 }

@@ -16,8 +16,8 @@ namespace KanColle {
 
 		public const string DEFAULT_GET = "api_token={0}&api_verno=1";
 
-		private readonly string USER_API_TOKEN;
-		private readonly string USER_SERVER;
+		public readonly string USER_API_TOKEN;
+		public readonly string USER_SERVER;
 
 		public bool debug { get; set; }
 
