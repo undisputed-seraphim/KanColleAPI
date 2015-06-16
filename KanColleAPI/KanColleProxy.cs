@@ -133,7 +133,7 @@ namespace KanColle {
 #if DEBUG
 				Console.WriteLine(e.Message);
 #endif
-				return null;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -149,7 +149,7 @@ namespace KanColle {
 #if DEBUG
 				Console.WriteLine(e.Message);
 #endif
-				return null;
+				throw new Exception(e.Message);
 			}
 		}
 
@@ -162,7 +162,7 @@ namespace KanColle {
 #if DEBUG
 				Console.WriteLine(e.Message);
 #endif
-				return null;
+				throw new Exception(e.Message);
 			}
 		}
 
